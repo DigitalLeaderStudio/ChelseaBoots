@@ -237,8 +237,12 @@ button, a, .icon {
 
 
 a {
-	color: #000;
+	color: #333;
 }
+
+	a:hover {
+		color: #c68c53;
+	}
 
 .header-logo {
 	margin-bottom: 10px;
@@ -553,8 +557,6 @@ div.newsletter-subscribe-block > div.newsletter-email {
 /*------------------------------------*\
 .footer   end
 \*------------------------------------*/
-
-
 
 .offer {
 	background: #fff;

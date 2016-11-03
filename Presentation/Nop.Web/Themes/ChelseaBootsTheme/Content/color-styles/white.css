@@ -2,6 +2,87 @@
 	color: #fff;
 }
 
+.login-page {
+	background-color: #fff;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+	.login-page .login-existed {
+		border: dotted 2px #ccc;
+		border-right-width: 1px;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		padding: 0 25px;
+	}
+
+	.login-page .login-new {
+		border: dotted 2px #ccc;
+		border-left-width: 1px;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+		padding: 0 25px;
+	}
+
+	.login-page .panel-body {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	.login-page .mid-content-title {
+		background-color: #fff;
+		border-bottom: solid 2px #f0f0f0;
+		color: #474747;
+		font-size: 1em;
+		text-align: left;
+		padding: 20px 0;
+	}
+
+	.login-page .mid-content-body {
+		background-color: #fff;
+		text-align: left;
+		padding: 20px 0;
+		height: 170px;
+	}
+
+		.login-page .mid-content-body a.forgot-password {
+			font-size: smaller;
+		}
+
+		.login-page .mid-content-body .remember-me {
+			float: right;
+			padding: 10px;
+			font-size: smaller;
+		}
+
+			.login-page .mid-content-body .remember-me input[type="checkbox"] {
+				vertical-align: sub;
+			}
+
+			.login-page .mid-content-body .remember-me label {
+				margin: 0;
+				font-weight: normal;
+			}
+
+		.login-page .mid-content-body .control-label {
+			color: #5f5f5f;
+			font-size: 0.9em;
+		}
+
+	.login-page .mid-content-footer {
+		margin-bottom: 20px;
+	}
+
+		.login-page .mid-content-footer .login-button {
+			float: right;
+		}
+
+		.login-page .mid-content-footer .register-button {
+			float: left;
+		}
+
+
+
 .masthead .navbar-inverse {
 	background-color: #fff;
 }
@@ -18,28 +99,18 @@ ul.nav.navbar-nav.navbar-right li > a:hover {
 
 .btn.btn-default {
 	color: #fff;
-	background-color: #fff;
+	background-color: #FF6905;
 	border-color: #fff;
 }
 
 	.btn.btn-default:hover, .btn.btn-default:active, .btn.btn-default:focus {
 		color: #fff;
-		background-color: #000000;
-		border-color: #000000;
+		background-color: #E16905;
+		border-color: #FFDEC1;
 	}
 
-.panel.panel-default.side-nav, .panel.panel-default.form-panel {
-	font-family: "Rubik",sans-serif;
-	font-size: 1.2em;
+.panel.panel-default {
 	border: 1px dotted #d9d9d9;
-	border-top: none;
-	padding: 0 10px;
-	text-align: center;
-	width: 70%;
-}
-
-.panel .panel-body {
-	padding: 0 15px;
 }
 
 .mid-content-title {

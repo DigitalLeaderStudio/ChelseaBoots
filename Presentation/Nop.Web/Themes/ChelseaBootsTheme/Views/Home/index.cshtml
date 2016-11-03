@@ -1,20 +1,28 @@
 @*@{
-	Layout = "~/Themes/ChelseaBootsTheme/Views/Shared/_ColumnsTwoHomepage.cshtml";
-}
+		Layout = "~/Themes/ChelseaBootsTheme/Views/Shared/_ColumnsTwoHomepage.cshtml";
+	}
 
-@Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
-@Html.Action("HomepageCategories", "Catalog")
-@Html.Action("HomepageProducts", "Product")
-@Html.Action("HomepageBestSellers", "Product")
-@Html.Action("HomePageNews", "News")
-@Html.Action("HomePagePolls", "Poll")
-@Html.Widget("home_page_bottom")*@
+	@Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+	@Html.Action("HomepageCategories", "Catalog")
+	@Html.Action("HomepageProducts", "Product")
+	@Html.Action("HomepageBestSellers", "Product")
+	@Html.Action("HomePageNews", "News")
+	@Html.Action("HomePagePolls", "Poll")
+	@Html.Widget("home_page_bottom")*@
 
 @{
 	Layout = "~/Themes/ChelseaBootsTheme/Views/Shared/_ColumnsOne.cshtml";
 }
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+			@Html.Widget("home_page_top")
+		</div>
+	</div>
+</div>
 @*@Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
-@Html.Action("HomepageCategories", "Catalog")*@
+	@Html.Action("HomepageCategories", "Catalog")*@
 @Html.Action("HomepageProducts", "Product")
 @Html.Action("HomepageBestSellers", "Product")
 @Html.Action("HomePageNews", "News")
