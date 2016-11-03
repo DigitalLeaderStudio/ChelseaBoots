@@ -1,0 +1,46 @@
+﻿@model HeaderLinksModel
+@using Nop.Web.Models.Common;
+
+
+@*@Html.Action("Index","SideMenu",new { area = "" })*@
+
+<ul class="nav navbar-nav navbar-right">
+	@Html.Widget("header_links_before")
+	@Html.Action("AdminHeaderLinks", "Common")
+
+	@Html.Partial("PartialViews/LoginPartial", Model)
+
+	@Html.Partial("PartialViews/MessagesPartial", Model)
+
+	@Html.Partial("PartialViews/VishListPartial", Model)
+
+	@Html.Partial("PartialViews/ShoppingCartPartial", Model)
+
+	<li>
+		@Html.Action("TaxTypeSelector", "Common")
+	</li>
+	<li>
+		@Html.Action("CurrencySelector", "Common")
+	</li>
+	<li>
+		@Html.Action("LanguageSelector", "Common")
+	</li>
+
+	@Html.Widget("header_links_after")
+</ul>
+
+
+@*Notification window*@
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="notificationModalLabel">@T("Common.Notification")</h4>
+			</div>
+			<div class="modal-body">
+				@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.AlertMessage))
+			</div>
+		</div>
+	</div>
+</div>

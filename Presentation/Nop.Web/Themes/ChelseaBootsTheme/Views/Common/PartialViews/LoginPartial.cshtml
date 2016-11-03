@@ -1,0 +1,43 @@
+﻿@model Nop.Web.Models.Common.HeaderLinksModel
+
+<li class="dropdown login">
+	<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
+		<i class="fa fa-user@(!Model.IsAuthenticated ? "-o": "")"></i>
+		<i class="fa fa-angle-down"></i>
+	</a>
+	@if (Model.IsAuthenticated)
+	{
+		<ul class="dropdown-menu">
+			<li>
+				<a href="@Url.RouteUrl("CustomerInfo")">
+					<i class="fa fa-cog" aria-hidden="true"></i>
+					@Model.CustomerEmailUsername
+				</a>
+			</li>
+			<li>
+
+				<a href="@Url.RouteUrl("Logout")">
+					<i class="fa fa-sign-out" aria-hidden="true"></i>
+					@T("Account.Logout")
+				</a>
+			</li>
+		</ul>
+	}
+	else
+	{
+		<ul class="dropdown-menu">
+			<li>
+				<a href="@Url.RouteUrl("Register")">
+					<i class="fa fa-user-plus" aria-hidden="true"></i>
+					@T("Account.Register")
+				</a>
+			</li>
+			<li>
+				<a href="@Url.RouteUrl("Login")">
+					<i class="fa fa-sign-in" aria-hidden="true"></i>
+					@T("Account.Login")
+				</a>
+			</li>
+		</ul>
+	}
+</li>

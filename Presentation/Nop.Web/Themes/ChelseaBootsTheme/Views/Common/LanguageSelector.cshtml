@@ -1,0 +1,68 @@
+﻿@model LanguageSelectorModel
+@using Nop.Web.Models.Common;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+
+@if (Model.AvailableLanguages.Count > 1)
+{
+	var webHelper = EngineContext.Current.Resolve<IWebHelper>();
+
+	// Set selected language to first position;
+	var selectedLanguage = Model.AvailableLanguages.First(lang => lang.Id == Model.CurrentLanguageId);
+	Model.AvailableLanguages.Remove(selectedLanguage);
+	Model.AvailableLanguages.Insert(0, selectedLanguage);
+
+	if (Model.UseImages)
+	{
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
+				<img src="@Url.Content("~/Content/Images/flags/" + @Model.AvailableLanguages.First().FlagImageFileName) " />
+
+				<i class="fa fa-angle-down"></i>
+			</a>
+
+			<ul class="dropdown-menu">
+				@foreach (var lang in Model.AvailableLanguages.Skip(1))
+				{
+					<li>
+						<a href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeLanguage", new { langid = lang.Id }), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)" title="@lang.Name">
+							<img title='@lang.Name' alt='@lang.Name' @(lang.Id == Model.CurrentLanguageId ? " class=selected" : null)
+								 src="@Url.Content("~/Content/Images/flags/" + @lang.FlagImageFileName) " />
+						</a>
+					</li>
+				}
+			</ul>
+		</li>
+	}
+	else
+	{
+		var languages = Model.AvailableLanguages
+			.Select(lang => new SelectListItem
+		{
+			Text = lang.UniqueSeoCode,
+			Value = webHelper.ModifyQueryString(Url.RouteUrl("ChangeLanguage", new { langid = lang.Id }), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null),
+			Selected = lang.Id.Equals(Model.CurrentLanguageId)
+		});
+
+		<li class="dropdown languages">
+			<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
+
+				<i class="fa fa-language" aria-hidden="true">&nbsp;</i>
+				<span>@languages.First().Text</span>
+
+				<i class="fa fa-angle-down"></i>
+			</a>
+			<ul class="dropdown-menu">
+				@foreach (var language in languages.Skip(1))
+				{
+					<li>
+						<a href="@language.Value">
+							<i class="fa fa-check"></i>
+							@language.Text
+						</a>
+					</li>
+				}
+			</ul>
+		</li>
+	}
+}
