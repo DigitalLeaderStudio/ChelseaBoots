@@ -1,0 +1,25 @@
+﻿@{
+	Layout = "~/Views/Shared/_Root.cshtml";
+}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			@if (IsSectionDefined("left"))
+			{
+				@RenderSection("left")
+			}
+			else
+			{
+				@Html.Widget("left_side_column_before")
+				@Html.Widget("left_side_column_after_category_navigation")
+				@Html.Widget("left_side_column_after")
+				@Html.Action("VendorNavigation", "Catalog")
+			}
+		</div>
+		<div class="col-md-9">
+			@Html.Widget("main_column_before")
+			@RenderBody()
+			@Html.Widget("main_column_after")
+		</div>
+	</div>
+</div>

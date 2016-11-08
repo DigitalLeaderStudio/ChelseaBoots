@@ -1,4 +1,8 @@
-﻿.configure-button a {
+﻿.margin-left-5{
+	margin-left: 5px;
+}
+
+.configure-button a {
 	color: #fff;
 }
 
@@ -97,16 +101,28 @@ ul.nav.navbar-nav.navbar-right li > a:hover {
 	color: #c68c53 !important;
 }
 
+.open > .dropdown-toggle.btn-default {
+	color: #fff !important;
+	background-color: #E16905 !important;
+	border-color: #FFDEC1 !important;
+}
+
 .btn.btn-default {
 	color: #fff;
 	background-color: #FF6905;
-	border-color: #fff;
+	/*border-color: #fff;*/
 }
 
-	.btn.btn-default:hover, .btn.btn-default:active, .btn.btn-default:focus {
+	.btn.btn-default:hover,
+	.btn.btn-default:active,
+	.btn.btn-default:focus,
+	.btn.btn-default.active {
 		color: #fff;
 		background-color: #E16905;
 		border-color: #FFDEC1;
+	}
+
+	.btn.btn-default.active {
 	}
 
 .panel.panel-default {
@@ -119,6 +135,15 @@ ul.nav.navbar-nav.navbar-right li > a:hover {
 	color: #000;
 	border-bottom: 2px solid #fff;
 	margin: 0;
+}
+
+.registration-page {
+	padding: 0 40px;
+}
+
+select.form-control.date-select {
+	float: left;
+	width: 100px;
 }
 
 .navbar-fixed-top.top-menu {

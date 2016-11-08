@@ -127,7 +127,8 @@ namespace Nop.Web.Models.Customer
 
         public bool PhoneEnabled { get; set; }
         public bool PhoneRequired { get; set; }
-        [NopResourceDisplayName("Account.Fields.Phone")]
+        
+		[NopResourceDisplayName("Account.Fields.Phone")]
         [AllowHtml]
         public string Phone { get; set; }
 

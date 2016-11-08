@@ -110,6 +110,12 @@ namespace Nop.Web.Validators.Customer
             {
                 RuleFor(x => x.Phone).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Phone.Required"));
             }
+			if (customerSettings.PhoneEnabled)
+			{
+				RuleFor(x => x.Phone)
+					.Matches(@"^^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$")
+					.WithMessage(localizationService.GetResource("Account.Fields.Phone.WrongFormat"));
+			}
             if (customerSettings.FaxRequired && customerSettings.FaxEnabled)
             {
                 RuleFor(x => x.Fax).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Fax.Required"));

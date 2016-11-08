@@ -1256,6 +1256,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\MessagesPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\VishListPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\ShoppingCartPartial.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsTwoSimple.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

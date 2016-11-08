@@ -24,18 +24,19 @@
 	@Html.Partial("_ExternalAuthentication.Errors")
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-md-7 login-existed">
-				<div class="title mid-content-title">
-					<strong>@T("Account.Login.ReturningCustomer")</strong>
-				</div>
 
-				<div class="mid-content-body">
-					@using (Html.BeginForm())
-					{
+			<div class="col-md-7 login-existed">
+				@using (Html.BeginForm())
+				{
+					<div class="title mid-content-title">
+						<strong>@T("Account.Login.ReturningCustomer")</strong>
+					</div>
+
+					<div class="mid-content-body">
 						<div class="text-danger">
 							@Html.ValidationSummary(true, T("Account.Login.Unsuccessful").Text)
 						</div>
-						if (Model.UsernamesEnabled)
+						@if (Model.UsernamesEnabled)
 						{
 							<div class="form-group row">
 								<div class="col-md-3">
@@ -76,19 +77,18 @@
 								</div>
 							</div>
 						</div>
-
-						if (Model.DisplayCaptcha)
+						@if (Model.DisplayCaptcha)
 						{
 							<div class="captcha-box">
 								@Html.Raw(Html.GenerateCaptcha())
 							</div>
 						}
-					}
-				</div>
-				<div class="mid-content-footer">
-					@Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery", null, new { @class = "forgot-password" })
-					<input class="button-1 login-button btn btn-default" type="submit" value="@T("Account.Login.LoginButton")" />
-				</div>
+					</div>
+					<div class="mid-content-footer">
+						@Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery", null, new { @class = "forgot-password" })
+						<input class="button-1 login-button btn btn-default" type="submit" value="@T("Account.Login.LoginButton")" />
+					</div>
+				}
 			</div>
 
 			<div class="col-md-5 login-new">
@@ -143,9 +143,9 @@
 			}*@
 
 		@*<div class="row">
-			<div class="col-md-12">
-				@Html.Action("TopicBlock", "Topic", new { systemName = "LoginRegistrationInfo" })
-			</div>
-		</div>*@
+				<div class="col-md-12">
+					@Html.Action("TopicBlock", "Topic", new { systemName = "LoginRegistrationInfo" })
+				</div>
+			</div>*@
 	</div>
 </div>
