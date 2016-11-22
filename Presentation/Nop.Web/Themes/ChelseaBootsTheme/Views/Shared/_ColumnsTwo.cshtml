@@ -10,7 +10,6 @@
         currentCategoryId = Convert.ToInt32(Url.RequestContext.RouteData.Values["categoryId"].ToString());
     }
 
-
     //current manufacturer ID
     int currentManufacturerId = 0;
     if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
@@ -18,7 +17,6 @@
     {
         currentManufacturerId = Convert.ToInt32(Url.RequestContext.RouteData.Values["manufacturerId"].ToString());
     }
-
 
     //current product ID
     int currentProductId = 0;
@@ -35,7 +33,6 @@
             @if (IsSectionDefined("left"))
             {
                 @RenderSection("left")
-                @Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
             }
             else
             {

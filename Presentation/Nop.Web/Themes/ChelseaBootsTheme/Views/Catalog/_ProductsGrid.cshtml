@@ -1,0 +1,28 @@
+﻿@model IList<Nop.Web.Models.Catalog.ProductOverviewModel>
+
+<div class="product-grid home-page-product-grid">
+	@{
+		var pg_i = 0;
+	}
+	@foreach (var product in Model)
+	{
+		if (pg_i % 3 == 0)
+		{
+			@:<div class="row box-products">
+		}
+		<div class="col-md-4">
+			<div class="offer offer-default silde-show-offer pull-text-center">
+				@Html.Partial("_ProductBox", product)
+			</div>
+		</div>
+		if (pg_i % 3 == 2)
+		{
+			@:</div>
+		}
+		pg_i++;
+	}
+	@if (pg_i % 3 != 0)
+	{
+		@:</div>
+	}
+</div>

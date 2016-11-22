@@ -1,0 +1,70 @@
+﻿@model Nop.Web.Models.Catalog.CatalogPagingFilteringModel
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="product-selectors clearfix">
+			<div class="col">
+				@*sorting*@
+				@if (Model.AllowProductSorting)
+				{
+					<div class="btn-group pull-left">
+						<button type="button" class="btn btn-default" data-toggle="dropdown">@T("Catalog.OrderBy")</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu">
+							@foreach (var sortOption in Model.AvailableSortOptions)
+							{
+								<li>
+									<a class="@(sortOption.Selected ? "active" : "")" href="@sortOption.Value">
+										<i class="fa fa-check"></i>
+										@sortOption.Text
+									</a>
+								</li>
+							}
+						</ul>
+					</div>
+				}
+			</div>
+			<div class="col">
+				@*view mode*@
+				@if (Model.AllowProductViewModeChanging)
+				{
+					<div class="btn-group pull-right margin-left-5">
+
+						@foreach (var viewMode in Model.AvailableViewModes)
+						{
+							var isGridView = viewMode.Value.Contains("viewmode=grid");
+							<a class="btn btn-default @(viewMode.Selected ? "active" : "")" href="@viewMode.Value">
+								<i class="fa fa-@(isGridView ? "th" : "bars")" aria-hidden="true"></i>
+							</a>
+						}
+					</div>
+				}
+				@*page size*@
+				@if (Model.AllowCustomersToSelectPageSize)
+				{
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default" data-toggle="dropdown">@T("Catalog.PageSize")</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu">
+							@foreach (var sortOption in Model.PageSizeOptions)
+							{
+								<li>
+									<a class="@(sortOption.Selected ? "active" : "")" href="@sortOption.Value">
+										<i class="fa fa-check"></i>
+										@sortOption.Text
+									</a>
+								</li>
+							}
+						</ul>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

@@ -609,10 +609,12 @@
     <Content Include="Scripts\jquery.magnific-popup.js" />
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\native.history.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\selectivizr.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\URI.js" />
     <Content Include="Themes\ChelseaBootsTheme\Content\bootstrap-3.2.0\css\bootstrap-theme.css" />
     <Content Include="Themes\ChelseaBootsTheme\Content\bootstrap-3.2.0\css\bootstrap-theme.min.css" />
     <Content Include="Themes\ChelseaBootsTheme\Content\bootstrap-3.2.0\css\bootstrap.css" />
@@ -675,6 +677,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Content\styles.css" />
     <Content Include="Themes\ChelseaBootsTheme\Content\styles.rtl.css" />
     <Content Include="Themes\ChelseaBootsTheme\preview.jpg" />
+    <Content Include="Themes\ChelseaBootsTheme\Scripts\Catalog\catalog.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\html5shiv.min.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\respond.min.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\styleSheetToogle.js" />
@@ -1227,7 +1230,6 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsOne.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsThree.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsTwo.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsTwoHomepage.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_CreateOrUpdateAddress.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Notifications.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Print.cshtml" />
@@ -1257,6 +1259,15 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\VishListPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\ShoppingCartPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsTwoSimple.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ProductsGrid.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ProductsList.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_SortingRow.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_FeaturedProducts.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_CategoryTemplateInnerBody.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_BreadCrumb.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_LeftSide.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ManufacturerTemplateInnerBody.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_FilterSpecsBox.Old.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

@@ -1,0 +1,68 @@
+﻿@model CatalogPagingFilteringModel.SpecificationFilterModel
+@using Nop.Web.Models.Catalog;
+@{
+	var notFilteredItemsGroups = Model.NotFilteredItems.GroupBy(x => x.SpecificationAttributeName);
+}
+@if (Model.Enabled)
+{
+	<div class="panel panel-default side-nav">
+		<div class="panel-heading">
+			<strong>@T("Filtering.SpecificationFilter")</strong>
+		</div>
+		<div class="panel-body">
+			@if (Model.NotFilteredItems.Count > 0)
+			{
+				foreach (var group in notFilteredItemsGroups)
+				{
+					var groupList = group.ToList();
+					<div class="filter-title">
+						<strong>@groupList[0].SpecificationAttributeName</strong>
+					</div>
+					<div class="form-group">
+						<ul class="nav filterSpecs">
+							@foreach (var spec in groupList)
+							{
+								<li>
+									<div class="checkbox">
+										<label>
+											<a href="@spec.FilterUrl">
+												<input type="checkbox" style='content: ""' />
+												@spec.SpecificationAttributeOptionName
+											</a>
+										</label>
+									</div>
+
+								</li>
+							}
+						</ul>
+					</div>
+				}
+
+			}
+			@if (Model.AlreadyFilteredItems.Count > 0)
+			{
+				<div class="panel-footer">
+					<div class="filter-title">
+						<strong>@T("Filtering.SpecificationFilter.CurrentlyFilteredBy")</strong>
+					</div>
+					<ul class="nav filterSpecs">
+						@foreach (var item in Model.AlreadyFilteredItems)
+						{
+							<li>
+								<a href="@item.FilterUrl">
+									<i class="fa fa-check-square-o" aria-hidden="true"></i>
+									@item.SpecificationAttributeOptionName
+								</a>
+							</li>
+						}
+					</ul>
+
+					<div class="remove-filter">
+						<a href="@Model.RemoveFilterUrl">@T("Filtering.SpecificationFilter.Remove")</a>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+}
+

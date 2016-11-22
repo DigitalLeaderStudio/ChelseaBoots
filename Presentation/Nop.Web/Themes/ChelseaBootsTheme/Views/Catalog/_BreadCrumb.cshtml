@@ -1,0 +1,31 @@
+﻿@model Nop.Web.Models.Catalog.CategoryModel
+
+@{
+	var breadcrumbDelimiter = Nop.Core.Infrastructure.EngineContext.Current.Resolve<Nop.Core.Domain.Common.CommonSettings>().BreadcrumbDelimiter;
+}
+<div class="breadcrumb">
+	<ul>
+		<li>
+			<a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">
+				<span class="glyphicon glyphicon-home"></span>
+			</a>
+			<span class="delimiter">@breadcrumbDelimiter</span>
+		</li>
+		@foreach (var cat in Model.CategoryBreadcrumb)
+		{
+			var isLastCategory = cat.Id == Model.Id;
+			<li>
+				@if (isLastCategory)
+				{
+					<strong class="current-item">@cat.Name</strong>
+				}
+				else
+				{
+					<a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name">@cat.Name</a>
+					<span class="delimiter">@breadcrumbDelimiter</span>
+				}
+			</li>
+		}
+	</ul>
+	@Html.Widget("categorydetails_after_breadcrumb", Model.Id)
+</div>

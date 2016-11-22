@@ -1,0 +1,14 @@
+﻿@model IList<Nop.Web.Models.Catalog.ProductOverviewModel>
+
+<div class="product-list">
+	@foreach (var product in Model)
+	{
+		<div class="row">
+			<div class="col-md-12">
+				<div class="offer offer-default">
+					@Html.Partial("_ProductBox", product)
+				</div>
+			</div>
+		</div>
+	}
+</div>
