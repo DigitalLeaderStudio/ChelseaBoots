@@ -19,7 +19,7 @@
 					{
 						<li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
 					}
-					<li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+					@*<li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>*@
 				</ul>
 			</div>
 
@@ -61,17 +61,17 @@
 					<li><a href="@Url.RouteUrl("CustomerInfo")" class="account">@T("Account.MyAccount")</a></li>
 
 					@if (Model.AllowCustomersToApplyForVendorAccount)
-                    {
-					<li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
-                    }
+					{
+						<li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+					}
 					@if (Model.ShoppingCartEnabled)
-                    {
-					<li><a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">@T("ShoppingCart")</a></li>
-                    }
+					{
+						<li><a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">@T("ShoppingCart")</a></li>
+					}
 					@if (Model.WishlistEnabled)
-                    {
-					<li><a href="@Url.RouteUrl("Wishlist")" class="ico-wishlist">@T("Wishlist")</a></li>
-                    }
+					{
+						<li><a href="@Url.RouteUrl("Wishlist")" class="ico-wishlist">@T("Wishlist")</a></li>
+					}
 				</ul>
 			</div>
 

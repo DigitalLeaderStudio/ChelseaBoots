@@ -1,78 +1,114 @@
-﻿@model ContactUsModel
-@using Nop.Web.Models.Common;
-@{
-    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+﻿@model Nop.Web.Models.Common.ContactUsModel
 
-    //title
-    Html.AddTitleParts(T("PageTitle.ContactUs").Text);
-}
 <div class="panel panel-default form-panel">
-    <div class="panel-heading">
-        <h3>@T("PageTitle.ContactUs")</h3>
-    </div>
-    @Html.Action("TopicBlock", "Topic", new { systemName = "ContactUs" })
-    <div class="panel-body">
-        @Html.Widget("contactus_top")
-        @if (Model.SuccessfullySent)
-        {
-            <div class="result">
-                @Model.Result
-            </div>        
-        }
-        else
-        {
-            using (Html.BeginForm())
-            {
-                 @Html.AntiForgeryToken()
-            <div class="message-error">
-                @Html.ValidationSummary(true)
-            </div>
-            <div class="form-fields">
-                <div class="inputs-left">
+	<div class="panel-heading">
+		<h3>@T("PageTitle.ContactUs")</h3>
+	</div>
 
-                    <div class="form-group row">
-                        @Html.LabelFor(model => model.FullName, new { @class = "col-md-2 control-label" }, ":")
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = T("ContactUs.FullName.Hint") })
-                        </div>
-                        <div class="col-md-4">
-                         @Html.ValidationMessageFor(model => model.FullName)
-                        </div>    
-                    </div>
+	<div class="row form-contactus">
+		<div class="col-md-12">
+			<p>
+				@T("ContactUs.Prompt")
+			</p>
+		</div>
+		<div class="col-md-6">
+			@Html.Widget("contactus_top")
+			@if (Model.SuccessfullySent)
+			{
+				<div class="result">
+					@Model.Result
+				</div>
+			}
+			else
+			{
+				using (Html.BeginForm())
+				{
+					@Html.AntiForgeryToken()
+					<div class="message-error">
+						@Html.ValidationSummary(true)
+					</div>
+					<div class="form-fields">
+						<div class="inputs-left">
 
-                    <div class="form-group row">
-                        @Html.LabelFor(model => model.Email, new { @class = "col-md-2 control-label" }, ":")
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = T("ContactUs.Email.Hint") })
-                        </div>
-                        <div class="col-md-4">
-                         @Html.ValidationMessageFor(model => model.Email)
-                        </div>    
-                    </div>
-                    @if (Model.DisplayCaptcha)
-                    {
-                        <div class="captcha-box">
-                            @Html.Raw(Html.GenerateCaptcha())
-                        </div>
-                    }
-                </div>
+							<div class="form-group row">
+								@Html.LabelFor(model => model.FullName, new { @class = "col-md-12 control-label" }, ":")
+								<div class="col-md-12">
+									@Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = T("ContactUs.FullName.Hint") })
+								</div>
+								<div class="col-md-12">
+									@Html.ValidationMessageFor(model => model.FullName)
+								</div>
+							</div>
 
-                <div class="form-group row">
-                        @Html.LabelFor(model => model.Enquiry, new { @class = "col-md-2 control-label" }, ":")
-                        <div class="col-md-6">
-                            @Html.TextAreaFor(model => model.Enquiry, new { @class = "enquiry form-control", placeholder = T("ContactUs.Enquiry.Hint") })
-                        </div>
-                        <div class="col-md-4">
-                         @Html.ValidationMessageFor(model => model.Enquiry)
-                        </div>    
-                 </div>
-            </div>
+							<div class="form-group row">
+								@Html.LabelFor(model => model.Email, new { @class = "col-md-12 control-label" }, ":")
+								<div class="col-md-12">
+									@Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = T("ContactUs.Email.Hint") })
+								</div>
+								<div class="col-md-12">
+									@Html.ValidationMessageFor(model => model.Email)
+								</div>
+							</div>
+							@if (Model.DisplayCaptcha)
+							{
+								<div class="captcha-box">
+									@Html.Raw(Html.GenerateCaptcha())
+								</div>
+							}
+						</div>
 
-            <div class="buttons">
-                <input type="submit" name="send-email" class="button-1 register-next-step-button btn btn-default" value="@T("ContactUs.Button")" />
-            </div>
-            }
-        }
-        @Html.Widget("contactus_bottom")
-    </div>
+						<div class="form-group row">
+							@Html.LabelFor(model => model.Phone, new { @class = "col-md-12 control-label" }, ":")
+							<div class="col-md-12">
+								@Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = T("ContactUs.Phone.Hint") })
+							</div>
+							<div class="col-md-12">
+								@Html.ValidationMessageFor(model => model.Phone)
+							</div>
+						</div>
+
+						<div class="form-group row">
+							@Html.LabelFor(model => model.Enquiry, new { @class = "col-md-12 control-label" }, ":")
+							<div class="col-md-12">
+								@Html.TextAreaFor(model => model.Enquiry, new { @class = "enquiry form-control", placeholder = T("ContactUs.Enquiry.Hint") })
+							</div>
+							<div class="col-md-12">
+								@Html.ValidationMessageFor(model => model.Enquiry)
+							</div>
+						</div>
+					</div>
+
+					<div class="buttons">
+						<input type="submit" name="send-email" class="button-1 register-next-step-button btn btn-default" value="@T("ContactUs.Button")" />
+					</div>
+				}
+			}
+			@Html.Widget("contactus_bottom")
+		</div>
+		<div class="col-md-6">
+			@Html.Action("TopicBlock", "Topic", new { systemName = "ContactUs" })
+			<div id="map">
+			</div>
+
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlUnB9ai-POBrlcbtnf45eTHK1Q6dmFVs&callback=initMap">
+			</script>
+
+			<script>
+				function initMap() {
+					var uluru = { lat: 50.394542, lng: 30.503557 };
+					var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 15,
+						center: uluru
+					});
+					var marker = new google.maps.Marker({
+						animation: google.maps.Animation.DROP,
+						position: uluru,
+						map: map
+					});
+				}
+				
+			</script>
+
+		</div>
+	</div>
 </div>

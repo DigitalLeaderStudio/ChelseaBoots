@@ -70,6 +70,15 @@
     <Compile Include="Mapping\Orders\ReturnRequestAction.cs" />
     <Compile Include="Mapping\Topics\TopicTemplateMap.cs" />
     <Compile Include="Mapping\Vendors\VendorNoteMap.cs" />
+    <Compile Include="Migrations\201611291239477_Init.cs" />
+    <Compile Include="Migrations\201611291239477_Init.Designer.cs">
+      <DependentUpon>201611291239477_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611291241139_Add-ContactUs.Phone.cs" />
+    <Compile Include="Migrations\201611291241139_Add-ContactUs.Phone.Designer.cs">
+      <DependentUpon>201611291241139_Add-ContactUs.Phone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="DataReaderExtensions.cs" />
@@ -193,7 +202,14 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611291239477_Init.resx">
+      <DependentUpon>201611291239477_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611291241139_Add-ContactUs.Phone.resx">
+      <DependentUpon>201611291241139_Add-ContactUs.Phone.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

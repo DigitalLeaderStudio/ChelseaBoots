@@ -617,3 +617,24 @@ blockquote {
 .list-group-item {
 	border: 0 !important;
 }
+
+#ph-topic .panel-body i {
+	font-size: larger;
+	padding: 10px;
+}
+
+#ph-topic .form-contactus {
+	margin: 10px;
+}
+
+#map {
+	height: 235px;
+	width: 500px;
+}
+
+.form-contactus .field-validation-error {
+	margin-top: 7px;
+	margin-left: 5px;
+	font-size: smaller;
+	color: red;
+}

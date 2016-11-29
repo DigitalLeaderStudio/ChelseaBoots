@@ -2,6 +2,15 @@
 
 @Html.Partial("_LeftSide", Model.PagingFilteringContext)
 
+@{
+	var pageTitle = !String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name;
+	Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+}
+
+@*<script type="text/javascript">
+	document.title = '@pageTitle';
+</script>*@
+
 <div class="col-md-9">
 	<div class="panel panel-default form-panel">
 		<div class="panel-heading">

@@ -580,7 +580,7 @@ namespace Nop.Web.Controllers
                 {
                     from = emailAccount.Email;
                     fromName = emailAccount.DisplayName;
-                    body = string.Format("<strong>From</strong>: {0} - {1}<br /><br />{2}",
+                    body = string.Format("<strong>From</strong>: {0} - {1}<br /><br /><strong>Phone<strong>: <a href=\"tel: {2}\">{2}</a><br /><br />{2}",
                         Server.HtmlEncode(fullName),
                         Server.HtmlEncode(email), body);
                 }
@@ -616,7 +616,8 @@ namespace Nop.Web.Controllers
             model.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnContactUsPage;
             return View(model);
         }
-        //contact vendor page
+      
+		//contact vendor page
         [NopHttpsRequirement(SslRequirement.Yes)]
         public ActionResult ContactVendor(int vendorId)
         {

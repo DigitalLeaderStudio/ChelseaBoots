@@ -25,7 +25,7 @@ var catalog = (function () {
 
 		//override href behaviours in left part
 		$(document).on('change', '#filter-spec input[type=checkbox]', function (evt) {
-			History.pushState(null, '', $(this).attr('href'));
+			History.pushState(null, null, $(this).attr('href'));
 		});
 	}
 

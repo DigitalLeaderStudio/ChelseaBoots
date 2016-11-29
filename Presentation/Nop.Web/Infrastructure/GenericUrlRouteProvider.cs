@@ -9,43 +9,32 @@ namespace Nop.Web.Infrastructure
 	{
 		public void RegisterRoutes(RouteCollection routes)
 		{
-
-			//AJAX: link to load sorted, filtered e.t.c products 
-			//TODO: doesn't find a route
-			routes.MapGenericPathRoute("GetProducts",
-							"{generic_se_name}/GetProducts",
-							new { conroller = "Catalog", action = "GetProducts" },
-							new[] { "Nop.Web.Controllers" });
-
-
 			//generic URLs
 			routes.MapGenericPathRoute("GenericUrl",
-									   "{generic_se_name}",
-									   new { controller = "Common", action = "GenericUrl" },
-									   new[] { "Nop.Web.Controllers" });
-
-
+							"{generic_se_name}",
+							new { controller = "Common", action = "GenericUrl" },
+							new[] { "Nop.Web.Controllers" });
 
 			//define this routes to use in UI views (in case if you want to customize some of them later)
 			routes.MapLocalizedRoute("Product",
-									 "{SeName}",
-									 new { controller = "Product", action = "ProductDetails" },
-									 new[] { "Nop.Web.Controllers" });
+							"{SeName}",
+							new { controller = "Product", action = "ProductDetails" },
+							new[] { "Nop.Web.Controllers" });
 
 			routes.MapLocalizedRoute("Category",
 							"{SeName}",
 							new { controller = "Catalog", action = "Category" },
-							new[] { "Nop.Web.Controllers" });
+							new[] { "Nop.Web.Themes.ChelseaBootsTheme.Controllers" });
 
 			routes.MapLocalizedRoute("Manufacturer",
 							"{SeName}",
 							new { controller = "Catalog", action = "Manufacturer" },
-							new[] { "Nop.Web.Controllers" });
+							new[] { "Nop.Web.Themes.ChelseaBootsTheme.Controllers" });
 
 			routes.MapLocalizedRoute("Vendor",
 							"{SeName}",
 							new { controller = "Catalog", action = "Vendor" },
-							new[] { "Nop.Web.Controllers" });
+							new[] { "Nop.Web.Themes.ChelseaBootsTheme.Controllers" });
 
 			routes.MapLocalizedRoute("NewsItem",
 							"{SeName}",

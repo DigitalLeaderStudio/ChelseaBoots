@@ -13,6 +13,9 @@ namespace Nop.Web.Validators.Common
             RuleFor(x => x.Email).NotEmpty().WithMessage(localizationService.GetResource("ContactUs.Email.Required"));
             RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Common.WrongEmail"));
             RuleFor(x => x.FullName).NotEmpty().WithMessage(localizationService.GetResource("ContactUs.FullName.Required"));
+			RuleFor(x => x.Phone).NotEmpty().WithMessage(localizationService.GetResource("ContactUs.Phone.Required"));
+			RuleFor(x => x.Phone).Matches(@"\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?")
+				.WithMessage(localizationService.GetResource("ContactUs.Phone.WrongFormat"));
             if (commonSettings.SubjectFieldOnContactUsForm)
             {
                 RuleFor(x => x.Subject).NotEmpty().WithMessage(localizationService.GetResource("ContactUs.Subject.Required"));
