@@ -70,18 +70,20 @@
 		}
 	</div>
 }
-<div class="panel panel-default form-panel" id="ph-topic">
+<div class="form-panel" id="ph-topic">
 	@if (Model.SystemName == "contactus")
 	{
 		@Html.Action("ContactUs", "Common")
 	}
 	else
 	{
-		<div class="panel-heading">
-			<h3>@Model.Title</h3>
-		</div>
-		<div class="panel-body">
-			@Html.Raw(Model.Body)
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>@Model.Title</h3>
+			</div>
+			<div class="panel-body">
+				@Html.Raw(Model.Body)
+			</div>
 		</div>
 	}
 </div>

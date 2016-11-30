@@ -6,14 +6,10 @@
 	var pageTitle = !String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name;
 }
 
-<script type="text/javascript">
-	document.title = '@pageTitle';
-</script>
-
 <div class="col-md-9">
 	<div class="panel panel-default form-panel">
 		<div class="panel-heading">
-			<h3>@Model.Name</h3>
+			<h3>@pageTitle</h3>
 		</div>
 		<div class="panel-body">
 			@Html.Widget("manufacturerdetails_top")
@@ -49,11 +45,11 @@
 				{
 					if (Model.PagingFilteringContext.ViewMode == "list")
 					{
-					@Html.Partial("_ProductsList", Model.Products);
+				@Html.Partial("_ProductsList", Model.Products);
 					}
 					else
 					{
-					@Html.Partial("_ProductsGrid", Model.Products);
+				@Html.Partial("_ProductsGrid", Model.Products);
 					}
 				}
 			</div>

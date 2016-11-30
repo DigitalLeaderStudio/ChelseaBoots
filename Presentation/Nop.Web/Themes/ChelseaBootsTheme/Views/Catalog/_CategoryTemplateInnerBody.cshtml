@@ -4,17 +4,13 @@
 
 @{
 	var pageTitle = !String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name;
-	Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+	
 }
-
-@*<script type="text/javascript">
-	document.title = '@pageTitle';
-</script>*@
 
 <div class="col-md-9">
 	<div class="panel panel-default form-panel">
 		<div class="panel-heading">
-			@Html.Partial("_BreadCrumb", Model)
+			<h3>@pageTitle</h3>
 		</div>
 		<div class="panel-body">
 			<div class="page-body">
