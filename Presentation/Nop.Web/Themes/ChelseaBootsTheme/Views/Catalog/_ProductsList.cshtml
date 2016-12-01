@@ -4,10 +4,8 @@
 	@foreach (var product in Model)
 	{
 		<div class="row">
-			<div class="col-md-12">
-				<div class="offer offer-default">
-					@Html.Partial("_ProductBox", product)
-				</div>
+			<div class="col-md-12 product-item">
+				@Html.Partial("_ProductBox", product)
 			</div>
 		</div>
 	}

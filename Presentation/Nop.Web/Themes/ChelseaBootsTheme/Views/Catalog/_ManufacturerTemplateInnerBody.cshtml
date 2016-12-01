@@ -1,12 +1,14 @@
 ﻿@model Nop.Web.Models.Catalog.ManufacturerModel
 
-@Html.Partial("_LeftSide", Model.PagingFilteringContext)
-
 @{
 	var pageTitle = !String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name;
 }
 
-<div class="col-md-9">
+<div class="col-md-2">
+	@Html.Partial("_LeftSide", Model.PagingFilteringContext)
+</div>
+
+<div class="col-md-10">
 	<div class="panel panel-default form-panel">
 		<div class="panel-heading">
 			<h3>@pageTitle</h3>

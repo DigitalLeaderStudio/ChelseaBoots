@@ -1235,7 +1235,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_CreateOrUpdateAddress.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Notifications.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Print.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox-Original.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Root.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Root.Head.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_RootPopup.cshtml" />
@@ -1270,6 +1270,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_LeftSide.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ManufacturerTemplateInnerBody.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_FilterSpecsBox.Old.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

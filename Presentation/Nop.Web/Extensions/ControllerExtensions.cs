@@ -86,8 +86,10 @@ namespace Nop.Web.Extensions
             CatalogSettings catalogSettings,
             MediaSettings mediaSettings,
             IEnumerable<Product> products,
-            bool preparePriceModel = true, bool preparePictureModel = true,
-            int? productThumbPictureSize = null, bool prepareSpecificationAttributes = false,
+            bool preparePriceModel = true, 
+			bool preparePictureModel = true,
+            int? productThumbPictureSize = null, 
+			bool prepareSpecificationAttributes = false,
             bool forceRedirectionAfterAddingToCart = false)
         {
             if (products == null)
@@ -100,6 +102,7 @@ namespace Nop.Web.Extensions
                 {
                     Id = product.Id,
                     Name = product.GetLocalized(x => x.Name),
+					ManufacturerName = product.GetLocalized(x => x.ProductManufacturers.First().Manufacturer.Name),
                     ShortDescription = product.GetLocalized(x => x.ShortDescription),
                     FullDescription = product.GetLocalized(x => x.FullDescription),
                     SeName = product.GetSeName(),

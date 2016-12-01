@@ -4,28 +4,34 @@
 
 @if (Model.Enabled)
 {
-	<div class="panel panel-default side-nav">
-		<div class="panel-heading">
-			<strong>@T("Filtering.SpecificationFilter")</strong>
-		</div>
-		<div class="panel-body">
-			<div id="filter-spec">
-				<ul class="list-group">
-					@foreach (var spec in @Model.AllItems)
-					{
-						<li class="list-group-item" title="@spec.FilterUrl">
-							<div class="material-switch pull-right">
-								<input id="@spec.Name" name="@spec.Name" type="checkbox" href="@spec.FilterUrl" @(spec.Selected ? "checked='checked'" : null) />
-								<label for="@spec.Name" class="label-default"></label>
-							</div>
-							<span>
-								@spec.SpecificationAttributeOptionName
-							</span>
-						</li>
-					}
-				</ul>
+	//Group by attribute
+	var itemsGpoup = Model.AllItems.GroupBy(i => i.SpecificationAttributeName);
+
+	foreach (var group in itemsGpoup)
+	{
+		<div class="panel panel-default side-nav">
+			<div class="panel-heading">
+				<strong>@group.Key</strong>
+			</div>
+			<div class="panel-body">
+				<div id="filter-spec">
+					<ul class="list-group">
+						@foreach (var spec in group)
+						{
+							<li class="list-group-item" title="@spec.FilterUrl">
+								<div class="material-switch pull-right">
+									<input id="@spec.Name" name="@spec.Name" type="checkbox" href="@spec.FilterUrl" @(spec.Selected ? "checked='checked'" : null) />
+									<label for="@spec.Name" class="label-default"></label>
+								</div>
+								<span>
+									@spec.SpecificationAttributeOptionName
+								</span>
+							</li>
+						}
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
+	}
 }
 

@@ -1,13 +1,12 @@
 ﻿@model Nop.Web.Models.Catalog.CategoryModel
-
-@Html.Partial("_LeftSide", Model.PagingFilteringContext)
-
 @{
 	var pageTitle = !String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name;
-	
 }
 
-<div class="col-md-9">
+<div class="col-md-2">
+	@Html.Partial("_LeftSide", Model.PagingFilteringContext)
+</div>
+<div class="col-md-10">
 	<div class="panel panel-default form-panel">
 		<div class="panel-heading">
 			<h3>@pageTitle</h3>
@@ -18,44 +17,44 @@
 				@*description*@
 				@if (!String.IsNullOrWhiteSpace(Model.Description))
 				{
-				<div class="category-description">
-					@Html.Raw(Model.Description)
-				</div>
+					@*<div class="category-description">
+						@Html.Raw(Model.Description)
+					</div>*@
 				}
 				@Html.Widget("categorydetails_before_subcategories")
 				@*subcategories*@
 				@if (Model.SubCategories.Count > 0)
 				{
-				<div class="row">
-					@foreach (var item in Model.SubCategories)
+					<div class="row">
+						@foreach (var item in Model.SubCategories)
 						{
-					<div class="col-md-3">
-						<div class="item-box">
-							<div class="offer offer-default pull-text-center">
-								<div class="category-ash-box">
-									<h2 class="product-title">
-										<a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
-											@item.Name
-										</a>
-									</h2>
-								</div>
-								<div class="picture">
-									<a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
-										<img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl"
-											 title="@item.PictureModel.Title" />
-									</a>
+							<div class="col-md-3">
+								<div class="item-box">
+									<div class="offer offer-default pull-text-center">
+										<div class="category-ash-box">
+											<h2 class="product-title">
+												<a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+													@item.Name
+												</a>
+											</h2>
+										</div>
+										<div class="picture">
+											<a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+												<img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl"
+													 title="@item.PictureModel.Title" />
+											</a>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
 						}
-				</div>
+					</div>
 				}
 				@Html.Widget("categorydetails_before_featured_products")
 				@*featured products*@
 				@if (Model.FeaturedProducts.Count > 0)
 				{
-				@Html.Partial("_FeaturedProducts")
+					@Html.Partial("_FeaturedProducts")
 				}
 				@Html.Widget("categorydetails_after_featured_products")
 
@@ -71,11 +70,11 @@
 					{
 						if (Model.PagingFilteringContext.ViewMode == "list")
 						{
-					@Html.Partial("_ProductsList", Model.Products);
+							@Html.Partial("_ProductsList", Model.Products);
 						}
 						else
 						{
-					@Html.Partial("_ProductsGrid", Model.Products);
+							@Html.Partial("_ProductsGrid", Model.Products);
 						}
 					}
 				</div>

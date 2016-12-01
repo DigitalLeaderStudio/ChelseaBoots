@@ -152,8 +152,7 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 		[NonAction]
 		protected virtual void PrepareSortingOptions(
 			CatalogPagingFilteringModel pagingFilteringModel,
-			CatalogPagingFilteringModel command,
-			bool buildDataValuesNotLinks = false)
+			CatalogPagingFilteringModel command)
 		{
 			CheckForNull(pagingFilteringModel, command);
 
@@ -180,22 +179,14 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 				foreach (var option in activeOptions)
 				{
 					var sortText = ((ProductSortingEnum)option.Key).GetLocalizedEnum(_localizationService, _workContext);
+					var currentPageUrl = _webHelper.GetThisPageUrl(true);
+
 					var listItem = new SelectListItem
 					{
 						Text = sortText,
+						Value = _webHelper.ModifyQueryString(currentPageUrl, "orderby=" + (option.Key).ToString(), null),
 						Selected = option.Key == command.OrderBy
 					};
-
-					if (buildDataValuesNotLinks)
-					{
-						listItem.Value = option.Key.ToString();
-					}
-					else
-					{
-						var currentPageUrl = _webHelper.GetThisPageUrl(true);
-						var sortUrl = _webHelper.ModifyQueryString(currentPageUrl, "orderby=" + (option.Key).ToString(), null);
-						listItem.Value = sortUrl;
-					}
 
 					pagingFilteringModel.AvailableSortOptions.Add(listItem);
 				}
@@ -205,8 +196,7 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 		[NonAction]
 		protected virtual void PrepareViewModes(
 			CatalogPagingFilteringModel pagingFilteringModel,
-			CatalogPagingFilteringModel command,
-			bool buildDataValuesNotLinks = false)
+			CatalogPagingFilteringModel command)
 		{
 			CheckForNull(pagingFilteringModel, command);
 
@@ -219,28 +209,20 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 
 			if (pagingFilteringModel.AllowProductViewModeChanging)
 			{
+				var currentPageUrl = _webHelper.GetThisPageUrl(true);
+
 				var gridSelectListItem = new SelectListItem
 				{
 					Text = _localizationService.GetResource("Catalog.ViewMode.Grid"),
-					Selected = viewMode == "grid"
+					Selected = viewMode == "grid",
+					Value = _webHelper.ModifyQueryString(currentPageUrl, "viewmode=grid", null)
 				};
 				var listSelectListItem = new SelectListItem
 				{
 					Text = _localizationService.GetResource("Catalog.ViewMode.List"),
-					Selected = viewMode == "list"
+					Selected = viewMode == "list",
+					Value = _webHelper.ModifyQueryString(currentPageUrl, "viewmode=list", null)
 				};
-
-				if (buildDataValuesNotLinks)
-				{
-					gridSelectListItem.Value = "grid";
-					listSelectListItem.Value = "list";
-				}
-				else
-				{
-					var currentPageUrl = _webHelper.GetThisPageUrl(true);
-					gridSelectListItem.Value = _webHelper.ModifyQueryString(currentPageUrl, "viewmode=grid", null);
-					listSelectListItem.Value = _webHelper.ModifyQueryString(currentPageUrl, "viewmode=list", null);
-				}
 
 				pagingFilteringModel.AvailableViewModes.Add(gridSelectListItem);
 				pagingFilteringModel.AvailableViewModes.Add(listSelectListItem);
@@ -254,8 +236,7 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			CatalogPagingFilteringModel command,
 			bool allowCustomersToSelectPageSize,
 			string pageSizeOptions,
-			int fixedPageSize,
-			bool buildDataValuesNotLinks = false)
+			int fixedPageSize)
 		{
 			CheckForNull(pagingFilteringModel, command);
 
@@ -302,7 +283,7 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 						var listItem = new SelectListItem
 						{
 							Text = pageSize,
-							Value = buildDataValuesNotLinks ? pageSize.ToString() : String.Format(sortUrl, pageSize),
+							Value = String.Format(sortUrl, pageSize),
 							Selected = pageSize.Equals(command.PageSize.ToString(), StringComparison.InvariantCultureIgnoreCase)
 						};
 
@@ -422,19 +403,36 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 		}
 
 		[NonAction]
-		protected virtual IEnumerable<ProductOverviewModel> PrepareProductOverviewModels(IEnumerable<Product> products,
-			bool preparePriceModel = true, bool preparePictureModel = true,
-			int? productThumbPictureSize = null, bool prepareSpecificationAttributes = false,
+		protected virtual IEnumerable<ProductOverviewModel> PrepareProductOverviewModels(
+			IEnumerable<Product> products,
+			bool preparePriceModel = true,
+			bool preparePictureModel = true,
+			int? productThumbPictureSize = null,
+			bool prepareSpecificationAttributes = false,
 			bool forceRedirectionAfterAddingToCart = false)
 		{
 			return this.PrepareProductOverviewModels(_workContext,
-				_storeContext, _categoryService, _productService, _specificationAttributeService,
-				_priceCalculationService, _priceFormatter, _permissionService,
-				_localizationService, _taxService, _currencyService,
-				_pictureService, _measureService, _webHelper, _cacheManager,
-				_catalogSettings, _mediaSettings, products,
-				preparePriceModel, preparePictureModel,
-				productThumbPictureSize, prepareSpecificationAttributes,
+				_storeContext,
+				_categoryService,
+				_productService,
+				_specificationAttributeService,
+				_priceCalculationService,
+				_priceFormatter,
+				_permissionService,
+				_localizationService,
+				_taxService,
+				_currencyService,
+				_pictureService,
+				_measureService,
+				_webHelper,
+				_cacheManager,
+				_catalogSettings,
+				_mediaSettings,
+				products,
+				preparePriceModel,
+				preparePictureModel,
+				productThumbPictureSize,
+				prepareSpecificationAttributes,
 				forceRedirectionAfterAddingToCart);
 		}
 
@@ -680,7 +678,7 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 				orderBy: (ProductSortingEnum)command.OrderBy,
 				pageIndex: command.PageNumber - 1,
 				pageSize: command.PageSize);
-			model.Products = PrepareProductOverviewModels(products).ToList();
+			model.Products = PrepareProductOverviewModels(products, prepareSpecificationAttributes: true).ToList();
 
 			model.PagingFilteringContext.LoadPagedList(products);
 
