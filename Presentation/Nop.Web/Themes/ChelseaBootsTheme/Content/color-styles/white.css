@@ -213,15 +213,27 @@ select.form-control.date-select {
 		width: 90%;
 	}
 
-	.category-menu .nav > li > a {
-		color: #4d4d4d !important;
+	.category-menu .nav > li:first-child {
+		padding: 0;
 	}
 
-		.category-menu .nav > li > a:hover, .nav > li > a:focus {
-			background-color: #fff;
-			color: #c68c53 !important;
-			text-decoration: none;
+	.category-menu .nav > li {
+		padding-top: 3px;
+	}
+
+		.category-menu .nav > li > a {
+			color: #4d4d4d !important;
+			outline: none;
 		}
+
+			.category-menu .nav > li > a:hover,
+			.category-menu .nav > li > a.active,
+			.nav > li > a:focus,
+			.nav > li > a:active {
+				background-color: #fff !important;
+				color: #c68c53 !important;
+				text-decoration: none;
+			}
 
 .masthead .dropdown-menu {
 	border: 1px dotted #ccc !important;
