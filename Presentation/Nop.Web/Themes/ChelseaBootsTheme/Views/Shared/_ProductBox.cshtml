@@ -60,6 +60,7 @@
 				</a>
 			</h5>
 
+
 			<ul class="product-spec-list">
 				<li>
 					<strong>@T("Manufacturers"):</strong>&nbsp;
@@ -68,9 +69,9 @@
 
 				@foreach (var spec in Model.SpecificationAttributeModels)
 				{
-					<li>
-						<strong>@spec.SpecificationAttributeName:</strong>&nbsp;<span>@spec.ValueRaw</span>
-					</li>
+				<li>
+					<strong>@spec.SpecificationAttributeName:</strong>&nbsp;<span>@spec.ValueRaw</span>
+				</li>
 				}
 			</ul>
 
@@ -102,8 +103,8 @@
 
 				<div class="col-md-8">
 					<span class="price">@Model.ProductPrice.Price</span>
-				</div>
 			</div>
+					</div>
 		</div>
 	</div>
 </div>
