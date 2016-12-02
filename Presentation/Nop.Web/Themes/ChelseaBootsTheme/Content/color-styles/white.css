@@ -85,9 +85,7 @@
 			float: left;
 		}
 
-.notifications.success {
-	background: #0d9c66 !important;
-}
+
 
 .masthead .navbar-inverse {
 	background-color: #fff;
@@ -134,7 +132,8 @@ ul.nav.navbar-nav.navbar-right li > a:hover {
 	.btn.btn-primary:hover,
 	.btn.btn-primary:active,
 	.btn.btn-primary:focus {
-		background-color: #63462A;
+    	background-color: #db9856;
+        z-index: 30000;
 	}
 
 .panel.panel-default {
@@ -809,4 +808,80 @@ blockquote {
 
 .custom-home-page .widget .theme-custom .nivo-controlNav a.active {
     background: #c68c53;
+}
+
+.product-details-page .gallery {
+    margin-top: 0 !important; 
+}
+
+ .product-essential .gallery-wrapper {
+    padding-left: 0 !important;
+}
+
+.product-essential .overview .product-name {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 2.2em;
+}
+.product-essential .overview .prices {
+    margin: 0 !important;
+    padding: 0;
+}
+
+.product-essential .overview .price-and-buttons {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 10px;
+    overflow: auto;
+}
+.product-essential .overview .price-and-buttons .product-price {
+    float: left;
+    width: 40%;
+}
+.product-essential .overview .price-and-buttons .product-price span {
+    font-size: 1.3em;
+}
+.product-essential .overview .price-and-buttons .call-to-action-buttons {
+    float: left;
+    width: 60%;
+}
+.product-essential .overview .add-to-cart-buttons .add-to-cart .col-md-3 {
+    padding: 0 !important;
+}
+.product-essential .call-to-action-buttons .add-to-cart {
+    float: left !important;
+    width: 50% !important;
+}
+.product-essential .call-to-action-buttons .add-to-fav {
+    float: left;
+    width: 50%;
+}
+.product-essential .call-to-action-buttons .add-to-fav .add-to-wishlist-button {
+    margin: 0 !important;
+    background: #c68c53;
+}
+.product-essential .call-to-action-buttons .add-to-fav .add-to-wishlist-button:hover {
+    background: #db9856;
+}
+.product-essential .call-to-action-buttons .add-to-cart .add-to-cart-button {
+    padding: 6px 12px;
+    background: #49ca20;
+}
+.product-essential .call-to-action-buttons .add-to-cart .add-to-cart-button:hover {
+    background: #4fdd22;
+}
+.product-essential .overview .full-description {
+    border:0;
+    padding:0;
+}
+.product-essential .overview .full-description p {
+    font-size: 1.2em;
+    border:0;
+}
+.product-essential .overview .product-specs-box .title {
+    font-size: 1.2em;
+}
+
+.product-item .add-to-fav-btn {
+    text-align: right;
 }

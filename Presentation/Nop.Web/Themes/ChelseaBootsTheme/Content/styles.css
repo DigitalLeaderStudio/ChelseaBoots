@@ -1427,7 +1427,7 @@ Page: Product Details START
 }
 
 .product-details-page .add-to-cart {
-	padding-top: 10px;
+	/padding-top: 10px;
 }
 
 	.product-details-page .add-to-cart .qty-input {

@@ -1,2 +1,2 @@
 DataProvider: sqlserver
-DataConnectionString: Data Source=TOHA-PC\SQLEXPRESS;Initial Catalog=ChelseaBoots;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=sa
+DataConnectionString: Server=BUG\SQLEXPRESS;Database=ChelseaBoots;User Id=sa;Password=sa;
