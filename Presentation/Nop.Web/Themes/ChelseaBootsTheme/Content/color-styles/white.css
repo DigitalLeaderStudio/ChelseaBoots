@@ -85,7 +85,9 @@
 			float: left;
 		}
 
-
+.notifications.success {
+ 	background: #0d9c66 !important;
+ }
 
 .masthead .navbar-inverse {
 	background-color: #fff;
@@ -884,4 +886,26 @@ blockquote {
 
 .product-item .add-to-fav-btn {
     text-align: right;
+}
+
+.product-list .product-item .thumbnail-wrapper .thumbnail .image {
+    float: left;
+    width: 35%;
+}
+.product-list .product-item .thumbnail-wrapper .thumbnail .caption {
+    float: left;
+    width: 65%;
+}
+.product-list .product-item .thumbnail-wrapper .thumbnail .caption h5 {
+    font-size: 2em;
+}
+.product-list .product-item .thumbnail-wrapper .thumbnail .caption .product-spec-list {
+     font-size: 1em;
+}
+.product-list .product-item .thumbnail-wrapper .thumbnail .caption .price {
+     font-size: 1.6em !important;
+     margin: 0;
+}
+.product-list .product-item .thumbnail .caption .product-short-description {
+    height: 100%;
 }
