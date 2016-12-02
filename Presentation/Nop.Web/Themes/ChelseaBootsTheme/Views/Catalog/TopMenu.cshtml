@@ -3,7 +3,6 @@
 @using Nop.Web.Models.Catalog;
 @{
 	var isRtl = this.ShouldUseRtlTheme();
-	string url = string.Empty;
 }
 @helper Bracket_Remover(string input)
 {
@@ -43,9 +42,8 @@
 	}
 	else
 	{
-		var url = Url.RouteUrl("Category", new { SeName = category.SeName });
 		<li>
-			<a href="@url" class="@(Html.IsUrlIsCurrent(url) ? "active" : "")">
+			<a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
 				@category.Name
 			</a>
 		</li>
@@ -66,12 +64,7 @@
 			<ul class="nav navbar-nav">
 				@Html.Widget("header_menu_before")
 				<li>
-					@{
-						url = Url.RouteUrl("HomePage");
-						<a href="@url" class="@(Html.IsUrlIsCurrent(url) ? "active" : "")">
-							<span class="glyphicon glyphicon-home"></span>
-						</a>
-					}
+					<a href="@Url.RouteUrl("HomePage")"><span class="glyphicon glyphicon-home"></span></a>
 				</li>
 				@{
 					var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
@@ -83,18 +76,14 @@
 
 				@foreach (var topic in Model.Topics)
 				{
-					url = Url.RouteUrl("Topic", new { SeName = topic.SeName });
-					<li>
-						<a href="@url" class="@(Html.IsUrlIsCurrent(url) ? "active" : "")">@topic.Name</a>
-					</li>
+					<li><a href="@Url.RouteUrl("Topic", new {SeName = topic.SeName})">@topic.Name</a></li>
+
 				}
 				@if (Model.Categories.Count == 0 && Model.Topics.Count == 0)
 				{
 					//no categories to display?
 					//in this cae let's diplay some default menu items
-					<li>
-						<a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a>
-					</li>
+					<li><a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></li>
 					if (Model.NewProductsEnabled)
 					{
 						<li>

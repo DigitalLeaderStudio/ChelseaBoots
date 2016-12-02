@@ -59,20 +59,21 @@
 				</a>
 			</h5>
 
-			<ul class="product-spec-list">
-				<li>
-					<strong>@T("Manufacturers"):</strong>&nbsp;
-					<span>@Model.ManufacturerName</span>
-				</li>
 
-				@foreach (var spec in Model.SpecificationAttributeModels)
-				{
-				<li>
-					<strong>@spec.SpecificationAttributeName:</strong>&nbsp;<span>@spec.ValueRaw</span>
-				</li>
-				}
-			</ul>
+            <ul class="product-spec-list">
+                <li>
+                    <strong>@T("Manufacturers"):</strong>&nbsp;
+                    <span>@Model.ManufacturerName</span>
+                </li>
 
+                @foreach (var spec in Model.SpecificationAttributeModels)
+                {
+                    <li>
+                        <strong>@spec.SpecificationAttributeName:</strong>&nbsp;<span>@spec.ValueRaw</span>
+                    </li>
+                }
+            </ul>
+		
 			<div class="row product-short-description">
 				<div class="col-md-12">
 					@Model.ShortDescription
@@ -81,7 +82,7 @@
 
 			<div class="row text-right">
 				<div class="col-md-4">
-					<a href="#" type="button" class="btn btn-sm btn-primary">
+					<a href="#" type="button" class="btn btn-md btn-primary">
 						<i class="fa fa-heart-o"></i>&nbsp;&nbsp;@T("ShoppingCart.AddToWishlist")
 						@*@T("ShoppingCart.AddToCart")*@
 					</a>
