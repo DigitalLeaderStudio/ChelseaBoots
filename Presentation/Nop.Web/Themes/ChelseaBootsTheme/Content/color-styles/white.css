@@ -85,7 +85,9 @@
 			float: left;
 		}
 
-
+.notifications.success {
+	background: #0d9c66 !important;
+}
 
 .masthead .navbar-inverse {
 	background-color: #fff;

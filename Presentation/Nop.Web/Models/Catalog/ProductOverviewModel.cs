@@ -27,6 +27,8 @@ namespace Nop.Web.Models.Catalog
 
 		public bool MarkAsNew { get; set; }
 
+		public bool IsInWishList { get; set; }
+
 		//price
 		public ProductPriceModel ProductPrice { get; set; }
 		//picture

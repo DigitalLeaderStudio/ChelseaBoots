@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201611291241139_Add-ContactUs.Phone.Designer.cs">
       <DependentUpon>201611291241139_Add-ContactUs.Phone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021409186_WishListCaptionsUpdate.cs" />
+    <Compile Include="Migrations\201612021409186_WishListCaptionsUpdate.Designer.cs">
+      <DependentUpon>201612021409186_WishListCaptionsUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="Extensions.cs" />
@@ -208,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611291241139_Add-ContactUs.Phone.resx">
       <DependentUpon>201611291241139_Add-ContactUs.Phone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021409186_WishListCaptionsUpdate.resx">
+      <DependentUpon>201612021409186_WishListCaptionsUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
