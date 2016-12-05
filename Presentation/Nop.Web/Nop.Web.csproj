@@ -407,6 +407,7 @@
     <Compile Include="Models\Vendors\VendorInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes\ChelseaBootsTheme\Controllers\CatalogController.cs" />
+    <Compile Include="Themes\ChelseaBootsTheme\Models\ProductWishListModel.cs" />
     <Compile Include="Validators\Blogs\BlogPostValidator.cs" />
     <Compile Include="Validators\Boards\EditForumPostValidator.cs" />
     <Compile Include="Validators\Boards\EditForumTopicValidator.cs" />
@@ -683,6 +684,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Scripts\html5shiv.min.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\respond.min.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\Shared\product.js" />
+    <Content Include="Themes\ChelseaBootsTheme\Scripts\ShoppingCart\wishlist.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\styleSheetToogle.js" />
     <Content Include="Themes\DefaultClean\Content\css\ie8.css" />
     <Content Include="Themes\DefaultClean\Content\css\styles.css" />
@@ -999,7 +1001,6 @@
     <Content Include="Content\install\images\topright.gif" />
     <Content Include="Content\install\style.css" />
     <Content Include="Content\install\style.rtl.css" />
-    <Content Include="Content\Images\Thumbs\placeholder.txt" />
     <Content Include="ErrorPage.htm" />
     <Content Include="FileNotFound.htm" />
     <Content Include="Global.asax" />
@@ -1272,6 +1273,8 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ManufacturerTemplateInnerBody.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_FilterSpecsBox.Old.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ButtonAddToWishlist.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\Wishlist - Original.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

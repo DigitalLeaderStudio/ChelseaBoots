@@ -1,0 +1,17 @@
+﻿@model Nop.Web.Themes.ChelseaBootsTheme.Models.ProductWishListModel
+
+@{
+	Html.AppendScriptParts("~/Themes/ChelseaBootsTheme/Scripts/ShoppingCart/wishlist.js");
+	
+	var wishListAttr = string.Format(Model.IsInWishList ? "remove-from-wish={0}" : "add-to-wish={0}", Model.ProductId);
+	var wishListText = Model.IsInWishList ? @T("ShoppingCart.RemoveFromWishlist") : @T("ShoppingCart.AddToWishlist");
+}
+<a href="javascript:void();"
+   type="button"
+   class="btn btn-sm btn-primary"
+   remove-text="@T("ShoppingCart.RemoveFromWishlist")"
+   add-text="@T("ShoppingCart.AddToWishlist")" @wishListAttr
+   title="@T("ShoppingCart.AddToWishlist")">
+	<i class="fa fa-heart@(Model.IsInWishList ? "" : "-o")"></i>&nbsp;&nbsp;
+	<span>@wishListText</span>
+</a>

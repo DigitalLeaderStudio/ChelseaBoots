@@ -41,6 +41,7 @@ using Nop.Web.Infrastructure.Cache;
 using Nop.Web.Models.Common;
 using Nop.Web.Models.Media;
 using Nop.Web.Models.ShoppingCart;
+using Nop.Web.Models.Catalog;
 
 namespace Nop.Web.Controllers
 {
@@ -48,6 +49,7 @@ namespace Nop.Web.Controllers
 	{
 		#region Fields
 
+		private readonly IMeasureService _measureService;
 		private readonly IProductService _productService;
 		private readonly IWorkContext _workContext;
 		private readonly IStoreContext _storeContext;
@@ -82,7 +84,7 @@ namespace Nop.Web.Controllers
 		private readonly IGenericAttributeService _genericAttributeService;
 		private readonly IAddressAttributeFormatter _addressAttributeFormatter;
 		private readonly HttpContextBase _httpContext;
-
+		private readonly ISpecificationAttributeService _specificationAttributeService;
 		private readonly MediaSettings _mediaSettings;
 		private readonly ShoppingCartSettings _shoppingCartSettings;
 		private readonly CatalogSettings _catalogSettings;
@@ -100,6 +102,7 @@ namespace Nop.Web.Controllers
 
 		public ShoppingCartController(IProductService productService,
 			IStoreContext storeContext,
+			IMeasureService measureService,
 			IWorkContext workContext,
 			IShoppingCartService shoppingCartService,
 			IPictureService pictureService,
@@ -121,6 +124,7 @@ namespace Nop.Web.Controllers
 			IShippingService shippingService,
 			IOrderTotalCalculationService orderTotalCalculationService,
 			ICheckoutAttributeService checkoutAttributeService,
+			ISpecificationAttributeService specificationAttributeService,
 			IPaymentService paymentService,
 			IWorkflowMessageService workflowMessageService,
 			IPermissionService permissionService,
@@ -176,6 +180,8 @@ namespace Nop.Web.Controllers
 			this._genericAttributeService = genericAttributeService;
 			this._addressAttributeFormatter = addressAttributeFormatter;
 			this._httpContext = httpContext;
+			this._measureService = measureService;
+			this._specificationAttributeService = specificationAttributeService;
 
 			this._mediaSettings = mediaSettings;
 			this._shoppingCartSettings = shoppingCartSettings;
@@ -808,6 +814,40 @@ namespace Nop.Web.Controllers
 			}
 
 			#endregion
+		}
+
+		[NonAction]
+		protected virtual IEnumerable<ProductOverviewModel> PrepareProductOverviewModels(
+			IEnumerable<Product> products,
+			bool preparePriceModel = true,
+			bool preparePictureModel = true,
+			int? productThumbPictureSize = null,
+			bool prepareSpecificationAttributes = false,
+			bool forceRedirectionAfterAddingToCart = false)
+		{
+			return this.PrepareProductOverviewModels(_workContext,
+				_storeContext,
+				null,
+				_productService,
+				_specificationAttributeService,
+				_priceCalculationService,
+				_priceFormatter,
+				_permissionService,
+				_localizationService,
+				_taxService,
+				_currencyService,
+				_pictureService,
+				_measureService,
+				_webHelper,
+				_cacheManager,
+				_catalogSettings,
+				_mediaSettings,
+				products,
+				preparePriceModel,
+				preparePictureModel,
+				productThumbPictureSize,
+				prepareSpecificationAttributes,
+				forceRedirectionAfterAddingToCart);
 		}
 
 		[NonAction]
@@ -2718,6 +2758,26 @@ namespace Nop.Web.Controllers
 
 		#region Wishlist
 
+		//[NopHttpsRequirement(SslRequirement.Yes)]
+		//public ActionResult Wishlist(Guid? customerGuid)
+		//{
+		//	if (!_permissionService.Authorize(StandardPermissionProvider.EnableWishlist))
+		//		return RedirectToRoute("HomePage");
+
+		//	Customer customer = customerGuid.HasValue ?
+		//		_customerService.GetCustomerByGuid(customerGuid.Value)
+		//		: _workContext.CurrentCustomer;
+		//	if (customer == null)
+		//		return RedirectToRoute("HomePage");
+		//	var cart = customer.ShoppingCartItems
+		//		.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
+		//		.LimitPerStore(_storeContext.CurrentStore.Id)
+		//		.ToList();
+		//	var model = new WishlistModel();
+		//	PrepareWishlistModel(model, cart, !customerGuid.HasValue);
+		//	return View(model);
+		//}
+
 		[NopHttpsRequirement(SslRequirement.Yes)]
 		public ActionResult Wishlist(Guid? customerGuid)
 		{
@@ -2729,12 +2789,24 @@ namespace Nop.Web.Controllers
 				: _workContext.CurrentCustomer;
 			if (customer == null)
 				return RedirectToRoute("HomePage");
+
 			var cart = customer.ShoppingCartItems
 				.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
 				.LimitPerStore(_storeContext.CurrentStore.Id)
 				.ToList();
+
 			var model = new WishlistModel();
+
+			var overviewModels = PrepareProductOverviewModels(cart.Select(sci => sci.Product).ToList(), true, true, null, true, true);
+
 			PrepareWishlistModel(model, cart, !customerGuid.HasValue);
+			//Insert models into ShoppingCartItem
+			var i = 0;
+			foreach (var item in model.Items)
+			{
+				item.ProductOverview = overviewModels.ElementAt(i++);
+			}
+
 			return View(model);
 		}
 

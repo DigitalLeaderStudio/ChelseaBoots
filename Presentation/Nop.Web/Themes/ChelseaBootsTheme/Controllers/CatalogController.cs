@@ -847,7 +847,6 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			var manufacturer = _manufacturerService.GetManufacturerById(manufacturerId);
 
 			var verificationResult = VerifyDataAndSetAttributes<Manufacturer>(manufacturer);
-
 			if (verificationResult != null)
 			{
 				return verificationResult;
@@ -860,7 +859,9 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			//view mode
 			PrepareViewModes(model.PagingFilteringContext, command);
 			//page size
-			PreparePageSizeOptions(model.PagingFilteringContext, command,
+			PreparePageSizeOptions(
+				model.PagingFilteringContext,
+				command,
 				manufacturer.AllowCustomersToSelectPageSize,
 				manufacturer.PageSizeOptions,
 				manufacturer.PageSize);
@@ -871,20 +872,34 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			model.FeaturedProducts = BuildFeatureProducts(null, manufacturer);
 
 			//products
+			IList<int> alreadyFilteredSpecOptionIds = model.PagingFilteringContext.SpecificationFilter.GetAlreadyFilteredSpecOptionIds(_webHelper);
 			IList<int> filterableSpecificationAttributeOptionIds;
-			var products = _productService.SearchProducts(out filterableSpecificationAttributeOptionIds, true,
+
+			var products = _productService.SearchProducts(
+				out filterableSpecificationAttributeOptionIds,
+				true,
 				manufacturerId: manufacturer.Id,
 				storeId: _storeContext.CurrentStore.Id,
 				visibleIndividuallyOnly: true,
 				featuredProducts: _catalogSettings.IncludeFeaturedProductsInNormalLists ? null : (bool?)false,
 				priceMin: convertedPriceRange.From,
 				priceMax: convertedPriceRange.To,
+				filteredSpecs: alreadyFilteredSpecOptionIds,
 				orderBy: (ProductSortingEnum)command.OrderBy,
 				pageIndex: command.PageNumber - 1,
 				pageSize: command.PageSize);
-			model.Products = PrepareProductOverviewModels(products).ToList();
+			model.Products = PrepareProductOverviewModels(products, prepareSpecificationAttributes: true).ToList();
 
 			model.PagingFilteringContext.LoadPagedList(products);
+
+			//specs
+			model.PagingFilteringContext.SpecificationFilter.PrepareSpecsFilters(
+				alreadyFilteredSpecOptionIds,
+				filterableSpecificationAttributeOptionIds != null ? filterableSpecificationAttributeOptionIds.ToArray() : null,
+				_specificationAttributeService,
+				_webHelper,
+				_workContext,
+				_cacheManager);
 
 			//activity log
 			_customerActivityService.InsertActivity("PublicStore.ViewManufacturer", _localizationService.GetResource("ActivityLog.PublicStore.ViewManufacturer"), manufacturer.Name);
