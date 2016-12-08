@@ -26,17 +26,17 @@ var AjaxCart = {
 	//add a product to the cart/wishlist from the catalog pages
 	addproducttocart_catalog: function (element, urladd) {
 		if (this.loadWaiting != false) {
-		    return;
+			return;
 		}
 		this.setLoadWaiting(true);
 
 		$.ajax({
-		    cache: false,
-		    url: urladd,
-		    type: 'post',
-		    success: this.success_process,
-		    complete: this.resetLoadWaiting,
-		    error: this.ajaxFailure
+			cache: false,
+			url: urladd,
+			type: 'post',
+			success: this.success_process,
+			complete: this.resetLoadWaiting,
+			error: this.ajaxFailure
 		});
 
 		var cart = $(this.topcartselector).parents('a').first();
@@ -45,7 +45,25 @@ var AjaxCart = {
 		this.animateAdding(itemToDrag, cart);
 	},
 
-	animateAdding: function(itemToDrag, endPointItem){
+	removeFromCart: function (element, removeUrl) {
+		if (this.loadWaiting != false) {
+			return;
+		}
+		this.setLoadWaiting(true);
+
+		$(element).parents('div.item').effect('drop', function () { $(this).detach(); });
+
+		$.ajax({
+			cache: false,
+			url: removeUrl,
+			type: 'post',
+			success: this.success_process,
+			complete: this.resetLoadWaiting,
+			error: this.ajaxFailure
+		});
+	},
+
+	animateAdding: function (itemToDrag, endPointItem) {
 		if (itemToDrag.length > 0) {
 			var itemClone = itemToDrag.clone()
 				.offset({

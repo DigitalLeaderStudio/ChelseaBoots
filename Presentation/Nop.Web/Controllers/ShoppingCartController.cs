@@ -1629,13 +1629,71 @@ namespace Nop.Web.Controllers
 						return Json(new
 						{
 							success = true,
-							message = string.Format(_localizationService.GetResource("Products.ProductHasBeenAddedToTheCart.Link"), Url.RouteUrl("ShoppingCart")),
 							updatetopcartsectionhtml = updatetopcartsectionhtml,
 							updateflyoutcartsectionhtml = updateflyoutcartsectionhtml
 						});
 					}
 			}
-		}		
+		}
+
+		[HttpPost]
+		public ActionResult RemoveFromCart(int productId)
+		{
+			var product = _productService.GetProductById(productId);
+
+			JsonResult result = ValidateProduct(product, 1);
+			if (result != null)
+			{
+				return result;
+			}
+
+			//get standard warnings without attribute validations
+			//first, try to find existing shopping cart item
+			var cart = _workContext.CurrentCustomer.ShoppingCartItems
+										.Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+										.LimitPerStore(_storeContext.CurrentStore.Id)
+										.ToList();
+			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, ShoppingCartType.ShoppingCart, product);
+			//if we already have the same product in the cart, then break
+			if (shoppingCartItem == null)
+			{
+				return Json(new
+				{
+					success = false,
+					message = "There is no product in wish list"
+				});
+			}
+
+			//now let's try adding product to the cart (now including product attribute validation, etc)
+
+			_shoppingCartService.DeleteShoppingCartItem(shoppingCartItem);
+
+			//activity log
+			_customerActivityService.InsertActivity(
+				"PublicStore.RemoveFromCart",
+				_localizationService.GetResource("ActivityLog.PublicStore.RemoveFromCart"),
+				product.Name);
+
+			//display notification message and update appropriate blocks
+			var updatetopcartsectionhtml = string.Format(
+				_localizationService.GetResource("ShoppingCart.HeaderQuantity"),
+				_workContext.CurrentCustomer.ShoppingCartItems
+						.Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+						.LimitPerStore(_storeContext.CurrentStore.Id)
+						.ToList()
+						.GetTotalProducts());
+
+			var updateflyoutcartsectionhtml = _shoppingCartSettings.MiniShoppingCartEnabled
+				? this.RenderPartialViewToString("FlyoutShoppingCart", PrepareMiniShoppingCartModel())
+				: "";
+
+			return Json(new
+			{
+				success = true,
+				updatetopcartsectionhtml = updatetopcartsectionhtml,
+				updateflyoutcartsectionhtml = updateflyoutcartsectionhtml
+			});
+		}
 
 		//add product to cart using AJAX
 		//currently we use this method on the product details pages

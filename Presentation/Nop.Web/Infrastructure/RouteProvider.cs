@@ -180,7 +180,12 @@ namespace Nop.Web.Infrastructure
 							new { controller = "ShoppingCart", action = "AddProductToCart_Details" },
 							new { productId = @"\d+", shoppingCartTypeId = @"\d+" },
 							new[] { "Nop.Web.Controllers" });
-			
+			//add product to cart (without any attributes and options). used on catalog pages.
+			routes.MapLocalizedRoute("RemoveProductFromCart",
+							"ShoppingCart/RemoveFromCart/{productId}/{quantity}",
+							new { controller = "ShoppingCart", action = "RemoveFromCart" },
+							new { productId = @"\d+", quantity = @"\d+" },
+							new[] { "Nop.Web.Controllers" });
 
 			//product tags
 			routes.MapLocalizedRoute("ProductsByTag",
