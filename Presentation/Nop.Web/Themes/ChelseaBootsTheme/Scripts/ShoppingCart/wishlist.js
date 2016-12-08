@@ -17,6 +17,8 @@
 
 		$element.find('i').attr('class', 'fa fa-heart');
 
+		AjaxCart.animateAdding($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')));
+
 		$.ajax({
 			cache: false,
 			url: 'WishList/AddToWishList/' + id,
@@ -54,7 +56,7 @@
 		});
 
 		if (removeFromDom) {
-			$('div[data-productid=' + id + ']').parents('.product-item').fadeOut(700, function () { $(this).detach(); });
+			$('div[data-productid=' + id + ']').parents('.product-item').effect('drop', function () { $(this).detach(); });
 		}
 
 		return false;

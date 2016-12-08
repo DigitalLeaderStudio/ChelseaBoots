@@ -823,7 +823,8 @@ namespace Nop.Web.Controllers
 			bool preparePictureModel = true,
 			int? productThumbPictureSize = null,
 			bool prepareSpecificationAttributes = false,
-			bool forceRedirectionAfterAddingToCart = false)
+			bool forceRedirectionAfterAddingToCart = false,
+			bool showWishButton = false)
 		{
 			return this.PrepareProductOverviewModels(_workContext,
 				_storeContext,
@@ -847,7 +848,8 @@ namespace Nop.Web.Controllers
 				preparePictureModel,
 				productThumbPictureSize,
 				prepareSpecificationAttributes,
-				forceRedirectionAfterAddingToCart);
+				forceRedirectionAfterAddingToCart,
+				showWishButton);
 		}
 
 		[NonAction]
@@ -1633,146 +1635,7 @@ namespace Nop.Web.Controllers
 						});
 					}
 			}
-		}
-
-		//TODO: Remover product from cart
-		//Add product to wish list
-		[HttpPost]
-		public ActionResult AddToWishList(int productId)
-		{
-			var product = _productService.GetProductById(productId);
-
-			JsonResult result = ValidateProduct(product, 1);
-			if (result != null)
-			{
-				return result;
-			}
-
-			//get standard warnings without attribute validations
-			//first, try to find existing shopping cart item
-			var cart = _workContext.CurrentCustomer.ShoppingCartItems
-										.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
-										.LimitPerStore(_storeContext.CurrentStore.Id)
-										.ToList();
-			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, ShoppingCartType.Wishlist, product);
-			//if we already have the same product in the cart, then break
-			if (shoppingCartItem != null)
-			{
-				return Json(new
-					{
-						success = false,
-						message = "There is already the same item in the cart"
-					});
-			}
-
-			var addToCartWarnings = _shoppingCartService
-				.GetShoppingCartItemWarnings(_workContext.CurrentCustomer, ShoppingCartType.Wishlist,
-				product, _storeContext.CurrentStore.Id, string.Empty,
-				decimal.Zero, null, null, 1, false, true, false, false, false);
-			if (addToCartWarnings.Any())
-			{
-				//cannot be added to the cart
-				//let's display standard warnings
-				return Json(new
-				{
-					success = false,
-					message = addToCartWarnings.ToArray()
-				});
-			}
-
-			//now let's try adding product to the cart (now including product attribute validation, etc)
-			addToCartWarnings = _shoppingCartService.AddToCart(
-				customer: _workContext.CurrentCustomer,
-				product: product,
-				shoppingCartType: ShoppingCartType.Wishlist,
-				storeId: _storeContext.CurrentStore.Id,
-				quantity: 1);
-			if (addToCartWarnings.Any())
-			{
-				//cannot be added to the cart
-				//but we do not display attribute and gift card warnings here. let's do it on the product details page
-				return Json(new
-				{
-					redirect = Url.RouteUrl("Product", new { SeName = product.GetSeName() }),
-				});
-			}
-
-			//activity log
-			_customerActivityService.InsertActivity(
-				"PublicStore.AddToWishlist",
-				_localizationService.GetResource("ActivityLog.PublicStore.AddToWishlist"),
-				product.Name);
-
-			//display notification message and update appropriate blocks
-			var updatetopwishlistsectionhtml = string.Format(
-				_localizationService.GetResource("Wishlist.HeaderQuantity"),
-				_workContext.CurrentCustomer.ShoppingCartItems
-								.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
-								.LimitPerStore(_storeContext.CurrentStore.Id)
-								.ToList()
-								.GetTotalProducts());
-			return Json(new
-			{
-				success = true,
-				message = string.Format(_localizationService.GetResource("Products.ProductHasBeenAddedToTheWishlist.Link"), Url.RouteUrl("Wishlist")),
-				updatetopwishlistsectionhtml = updatetopwishlistsectionhtml,
-			});
-		}
-
-		//Add product to wish list
-		[HttpPost]
-		public ActionResult RemoveFromWishList(int productId)
-		{
-			var product = _productService.GetProductById(productId);
-
-			JsonResult result = ValidateProduct(product, 1);
-			if (result != null)
-			{
-				return result;
-			}
-
-			//get standard warnings without attribute validations
-			//first, try to find existing shopping cart item
-			var cart = _workContext.CurrentCustomer.ShoppingCartItems
-										.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
-										.LimitPerStore(_storeContext.CurrentStore.Id)
-										.ToList();
-			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, ShoppingCartType.Wishlist, product);
-			//if we already have the same product in the cart, then break
-			if (shoppingCartItem == null)
-			{
-				return Json(new
-				{
-					success = false,
-					message = "There is no product in wish list"
-				});
-			}
-
-			//now let's try adding product to the cart (now including product attribute validation, etc)
-
-			_shoppingCartService.DeleteShoppingCartItem(shoppingCartItem);
-
-			//activity log
-			_customerActivityService.InsertActivity(
-				"PublicStore.RemoveFromWishlist",
-				_localizationService.GetResource("ActivityLog.PublicStore.RemoveFromWishlist"),
-				product.Name);
-
-			//display notification message and update appropriate blocks
-			var updatetopwishlistsectionhtml = string.Format(
-				_localizationService.GetResource("Wishlist.HeaderQuantity"),
-				_workContext.CurrentCustomer.ShoppingCartItems
-								.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
-								.LimitPerStore(_storeContext.CurrentStore.Id)
-								.ToList()
-								.GetTotalProducts());
-			return Json(new
-			{
-				success = true,
-				message = string.Format(_localizationService.GetResource("Products.ProductHasBeenRemovedFromTheWishlist.Link"), Url.RouteUrl("Wishlist")),
-				updatetopwishlistsectionhtml = updatetopwishlistsectionhtml,
-			});
-		}
+		}		
 
 		//add product to cart using AJAX
 		//currently we use this method on the product details pages
@@ -2751,6 +2614,7 @@ namespace Nop.Web.Controllers
 				return Content("");
 
 			var model = PrepareMiniShoppingCartModel();
+
 			return PartialView(model);
 		}
 
@@ -2758,25 +2622,141 @@ namespace Nop.Web.Controllers
 
 		#region Wishlist
 
-		//[NopHttpsRequirement(SslRequirement.Yes)]
-		//public ActionResult Wishlist(Guid? customerGuid)
-		//{
-		//	if (!_permissionService.Authorize(StandardPermissionProvider.EnableWishlist))
-		//		return RedirectToRoute("HomePage");
+		[HttpPost]
+		public ActionResult AddToWishList(int productId)
+		{
+			var product = _productService.GetProductById(productId);
 
-		//	Customer customer = customerGuid.HasValue ?
-		//		_customerService.GetCustomerByGuid(customerGuid.Value)
-		//		: _workContext.CurrentCustomer;
-		//	if (customer == null)
-		//		return RedirectToRoute("HomePage");
-		//	var cart = customer.ShoppingCartItems
-		//		.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
-		//		.LimitPerStore(_storeContext.CurrentStore.Id)
-		//		.ToList();
-		//	var model = new WishlistModel();
-		//	PrepareWishlistModel(model, cart, !customerGuid.HasValue);
-		//	return View(model);
-		//}
+			JsonResult result = ValidateProduct(product, 1);
+			if (result != null)
+			{
+				return result;
+			}
+
+			//get standard warnings without attribute validations
+			//first, try to find existing shopping cart item
+			var cart = _workContext.CurrentCustomer.ShoppingCartItems
+										.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
+										.LimitPerStore(_storeContext.CurrentStore.Id)
+										.ToList();
+			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, ShoppingCartType.Wishlist, product);
+			//if we already have the same product in the cart, then break
+			if (shoppingCartItem != null)
+			{
+				return Json(new
+				{
+					success = false,
+					message = "There is already the same item in the cart"
+				});
+			}
+
+			var addToCartWarnings = _shoppingCartService
+				.GetShoppingCartItemWarnings(_workContext.CurrentCustomer, ShoppingCartType.Wishlist,
+				product, _storeContext.CurrentStore.Id, string.Empty,
+				decimal.Zero, null, null, 1, false, true, false, false, false);
+			if (addToCartWarnings.Any())
+			{
+				//cannot be added to the cart
+				//let's display standard warnings
+				return Json(new
+				{
+					success = false,
+					message = addToCartWarnings.ToArray()
+				});
+			}
+
+			//now let's try adding product to the cart (now including product attribute validation, etc)
+			addToCartWarnings = _shoppingCartService.AddToCart(
+				customer: _workContext.CurrentCustomer,
+				product: product,
+				shoppingCartType: ShoppingCartType.Wishlist,
+				storeId: _storeContext.CurrentStore.Id,
+				quantity: 1);
+			if (addToCartWarnings.Any())
+			{
+				//cannot be added to the cart
+				//but we do not display attribute and gift card warnings here. let's do it on the product details page
+				return Json(new
+				{
+					redirect = Url.RouteUrl("Product", new { SeName = product.GetSeName() }),
+				});
+			}
+
+			//activity log
+			_customerActivityService.InsertActivity(
+				"PublicStore.AddToWishlist",
+				_localizationService.GetResource("ActivityLog.PublicStore.AddToWishlist"),
+				product.Name);
+
+			//display notification message and update appropriate blocks
+			var updatetopwishlistsectionhtml = string.Format(
+				_localizationService.GetResource("Wishlist.HeaderQuantity"),
+				_workContext.CurrentCustomer.ShoppingCartItems
+								.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
+								.LimitPerStore(_storeContext.CurrentStore.Id)
+								.ToList()
+								.GetTotalProducts());
+			return Json(new
+			{
+				success = true,
+				message = string.Format(_localizationService.GetResource("Products.ProductHasBeenAddedToTheWishlist.Link"), Url.RouteUrl("Wishlist")),
+				updatetopwishlistsectionhtml = updatetopwishlistsectionhtml,
+			});
+		}
+
+		[HttpPost]
+		public ActionResult RemoveFromWishList(int productId)
+		{
+			var product = _productService.GetProductById(productId);
+
+			JsonResult result = ValidateProduct(product, 1);
+			if (result != null)
+			{
+				return result;
+			}
+
+			//get standard warnings without attribute validations
+			//first, try to find existing shopping cart item
+			var cart = _workContext.CurrentCustomer.ShoppingCartItems
+										.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
+										.LimitPerStore(_storeContext.CurrentStore.Id)
+										.ToList();
+			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, ShoppingCartType.Wishlist, product);
+			//if we already have the same product in the cart, then break
+			if (shoppingCartItem == null)
+			{
+				return Json(new
+				{
+					success = false,
+					message = "There is no product in wish list"
+				});
+			}
+
+			//now let's try adding product to the cart (now including product attribute validation, etc)
+
+			_shoppingCartService.DeleteShoppingCartItem(shoppingCartItem);
+
+			//activity log
+			_customerActivityService.InsertActivity(
+				"PublicStore.RemoveFromWishlist",
+				_localizationService.GetResource("ActivityLog.PublicStore.RemoveFromWishlist"),
+				product.Name);
+
+			//display notification message and update appropriate blocks
+			var updatetopwishlistsectionhtml = string.Format(
+				_localizationService.GetResource("Wishlist.HeaderQuantity"),
+				_workContext.CurrentCustomer.ShoppingCartItems
+								.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
+								.LimitPerStore(_storeContext.CurrentStore.Id)
+								.ToList()
+								.GetTotalProducts());
+			return Json(new
+			{
+				success = true,
+				message = string.Format(_localizationService.GetResource("Products.ProductHasBeenRemovedFromTheWishlist.Link"), Url.RouteUrl("Wishlist")),
+				updatetopwishlistsectionhtml = updatetopwishlistsectionhtml,
+			});
+		}
 
 		[NopHttpsRequirement(SslRequirement.Yes)]
 		public ActionResult Wishlist(Guid? customerGuid)
@@ -2797,7 +2777,7 @@ namespace Nop.Web.Controllers
 
 			var model = new WishlistModel();
 
-			var overviewModels = PrepareProductOverviewModels(cart.Select(sci => sci.Product).ToList(), true, true, null, true, true);
+			var overviewModels = PrepareProductOverviewModels(cart.Select(sci => sci.Product).ToList(), true, true, null, true, true, !customerGuid.HasValue);
 
 			PrepareWishlistModel(model, cart, !customerGuid.HasValue);
 			//Insert models into ShoppingCartItem

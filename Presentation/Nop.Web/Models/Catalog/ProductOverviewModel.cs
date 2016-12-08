@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Nop.Core.Domain.Catalog;
 using Nop.Web.Framework.Mvc;
 using Nop.Web.Models.Media;
+using Nop.Web.Themes.ChelseaBootsTheme.Models;
 
 namespace Nop.Web.Models.Catalog
 {
@@ -14,6 +15,7 @@ namespace Nop.Web.Models.Catalog
 			DefaultPictureModel = new PictureModel();
 			SpecificationAttributeModels = new List<ProductSpecificationModel>();
 			ReviewOverviewModel = new ProductReviewOverviewModel();
+			WishListModel = new ProductWishListModel();
 		}
 
 		public string Name { get; set; }
@@ -27,7 +29,7 @@ namespace Nop.Web.Models.Catalog
 
 		public bool MarkAsNew { get; set; }
 
-		public bool IsInWishList { get; set; }
+		public bool ShowBuyButton { get; set; }
 
 		//price
 		public ProductPriceModel ProductPrice { get; set; }
@@ -37,6 +39,8 @@ namespace Nop.Web.Models.Catalog
 		public IList<ProductSpecificationModel> SpecificationAttributeModels { get; set; }
 		//price
 		public ProductReviewOverviewModel ReviewOverviewModel { get; set; }
+
+		public ProductWishListModel WishListModel { get; set; }
 
 		#region Nested Classes
 

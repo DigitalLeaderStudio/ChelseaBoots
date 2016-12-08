@@ -5,8 +5,11 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Models
 {
 	public class ProductWishListModel : BaseNopModel
 	{
+		public int ProductId { get; set; }
+
 		public bool IsInWishList { get; set; }
 
-		public int ProductId { get; set; }
+		public bool ShowWishListButton { get; set; }
+
 	}
 }

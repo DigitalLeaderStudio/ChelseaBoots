@@ -21,6 +21,7 @@ using Nop.Web.Models.Media;
 using Nop.Core.Domain.Orders;
 using Nop.Services.Orders;
 using Nop.Core.Domain.Customers;
+using Nop.Web.Themes.ChelseaBootsTheme.Models;
 
 namespace Nop.Web.Extensions
 {
@@ -93,7 +94,9 @@ namespace Nop.Web.Extensions
 			bool preparePictureModel = true,
 			int? productThumbPictureSize = null,
 			bool prepareSpecificationAttributes = false,
-			bool forceRedirectionAfterAddingToCart = false)
+			bool forceRedirectionAfterAddingToCart = false,
+			bool showWishButton = true,
+			bool showBuyButton = true)
 		{
 			if (products == null)
 				throw new ArgumentNullException("products");
@@ -111,7 +114,13 @@ namespace Nop.Web.Extensions
 					FullDescription = product.GetLocalized(x => x.FullDescription),
 					SeName = product.GetSeName(),
 					ProductType = product.ProductType,
-					IsInWishList = wishList.Contains(product.Id),
+					ShowBuyButton = showBuyButton,
+					WishListModel = new ProductWishListModel
+					{
+						IsInWishList = wishList.Contains(product.Id),
+						ProductId = product.Id,
+						ShowWishListButton = showWishButton
+					},
 					MarkAsNew = product.MarkAsNew &&
 						(!product.MarkAsNewStartDateTimeUtc.HasValue || product.MarkAsNewStartDateTimeUtc.Value < DateTime.UtcNow) &&
 						(!product.MarkAsNewEndDateTimeUtc.HasValue || product.MarkAsNewEndDateTimeUtc.Value > DateTime.UtcNow)

@@ -83,36 +83,27 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<span class="price">@Model.ProductPrice.Price</span>
+					@if (!Model.ProductPrice.DisableWishlistButton && Model.WishListModel.ShowWishListButton)
+					{
+						@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
+					}<span class="price">@Model.ProductPrice.Price</span>
 				</div>
+
 				<div class="col-md-6 text-right">
-					@Html.Partial("_ButtonAddToWishlist",
-							new ProductWishListModel
-							{
-								ProductId = Model.ReviewOverviewModel.ProductId,
-								IsInWishList = Model.IsInWishList
-							})
-				</div>
-
-				<div class="col-md-8">
-
-					@*<a href="#" type="button" class="btn btn-sm btn-default">
-							<i class="fa fa-heart-o"></i>
+					@if (Model.ShowBuyButton)
+					{
+						var buyButtonText = (Model.ProductPrice.AvailableForPreOrder ? T("ShoppingCart.PreOrder") : T("ShoppingCart.AddToCart"));
+						<a href="javascript:void();"
+						   type="button"
+						   class="btn btn-sm btn-primary"
+						   onclick="AjaxCart.addproducttocart_catalog(this, '@addtocartlink');return false;"
+						   title="@buyButtonText">
+							<i class="fa fa-shopping-cart fa-fw"></i>&nbsp;&nbsp;
+							<span>@buyButtonText</span>
 						</a>
-						<a href="#" type="button" class="btn btn-sm btn-default">
-							<i class="fa fa-balance-scale" aria-hidden="true"></i>
-						</a>*@
+					}
 				</div>
-
 			</div>
-			@*<div class="row text-center">
-					<div class="col-md-12">
-						<input type="button" class="btn btn-sm btn-primary"
-							   value="@(Model.ProductPrice.AvailableForPreOrder ? T("ShoppingCart.PreOrder") : T("ShoppingCart.AddToCart"))"
-							   onclick="AjaxCart.addproducttocart_catalog('PUT CART LINK HERE');return false;" />
-					</div>
-				</div>*@
-
 		</div>
 	</div>
 </div>

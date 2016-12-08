@@ -13,12 +13,9 @@
 			@if (Model.IsEditable && Model.Items.Count > 0)
 			{
 				<div class="share-info">
-					<p>
-						<span class="share-label">@T("Wishlist.YourWishlistURL"):</span>
-					</p>
-					<p>
+					<div class="share-icon">
 						<a href="@Url.RouteUrl("Wishlist", new { customerGuid = Model.CustomerGuid })" class="share-link">@Url.RouteUrl("Wishlist", new { customerGuid = Model.CustomerGuid }, "http")</a>
-					</p>
+					</div>
 				</div>
 			}
 		</div>

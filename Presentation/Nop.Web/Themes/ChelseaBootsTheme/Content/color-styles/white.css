@@ -93,10 +93,19 @@
 	background-color: #fff;
 }
 
-.navbar-fixed-top.top-menu li > a:hover {
-	background-color: #fff;
-	color: #4d4d4d;
+/*.cart-menu-item-container {
+	margin-top: 13px;
+	width: 100%;
+}*/
+
+.navbar-fixed-top.top-menu li {
+	display: block;
 }
+
+	.navbar-fixed-top.top-menu li > a:hover {
+		background-color: #fff;
+		color: #4d4d4d;
+	}
 
 ul.nav.navbar-nav.navbar-right li > a:hover {
 	background-color: #fff;
@@ -389,7 +398,16 @@ h2.title {
 
 #flyout-cart {
 	color: #000;
+	padding: 0 !important;
 }
+
+	#flyout-cart .flyout-cart-footer {
+		border-top: 1px dotted #d9d9d9;
+		text-align: center;
+		margin-top: 10px;
+		padding-top: 10px;
+	}
+
 
 .navbar-right .dropdown li a {
 	color: #000;
@@ -677,7 +695,7 @@ blockquote {
 
 .product-item .price {
 	margin-top: 5px;
-	display: block;
+	/*display: block;*/
 	font-weight: bold;
 	line-height: 25px;
 }
@@ -707,7 +725,7 @@ blockquote {
 		font-size: 1.3em;
 		font-weight: bold;
 		color: #000000;
-		min-height: 31px;
+		height: 31px;
 	}
 
 .product-grid ul.product-spec-list {
@@ -727,7 +745,9 @@ blockquote {
 	}
 
 
-
+.product-item .thumbnail a {
+	font-family: "Open Sans", Arial;
+}
 
 /*List view*/
 .product-list .product-item {
@@ -883,22 +903,19 @@ blockquote {
 	margin: 5px 7px;
 }
 
-	.product-essential .call-to-action-buttons .add-to-fav .add-to-wishlist-button {
-		margin: 0 !important;
-		background: #c68c53;
-	}
-
-		.product-essential .call-to-action-buttons .add-to-fav .add-to-wishlist-button:hover {
-			background: #db9856;
-		}
-
-.product-essential .call-to-action-buttons .add-to-cart .add-to-cart-button {
-	padding: 6px 12px;
-	background: #53c6c6;
+.add-to-wishlist-button {
+	float: left;
+	margin-top: 2px !important;
+	margin-right: 10px;
 }
 
-	.product-essential .call-to-action-buttons .add-to-cart .add-to-cart-button:hover {
-		background: #53c68c;
+.add-to-cart-button {
+	padding: 6px 12px;
+	background: #53c68c;
+}
+
+	.add-to-cart-button:hover {
+		background: #53c6c6;
 	}
 
 .product-essential .overview .full-description {
@@ -944,4 +961,14 @@ blockquote {
 
 .product-list .product-item .thumbnail .caption .product-short-description {
 	height: 100%;
+}
+
+.share-info {
+	margin: 10px;
+}
+
+.share-icon {
+	background-image: url("../images/share.svg"), none;
+	background-repeat: no-repeat;
+	padding-left: 25px;
 }

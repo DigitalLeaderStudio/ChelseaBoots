@@ -674,6 +674,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Content\images\progress-step-active.gif" />
     <Content Include="Themes\ChelseaBootsTheme\Content\images\progress-step-inactive.gif" />
     <Content Include="Themes\ChelseaBootsTheme\Content\images\red-picker.png" />
+    <Content Include="Themes\ChelseaBootsTheme\Content\images\share.svg" />
     <Content Include="Themes\ChelseaBootsTheme\Content\images\star-x-active.png" />
     <Content Include="Themes\ChelseaBootsTheme\Content\images\star-x-inactive.png" />
     <Content Include="Themes\ChelseaBootsTheme\Content\images\styles.rtl.css" />
