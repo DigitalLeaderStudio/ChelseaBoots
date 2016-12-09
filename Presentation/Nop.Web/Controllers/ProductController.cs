@@ -38,6 +38,7 @@ using Nop.Web.Infrastructure.Cache;
 using Nop.Web.Models.Catalog;
 using Nop.Web.Models.Common;
 using Nop.Web.Models.Media;
+using Nop.Web.Themes.ChelseaBootsTheme.Models;
 
 namespace Nop.Web.Controllers
 {
@@ -891,10 +892,15 @@ namespace Nop.Web.Controllers
 
 			#region IsInWishLIst
 
-			model.IsInWishList = _workContext.CurrentCustomer.ShoppingCartItems
-								.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist  && sci.ProductId == product.Id)
-								.LimitPerStore(_storeContext.CurrentStore.Id)
-								.Any();
+			model.WishListModel = new ProductWishListModel
+			{
+				IsInWishList = _workContext.CurrentCustomer.ShoppingCartItems
+						.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist && sci.ProductId == product.Id)
+						.LimitPerStore(_storeContext.CurrentStore.Id)
+						.Any(),
+				ProductId = product.Id,
+				ShowWishListButton = true
+			};
 
 			#endregion
 

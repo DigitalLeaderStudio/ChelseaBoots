@@ -6,6 +6,7 @@ using Nop.Core.Domain.Orders;
 using Nop.Web.Framework;
 using Nop.Web.Framework.Mvc;
 using Nop.Web.Models.Media;
+using Nop.Web.Themes.ChelseaBootsTheme.Models;
 
 namespace Nop.Web.Models.Catalog
 {
@@ -27,6 +28,7 @@ namespace Nop.Web.Models.Catalog
 			ProductManufacturers = new List<ManufacturerModel>();
 			ProductReviewOverview = new ProductReviewOverviewModel();
 			TierPrices = new List<TierPriceModel>();
+			WishListModel = new ProductWishListModel();
 		}
 
 		//picture(s)
@@ -66,6 +68,7 @@ namespace Nop.Web.Models.Catalog
 		public bool FreeShippingNotificationEnabled { get; set; }
 		public string DeliveryDate { get; set; }
 
+		public ProductWishListModel WishListModel { get; set; }
 
 		public bool IsRental { get; set; }
 		public DateTime? RentalStartDate { get; set; }
@@ -77,8 +80,6 @@ namespace Nop.Web.Models.Catalog
 
 		public bool EmailAFriendEnabled { get; set; }
 		public bool CompareProductsEnabled { get; set; }
-
-		public bool IsInWishList { get; set; }
 
 		public string PageShareCode { get; set; }
 

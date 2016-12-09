@@ -11,20 +11,23 @@
 		loadWaiting = true
 		var $element = $(evt.currentTarget);
 		var id = $element.attr('add-to-wish');
-		$element.removeAttr('add-to-wish');
-		$element.attr('remove-from-wish', id);
-		$element.find('span').text($element.attr('remove-text'));
-
-		$element.find('i').attr('class', 'fa fa-heart');
-
-		AjaxCart.animateAdding($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')));
 
 		$.ajax({
 			cache: false,
 			url: 'WishList/AddToWishList/' + id,
 			data: { productId: id },
 			type: 'post',
-			success: onSuccess,
+			success: function (response) {
+				$element.removeAttr('add-to-wish');
+				$element.attr('remove-from-wish', id);
+				$element.find('span').text($element.attr('remove-text'));
+
+				$element.find('i').attr('class', 'fa fa-heart');
+
+				AjaxCart.animateAdding($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')));
+
+				onSuccess(response);
+			},
 			complete: onComplete,
 			error: onError
 		});
@@ -40,24 +43,26 @@
 		loadWaiting = true
 		var $element = $(evt.currentTarget);
 		var id = $element.attr('remove-from-wish');
-		$element.removeAttr('remove-from-wish');
-		$element.attr('add-to-wish', id)
-		$element.find('span').text($element.attr('add-text'));
-
-		$element.find('i').attr('class', 'fa fa-heart-o');
 
 		$.ajax({
 			cache: false,
 			url: 'WishList/RemoveFromWishList/' + id,
 			type: 'post',
-			success: onSuccess,
+			success: function (response) {
+				$element.removeAttr('remove-from-wish');
+				$element.attr('add-to-wish', id)
+				$element.find('span').text($element.attr('add-text'));
+				$element.find('i').attr('class', 'fa fa-heart-o');
+
+				if (removeFromDom) {
+					$('div[data-productid=' + id + ']').parents('.product-item').effect('drop', function () { $(this).detach(); });
+				}
+
+				onSuccess(response);
+			},
 			complete: onComplete,
 			error: onError
 		});
-
-		if (removeFromDom) {
-			$('div[data-productid=' + id + ']').parents('.product-item').effect('drop', function () { $(this).detach(); });
-		}
 
 		return false;
 	}
@@ -79,7 +84,7 @@
 			if (response.success == true) {
 				//success
 				//specify timeout for success messages
-				displayBarNotification(response.message, 'success', 3500);
+				//displayBarNotification(response.message, 'success', 3500);
 			}
 			else {
 				//no timeout for errors

@@ -1,6 +1,6 @@
 ﻿@model MiniShoppingCartModel
 @using Nop.Web.Models.ShoppingCart;
-<div id="flyout-cart" class="flyout-cart" style="display: block">
+<div id="flyout-cart" class="flyout-cart">
 	<div class="mini-shopping-cart">
 		<div class="count">
 			@if (Model.TotalProducts == 0)
@@ -38,16 +38,8 @@
 								   onclick="AjaxCart.removeFromCart(this, '@removeLink');return false;">
 									<i class="fa fa-trash-o"></i>
 								</a>
-								@if (!String.IsNullOrEmpty(item.AttributeInfo))
-								{
-									<div class="attributes">
-										@Html.Raw(item.AttributeInfo)
-									</div>
-								}
-								<div class="size">Размер: <span>43</span></div>
-								<div class="quantity">@T("ShoppingCart.Mini.Quantity"): <span>@item.Quantity</span></div>
-								<div class="price">
 
+								<div class="price">
 									@T("ShoppingCart.Mini.UnitPrice"): <span>@item.UnitPrice</span>
 								</div>
 

@@ -436,11 +436,10 @@ h2.title {
 				padding-bottom: 5px;
 			}
 
-
-
 			#flyout-cart .mini-shopping-cart .item .product .name {
 				min-height: 42px;
 				font-size: 14px;
+				padding-top: 2px;
 				width: 90%;
 			}
 
@@ -455,7 +454,9 @@ h2.title {
 			}
 
 			#flyout-cart .mini-shopping-cart .item .product .price {
-				text-align: right;
+				position: absolute;
+				top: 85px;
+				right: 15px;
 				font-size: 12px;
 			}
 
@@ -933,15 +934,45 @@ blockquote {
 	padding-left: 0 !important;
 }
 
+.product-essential .overview .product-item-row {
+	border-top: 1px dotted #d9d9d9;
+	margin: 0 !important;
+}
+
 .product-essential .overview .product-name {
 	margin: 0 0 10px 0;
 	padding: 0;
 	font-size: 2.2em;
 }
 
+.product-essential .overview .manufacturers {
+	padding-top: 10px;
+}
+
+	.product-essential .overview .manufacturers .value a {
+		font-weight: bold;
+		font-size: 1.4em;
+		color: #000;
+	}
+
+.product-essential .overview .product-item-row .add-to-wishlist-button {
+	font-size: 1.4em;
+	padding-top: 12px;
+}
+
 .product-essential .overview .prices {
 	margin: 0 !important;
-	padding: 0;
+	margin-left: 15px;
+	padding: 10px;
+}
+
+	.product-essential .overview .prices .product-price span {
+		color: #000;
+		font-size: 1.4em;
+	}
+
+.product-essential .overview .manufacturers .product-details-label {
+	padding-top: 10px;
 }
 
 .product-essential .overview .price-and-buttons {
@@ -951,16 +982,31 @@ blockquote {
 	overflow: auto;
 }
 
-	.product-essential .overview .price-and-buttons .product-price {
-		float: left;
-		width: 40%;
+.product-essential .overview .product-specs-box {
+	padding: 0;
+	margin-top: 5px;
+}
+
+	.product-essential .overview .product-specs-box .title {
+		font-size: 1.1em;
 	}
 
-		.product-essential .overview .price-and-buttons .product-price span {
-			font-size: 1.3em;
-		}
+	.product-essential .overview .product-specs-box ul.product-spec-list {
+		padding-left: 15px;
+	}
 
-	.product-essential .overview .price-and-buttons .call-to-action-buttons {
+.product-essential .overview .product-item-row .full-description {
+	border: 0;
+	padding: 0;
+	margin-top: 10px;
+}
+
+	.product-essential .overview .product-item-row .full-description ul {
+		padding: 0;
+	}
+
+
+/*	.product-essential .overview .price-and-buttons .call-to-action-buttons {
 		float: left;
 		width: 60%;
 	}
@@ -970,7 +1016,6 @@ blockquote {
 }
 
 .product-essential .call-to-action-buttons .add-to-cart {
-	/*float: left !important;*/
 	font-size: 16px;
 	width: 50% !important;
 }
@@ -978,7 +1023,7 @@ blockquote {
 .product-essential .call-to-action-buttons .add-to-fav {
 	width: 50%;
 	margin: 5px 7px;
-}
+}*/
 
 .add-to-wishlist-button {
 	float: left;
@@ -995,19 +1040,8 @@ blockquote {
 		background: #53c6c6;
 	}
 
-.product-essential .overview .full-description {
-	border: 0;
-	padding: 0;
-}
 
-	.product-essential .overview .full-description p {
-		font-size: 1.2em;
-		border: 0;
-	}
 
-.product-essential .overview .product-specs-box .title {
-	font-size: 1.2em;
-}
 
 .product-item .add-to-fav-btn {
 	text-align: right;

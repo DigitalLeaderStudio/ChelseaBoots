@@ -1199,7 +1199,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductReviews.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductsAlsoPurchased.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Grouped.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Simple.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Simple-Original.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\RecentlyViewedProducts.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\RecentlyViewedProductsBlock.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\RelatedProducts.cshtml" />
@@ -1276,6 +1276,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ButtonAddToWishlist.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\Wishlist - Original.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Simple.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

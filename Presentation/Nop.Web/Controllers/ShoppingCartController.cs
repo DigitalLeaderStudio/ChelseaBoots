@@ -1436,7 +1436,7 @@ namespace Nop.Web.Controllers
 			}
 		}
 
-		private JsonResult ValidateProduct(Product product, int quantity)
+		private JsonResult ValidateProduct(Product product, int quantity, bool checkMappings = true)
 		{
 			if (product == null)
 			{
@@ -1496,7 +1496,7 @@ namespace Nop.Web.Controllers
 				});
 			}
 
-			if (product.ProductAttributeMappings.Any())
+			if (checkMappings && product.ProductAttributeMappings.Any())
 			{
 				//product has some attributes. let a customer see them
 				return Json(new
@@ -1522,7 +1522,7 @@ namespace Nop.Web.Controllers
 
 			var product = _productService.GetProductById(productId);
 
-			JsonResult result = ValidateProduct(product, quantity);
+			JsonResult result = ValidateProduct(product, quantity, false);
 			if (result != null)
 			{
 				return result;
@@ -1553,11 +1553,13 @@ namespace Nop.Web.Controllers
 			}
 
 			//now let's try adding product to the cart (now including product attribute validation, etc)
-			addToCartWarnings = _shoppingCartService.AddToCart(customer: _workContext.CurrentCustomer,
+			addToCartWarnings = _shoppingCartService.AddToCart(
+				customer: _workContext.CurrentCustomer,
 				product: product,
 				shoppingCartType: cartType,
 				storeId: _storeContext.CurrentStore.Id,
-				quantity: quantity);
+				quantity: quantity,
+				ignoreRequiredAttributes: false);
 			if (addToCartWarnings.Any())
 			{
 				//cannot be added to the cart
@@ -1588,10 +1590,10 @@ namespace Nop.Web.Controllers
 						//display notification message and update appropriate blocks
 						var updatetopwishlistsectionhtml = string.Format(_localizationService.GetResource("Wishlist.HeaderQuantity"),
 						_workContext.CurrentCustomer.ShoppingCartItems
-						.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
-						.LimitPerStore(_storeContext.CurrentStore.Id)
-						.ToList()
-						.GetTotalProducts());
+							.Where(sci => sci.ShoppingCartType == ShoppingCartType.Wishlist)
+							.LimitPerStore(_storeContext.CurrentStore.Id)
+							.ToList()
+							.GetTotalProducts());
 						return Json(new
 						{
 							success = true,
@@ -1616,11 +1618,11 @@ namespace Nop.Web.Controllers
 
 						//display notification message and update appropriate blocks
 						var updatetopcartsectionhtml = string.Format(_localizationService.GetResource("ShoppingCart.HeaderQuantity"),
-						_workContext.CurrentCustomer.ShoppingCartItems
-						.Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-						.LimitPerStore(_storeContext.CurrentStore.Id)
-						.ToList()
-						.GetTotalProducts());
+							_workContext.CurrentCustomer.ShoppingCartItems
+							.Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+							.LimitPerStore(_storeContext.CurrentStore.Id)
+							.ToList()
+							.GetTotalProducts());
 
 						var updateflyoutcartsectionhtml = _shoppingCartSettings.MiniShoppingCartEnabled
 							? this.RenderPartialViewToString("FlyoutShoppingCart", PrepareMiniShoppingCartModel())
@@ -1641,7 +1643,7 @@ namespace Nop.Web.Controllers
 		{
 			var product = _productService.GetProductById(productId);
 
-			JsonResult result = ValidateProduct(product, 1);
+			JsonResult result = ValidateProduct(product, 1, false);
 			if (result != null)
 			{
 				return result;
@@ -1812,7 +1814,7 @@ namespace Nop.Web.Controllers
 				addToCartWarnings.AddRange(_shoppingCartService.AddToCart(_workContext.CurrentCustomer,
 					product, cartType, _storeContext.CurrentStore.Id,
 					attributes, customerEnteredPriceConverted,
-					rentalStartDate, rentalEndDate, quantity, true));
+					rentalStartDate, rentalEndDate, quantity, true, true));
 			}
 			else
 			{
@@ -2685,7 +2687,7 @@ namespace Nop.Web.Controllers
 		{
 			var product = _productService.GetProductById(productId);
 
-			JsonResult result = ValidateProduct(product, 1);
+			JsonResult result = ValidateProduct(product, 1, false);
 			if (result != null)
 			{
 				return result;
@@ -2729,7 +2731,8 @@ namespace Nop.Web.Controllers
 				product: product,
 				shoppingCartType: ShoppingCartType.Wishlist,
 				storeId: _storeContext.CurrentStore.Id,
-				quantity: 1);
+				quantity: 1,
+				ignoreRequiredAttributes: false);
 			if (addToCartWarnings.Any())
 			{
 				//cannot be added to the cart
@@ -2767,7 +2770,7 @@ namespace Nop.Web.Controllers
 		{
 			var product = _productService.GetProductById(productId);
 
-			JsonResult result = ValidateProduct(product, 1);
+			JsonResult result = ValidateProduct(product, 1, false);
 			if (result != null)
 			{
 				return result;

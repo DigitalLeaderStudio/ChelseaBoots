@@ -1,9 +1,4 @@
-﻿/*
-** nopCommerce ajax cart implementation
-*/
-
-
-var AjaxCart = {
+﻿var AjaxCart = {
 	loadWaiting: false,
 	usepopupnotifications: false,
 	topcartselector: '',
@@ -30,19 +25,22 @@ var AjaxCart = {
 		}
 		this.setLoadWaiting(true);
 
+		var that = this;
 		$.ajax({
 			cache: false,
 			url: urladd,
 			type: 'post',
-			success: this.success_process,
+			success: function (response) {
+				var cart = $(that.topcartselector).parents('a').first();
+				var itemToDrag = $(element).parents('div[data-productid]');
+
+				that.animateAdding(itemToDrag, cart);
+
+				that.success(response);
+			},
 			complete: this.resetLoadWaiting,
 			error: this.ajaxFailure
 		});
-
-		var cart = $(this.topcartselector).parents('a').first();
-		var itemToDrag = $(element).parents('div[data-productid]');
-
-		this.animateAdding(itemToDrag, cart);
 	},
 
 	removeFromCart: function (element, removeUrl) {
@@ -51,13 +49,18 @@ var AjaxCart = {
 		}
 		this.setLoadWaiting(true);
 
-		$(element).parents('div.item').effect('drop', function () { $(this).detach(); });
+		var that = this;
 
 		$.ajax({
 			cache: false,
 			url: removeUrl,
 			type: 'post',
-			success: this.success_process,
+			success: function (response) {
+				$(element).parents('div.item').effect('drop', function () { $(this).detach(); });
+				window.setTimeout(function () {
+					that.success(response);
+				}, 50);
+			},
 			complete: this.resetLoadWaiting,
 			error: this.ajaxFailure
 		});
@@ -136,7 +139,7 @@ var AjaxCart = {
 		});
 	},
 
-	success_process: function (response) {
+	success: function (response) {
 		if (response.updatetopcartsectionhtml) {
 			$(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
 		}
