@@ -57,6 +57,10 @@
 				if (removeFromDom) {
 					$('div[data-productid=' + id + ']').parents('.product-item').effect('drop', function () { $(this).detach(); });
 				}
+				else {
+					//animate
+					AjaxCart.animateRemoving($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')));
+				}
 
 				onSuccess(response);
 			},

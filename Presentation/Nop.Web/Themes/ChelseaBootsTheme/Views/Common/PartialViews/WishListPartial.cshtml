@@ -1,0 +1,15 @@
+﻿@model Nop.Web.Models.Common.HeaderLinksModel
+
+@if (Model.WishlistEnabled)
+{
+
+	<li>
+		<div class="top-menu-item-wrapper">
+			<a href="@Url.RouteUrl("Wishlist")" class="ico-wishlist">
+				<i class="fa fa-heart@(Model.WishlistItems == 0 ? "-o" : "")" aria-hidden="true"></i>
+
+				<span class="wishlist-qty">@T("Wishlist.HeaderQuantity", Model.WishlistItems)</span>
+			</a>
+		</div>
+	</li>
+}
