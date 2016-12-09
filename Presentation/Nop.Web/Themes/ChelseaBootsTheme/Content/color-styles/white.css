@@ -1083,3 +1083,16 @@ blockquote {
 	background-repeat: no-repeat;
 	padding-left: 25px;
 }
+
+.brands {
+    width: 100%;
+    margin: 15px 0 30px 0;
+}
+.brands div {
+    width: 33.33%;
+    float: left;
+    padding: 10px;
+}
+.brands div img{
+    width: 100%;
+}

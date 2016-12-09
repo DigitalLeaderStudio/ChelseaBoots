@@ -10,18 +10,18 @@
 
 <div class="col-md-10">
 	<div class="panel panel-default form-panel">
-		<div class="panel-heading">
+		@*<div class="panel-heading">
 			<h3>@pageTitle</h3>
-		</div>
+		</div>*@
 		<div class="panel-body">
-			@Html.Widget("manufacturerdetails_top")
+			@*@Html.Widget("manufacturerdetails_top")*@
 			@*description*@
-			@if (!String.IsNullOrWhiteSpace(Model.Description))
+			@*@if (!String.IsNullOrWhiteSpace(Model.Description))
 			{
 				<div class="manufacturer-description alert alert-info square-box">
 					@Html.Raw(Model.Description)
 				</div>
-			}
+			}*@
 			@Html.Widget("manufacturerdetails_before_featured_products")
 			@*featured products*@
 			@*featured products*@

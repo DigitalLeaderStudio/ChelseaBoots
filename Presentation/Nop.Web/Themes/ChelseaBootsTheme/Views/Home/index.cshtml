@@ -1,3 +1,4 @@
+@model IList<Nop.Web.Models.Catalog.ManufacturerModel>
 @*@{
 		Layout = "~/Themes/ChelseaBootsTheme/Views/Shared/_ColumnsTwoHomepage.cshtml";
 	}
@@ -25,6 +26,15 @@
 @Html.Action("HomePageNews", "News")
 @Html.Action("HomePagePolls", "Poll")
 @Html.Widget("home_page_bottom")
+
+<div class="brands">
+    @foreach (var manufacturer in Model)
+    {
+        <div><img src="@manufacturer.PictureModel.ImageUrl" /></div>
+    }
+</div>
+
+
 
 
 
