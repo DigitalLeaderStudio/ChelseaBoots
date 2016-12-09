@@ -38,8 +38,8 @@
 
 				that.success(response);
 			},
-			complete: this.resetLoadWaiting,
-			error: this.ajaxFailure
+			complete: that.resetLoadWaiting,
+			error: that.ajaxFailure
 		});
 	},
 
@@ -59,10 +59,10 @@
 				$(element).parents('div.item').effect('drop', function () { $(this).detach(); });
 				window.setTimeout(function () {
 					that.success(response);
-				}, 50);
+				}, 320);
 			},
-			complete: this.resetLoadWaiting,
-			error: this.ajaxFailure
+			complete: that.resetLoadWaiting,
+			error: that.ajaxFailure
 		});
 	},
 
@@ -84,6 +84,44 @@
                 .animate({
                 	'top': endPointItem.offset().top + 10,
                 	'left': endPointItem.offset().left + 10,
+                	'width': 75,
+                	'height': 75
+                }, 1000, 'easeInOutExpo');
+
+			setTimeout(function () {
+				endPointItem.effect("shake", {
+					distance: 25,
+					times: 2
+				}, 400);
+			}, 1500);
+
+			itemClone.animate({
+				'width': 0,
+				'height': 0
+			}, function () {
+				$(this).detach()
+			});
+		}
+	},
+
+	animateRemoving: function (itemToDrag, endPointItem) {
+		if (itemToDrag.length > 0) {
+			var itemClone = itemToDrag.clone()
+				.offset({
+					top: endPointItem.offset().top,
+					left: endPointItem.offset().left
+				})
+                .css({
+                	'opacity': '0.5',
+                	'position': 'absolute',
+                	'height': '150px',
+                	'width': '150px',
+                	'z-index': '100'
+                })
+                .appendTo($('body'))
+                .animate({
+                	'top': itemToDrag.offset().top + 10,
+                	'left': itemToDrag.offset().left + 10,
                 	'width': 75,
                 	'height': 75
                 }, 1000, 'easeInOutExpo');

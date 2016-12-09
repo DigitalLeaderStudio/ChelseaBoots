@@ -1261,7 +1261,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\Logo.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\LoginPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\MessagesPartial.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\VishListPartial.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\WishListPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Common\PartialViews\ShoppingCartPartial.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ColumnsTwoSimple.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ProductsGrid.cshtml" />

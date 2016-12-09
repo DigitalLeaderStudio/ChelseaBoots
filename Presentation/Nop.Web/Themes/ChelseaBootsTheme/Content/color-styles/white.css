@@ -93,10 +93,15 @@
 	background-color: #fff;
 }
 
-/*.cart-menu-item-container {
-	margin-top: 13px;
+.nav > li > div > a {
+	text-decoration: none !important;
+}
+
+.navbar-fixed-top.top-menu .top-menu-item-wrapper {
+	line-height: 20px;
+	padding: 15px;
 	width: 100%;
-}*/
+}
 
 .navbar-fixed-top.top-menu li {
 	display: block;
