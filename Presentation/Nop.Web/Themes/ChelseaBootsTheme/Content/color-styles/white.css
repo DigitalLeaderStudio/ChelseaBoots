@@ -100,7 +100,7 @@
 .navbar-fixed-top.top-menu .top-menu-item-wrapper {
 	line-height: 20px;
 	padding: 15px;
-	width: 100%;
+	width: 110%;
 }
 
 .navbar-fixed-top.top-menu li {
@@ -138,6 +138,21 @@ ul.nav.navbar-nav.navbar-right li > a:hover {
 		background-color: #1a1a1a;
 		border-color: #FFDEC1;
 	}
+
+.btn-group.btn-group-attr {
+	width: 100%;
+}
+
+	.btn-group.btn-group-attr .btn.btn-attr:first-child {
+		width: 97px;
+	}
+
+	.btn-group.btn-group-attr .btn.btn-attr.dropdown-toggle {
+		/*width: 20%;*/
+	}
+
+.btn.btn-attr {
+}
 
 .btn.btn-primary {
 	color: #fff;
@@ -259,13 +274,14 @@ select.form-control.date-select {
 	border-top: none !important;
 }
 
-#catalog-container .dropdown-menu > li > a i,
-#catalog-container .nav > li > a i {
+.page .dropdown-menu > li > a i,
+.page .nav > li > a i {
 	display: none;
 }
 
-#catalog-container .dropdown-menu > li > a.active i,
-#catalog-container .nav > li.active > a i {
+.page .dropdown-menu > li.selected-value > a i,
+.page .dropdown-menu > li > a.active i,
+.page .nav > li.active > a i {
 	display: inline-block;
 }
 
@@ -314,6 +330,11 @@ h3 {
 	color: #fff;
 }
 
+.offer-default {
+	padding: 10px 0 !important;
+	margin-bottom: 5px;
+}
+
 .footer {
 	background-color: #323840;
 }
@@ -325,13 +346,18 @@ h3 {
 		padding-bottom: 14px;
 	}
 
-.breadcrumb ul {
-	width: 100%;
+.breadcrumb {
+	margin-top: -10px;
+	margin-bottom: 10px !important;
 }
 
-	.breadcrumb ul li {
-		display: inline-block;
+	.breadcrumb ul {
+		width: 100%;
 	}
+
+		.breadcrumb ul li {
+			display: inline-block;
+		}
 
 .product-selectors.clearfix > div.col-md-4 {
 	background-color: #F0F0F0;
@@ -405,7 +431,8 @@ h2.title {
 
 .top-menu li#topcartlink ul.dropdown-menu {
 	min-width: 380px !important;
-	left: -50% !important;
+	left: -380px !important;
+	top: 50px !important;
 }
 
 #flyout-cart {
@@ -936,18 +963,20 @@ blockquote {
 }
 
 .product-essential .gallery-wrapper {
-	padding-left: 0 !important;
+	/*padding-left: 0 !important;*/
 }
 
-.product-essential .overview .product-item-row {
-	border-top: 1px dotted #d9d9d9;
-	margin: 0 !important;
-}
+
 
 .product-essential .overview .product-name {
 	margin: 0 0 10px 0;
 	padding: 0;
 	font-size: 2.2em;
+}
+
+.manufacturer-page .panel-default.form-panel > .panel-heading {
+	font-size: 2em;
+	background-color: #FFF !important;
 }
 
 .product-essential .overview .manufacturers {
@@ -956,14 +985,11 @@ blockquote {
 
 	.product-essential .overview .manufacturers .value a {
 		font-weight: bold;
-		font-size: 1.4em;
+		font-size: 1.2em;
 		color: #000;
 	}
 
-.product-essential .overview .product-item-row .add-to-wishlist-button {
-	font-size: 1.4em;
-	padding-top: 12px;
-}
+
 
 .product-essential .overview .prices {
 	margin: 0 !important;
@@ -994,23 +1020,48 @@ blockquote {
 
 	.product-essential .overview .product-specs-box .title {
 		font-size: 1.1em;
+		padding-bottom: 10px;
 	}
 
 	.product-essential .overview .product-specs-box ul.product-spec-list {
 		padding-left: 15px;
 	}
 
-.product-essential .overview .product-item-row .full-description {
-	border: 0;
-	padding: 0;
-	margin-top: 10px;
+.product-essential .overview .product-item-row {
+	border-top: 1px dotted #d9d9d9;
+	margin: 0 !important;
 }
 
-	.product-essential .overview .product-item-row .full-description ul {
-		padding: 0;
+	.product-essential .overview .product-item-row .add-to-wishlist-button {
+		font-size: 1.4em;
+		padding-top: 12px;
 	}
 
+	.product-essential .overview .product-item-row .full-description {
+		border: 0;
+		padding: 0;
+		margin-top: 10px;
+	}
 
+		.product-essential .overview .product-item-row .full-description ul {
+			padding: 0;
+		}
+
+			.product-essential .overview .product-item-row .full-description ul li,
+			.product-essential .overview .product-specs-box ul.product-spec-list li {
+				list-style: disc;
+				font-size: 13px;
+				color: #474747;
+				padding-bottom: 7px;
+			}
+
+	.product-essential .overview .product-item-row .attributes > .row {
+		margin: 5px 0;
+	}
+
+	.product-essential .overview .product-item-row .add-to-cart {
+		margin-top: 5px;
+	}
 /*	.product-essential .overview .price-and-buttons .call-to-action-buttons {
 		float: left;
 		width: 60%;
@@ -1090,14 +1141,16 @@ blockquote {
 }
 
 .brands {
-    width: 100%;
-    margin: 15px 0 30px 0;
+	width: 100%;
+	margin: 15px 0 30px 0;
 }
-.brands div {
-    width: 33.33%;
-    float: left;
-    padding: 10px;
-}
-.brands div img{
-    width: 100%;
-}
+
+	.brands div {
+		width: 33.33%;
+		float: left;
+		padding: 10px;
+	}
+
+		.brands div img {
+			width: 100%;
+		}

@@ -63,105 +63,109 @@
 						@Html.Widget("productdetails_before_pictures", Model.Id)
 
 						<!--product pictures-->
-						<div class="col-md-6 gallery-wrapper">
-							@Html.Partial("_ProductDetailsPictures", Model)
-							@Html.Widget("productdetails_after_pictures", Model.Id)
+						<div class="col-md-6">
+							<div class="gallery-wrapper">
+								@Html.Partial("_ProductDetailsPictures", Model)
+								@Html.Widget("productdetails_after_pictures", Model.Id)
+							</div>
 						</div>
 
-						<div class="col-md-6 overview">
-							<h2 class="product-name">@Model.Name</h2>
-							<div class="row product-item-row">
-								<div class="col-md-6">
-
-									@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
-
-									@{
+						<div class="col-md-6">
+							<div class="overview">
+								<h2 class="product-name">@Model.Name</h2>
+								<div class="row product-item-row">
+									<div class="col-md-6">
+										@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
+										@{
 			var dataDictPrice = new ViewDataDictionary();
 			dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
 			@Html.Partial("_ProductPrice", Model.ProductPrice, dataDictPrice)
-									}
-								</div>
-								<div class="col-md-6">
-									@Html.Partial("_ProductManufacturers", Model.ProductManufacturers)
-								</div>
-							</div>
 
-							<div class="row product-item-row">
-								<div class="col-md-6">
-									@Html.Partial("_ProductSpecifications", Model.ProductSpecifications)
-								</div>
-								<div class="col-md-6">
-									@if (!String.IsNullOrEmpty(Model.FullDescription))
-									{
-										<div class="full-description">
-											@Html.Raw(Model.FullDescription)
-										</div>
-									}
-									else
-									{
-										<div class="short-description">
-											@Model.ShortDescription
-										</div>
-									}
-								</div>
-							</div>
+			var dataDictAttributes = new ViewDataDictionary();
+			dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
+			@Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
 
-							<!--price & add to cart-->
-							@*<div class="price-and-buttons">
-									@{
-								var dataDictAddToCart = new ViewDataDictionary();
-								dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
-								@Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
-									}
-								</div>*@
-
-
-							<!-- Product desciption -->
-							@*@if (!String.IsNullOrEmpty(@Html.Partial("_ProductTags", Model.ProductTags).ToString()))
-								{
-									<div class="full-description tab-pane" id="tags">
-										@Html.Partial("_ProductTags", Model.ProductTags)
+			var dataDictAddToCart = new ViewDataDictionary();
+			dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
+			@Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
+										}
 									</div>
+
+									<div class="col-md-6">
+										@Html.Partial("_ProductManufacturers", Model.ProductManufacturers)
+										@Html.Partial("_ProductSpecifications", Model.ProductSpecifications)
+									</div>
+								</div>
+
+								<div class="row product-item-row">
+
+									<div class="col-md-12">
+										@if (!String.IsNullOrEmpty(Model.FullDescription))
+										{
+											<div class="full-description">
+												@Html.Raw(Model.FullDescription)
+											</div>
+										}
+										else
+										{
+											<div class="short-description">
+												@Model.ShortDescription
+											</div>
+										}
+									</div>
+								</div>
+
+								<!--price & add to cart-->
+								@*<div class="price-and-buttons">
+										@{
+									var dataDictAddToCart = new ViewDataDictionary();
+									dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
+									@Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
+										}
+									</div>*@
+
+
+								<!-- Product desciption -->
+								@*@if (!String.IsNullOrEmpty(@Html.Partial("_ProductTags", Model.ProductTags).ToString()))
+									{
+										<div class="full-description tab-pane" id="tags">
+											@Html.Partial("_ProductTags", Model.ProductTags)
+										</div>
+									}*@
+
+
+								@*@Html.Widget("productdetails_overview_top")*@<!--product SKU, manufacturer part number, stock info-->
+								@*@Html.Partial("_SKU_Man_Stock", Model)*@
+
+								<!--Back in stock subscription-->
+								@*@Html.Partial("_BackInStockSubscription", Model)*@
+
+								<!--product manufacturers-->
+								@*@Html.Partial("_ProductManufacturers", Model.ProductManufacturers)*@
+
+								<!--product reviews-->
+								@*@Html.Partial("_ProductReviewOverview", Model.ProductReviewOverview)*@
+
+								<!--sample download-->
+								@*@Html.Partial("_DownloadSample", Model)*@
+
+								<!--attributes-->
+								<!--gift card-->
+								@*@{
+										var dataDictGiftCard = new ViewDataDictionary();
+										dataDictGiftCard.TemplateInfo.HtmlFieldPrefix = string.Format("giftcard_{0}", Model.Id);
+										@Html.Partial("_GiftCardInfo", Model.GiftCard, dataDictGiftCard)
 								}*@
 
+								@*<div class= "form-group row">
+										@Html.Partial("_ProductEmailAFriendButton", Model)
+										@Html.Partial("_CompareProductsButton", Model)
 
-							@*@Html.Widget("productdetails_overview_top")*@<!--product SKU, manufacturer part number, stock info-->
-							@*@Html.Partial("_SKU_Man_Stock", Model)*@
-
-							<!--Back in stock subscription-->
-							@*@Html.Partial("_BackInStockSubscription", Model)*@
-
-							<!--product manufacturers-->
-							@*@Html.Partial("_ProductManufacturers", Model.ProductManufacturers)*@
-
-							<!--product reviews-->
-							@*@Html.Partial("_ProductReviewOverview", Model.ProductReviewOverview)*@
-
-							<!--sample download-->
-							@*@Html.Partial("_DownloadSample", Model)*@
-
-							<!--attributes-->
-							@{
-									var dataDictAttributes = new ViewDataDictionary();
-									dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
-									@Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
-							}
-							<!--gift card-->
-							@{
-									var dataDictGiftCard = new ViewDataDictionary();
-									dataDictGiftCard.TemplateInfo.HtmlFieldPrefix = string.Format("giftcard_{0}", Model.Id);
-									@Html.Partial("_GiftCardInfo", Model.GiftCard, dataDictGiftCard)
-							}
-
-							@*<div class= "form-group row">
-									@Html.Partial("_ProductEmailAFriendButton", Model)
-									@Html.Partial("_CompareProductsButton", Model)
-
-								</div>*@
-							@*@Html.Partial("_ShareButton", Model)
-								@Html.Widget("productdetails_overview_bottom")*@
+									</div>*@
+								@*@Html.Partial("_ShareButton", Model)
+									@Html.Widget("productdetails_overview_bottom")*@
+							</div>
 						</div>
-
 
 						<div class="clearfix"></div>
 					</div>
@@ -204,7 +208,6 @@
 							}
 						</div>*@
 				</div>
-
 
 				@Html.Widget("productdetails_before_collateral")
 				@Html.Partial("_ProductTierPrices", Model.TierPrices)

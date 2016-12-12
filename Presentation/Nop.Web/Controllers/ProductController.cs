@@ -1648,5 +1648,11 @@ namespace Nop.Web.Controllers
 		}
 
 		#endregion
+
+		#region Manufacturers slider
+
+
+
+		#endregion
 	}
 }

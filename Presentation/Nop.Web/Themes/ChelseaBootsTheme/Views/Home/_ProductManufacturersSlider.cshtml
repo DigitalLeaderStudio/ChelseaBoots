@@ -1,0 +1,16 @@
+﻿@model IList<ManufacturerModel>
+
+@using Nop.Web.Models.Catalog;
+@if (Model.Count > 0)
+{
+	<div class="brands">
+		@foreach (var manufacturer in Model)
+		{
+			<div>
+				<a href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
+					<img src="@manufacturer.PictureModel.ImageUrl" />
+				</a>
+			</div>
+		}
+	</div>
+}

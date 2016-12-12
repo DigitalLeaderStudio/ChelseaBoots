@@ -1,16 +1,3 @@
-@model IList<Nop.Web.Models.Catalog.ManufacturerModel>
-@*@{
-		Layout = "~/Themes/ChelseaBootsTheme/Views/Shared/_ColumnsTwoHomepage.cshtml";
-	}
-
-	@Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
-	@Html.Action("HomepageCategories", "Catalog")
-	@Html.Action("HomepageProducts", "Product")
-	@Html.Action("HomepageBestSellers", "Product")
-	@Html.Action("HomePageNews", "News")
-	@Html.Action("HomePagePolls", "Poll")
-	@Html.Widget("home_page_bottom")*@
-
 @{
 	Layout = "~/Themes/ChelseaBootsTheme/Views/Shared/_ColumnsOne.cshtml";
 }
@@ -25,21 +12,5 @@
 @Html.Action("HomepageBestSellers", "Product")
 @Html.Action("HomePageNews", "News")
 @Html.Action("HomePagePolls", "Poll")
+@Html.Action("_ProductManufacturersSlider", "Home")
 @Html.Widget("home_page_bottom")
-
-<div class="brands">
-    @foreach (var manufacturer in Model)
-    {
-        <div><img src="@manufacturer.PictureModel.ImageUrl" /></div>
-    }
-</div>
-
-
-
-
-
-
-
-
-
-

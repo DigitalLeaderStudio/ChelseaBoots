@@ -10,11 +10,11 @@
 
 <div class="col-md-10">
 	<div class="panel panel-default form-panel">
-		@*<div class="panel-heading">
+		<div class="panel-heading">
 			<h3>@pageTitle</h3>
-		</div>*@
+		</div>
 		<div class="panel-body">
-			@*@Html.Widget("manufacturerdetails_top")*@
+			@Html.Widget("manufacturerdetails_top")
 			@*description*@
 			@*@if (!String.IsNullOrWhiteSpace(Model.Description))
 			{
@@ -47,11 +47,11 @@
 				{
 					if (Model.PagingFilteringContext.ViewMode == "list")
 					{
-				@Html.Partial("_ProductsList", Model.Products);
+						@Html.Partial("_ProductsList", Model.Products);
 					}
 					else
 					{
-				@Html.Partial("_ProductsGrid", Model.Products);
+						@Html.Partial("_ProductsGrid", Model.Products);
 					}
 				}
 			</div>

@@ -24,9 +24,8 @@
 
 				$element.find('i').attr('class', 'fa fa-heart');
 
-				AjaxCart.animateAdding($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')));
-
-				onSuccess(response);
+				AjaxCart.animateAdding($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')))
+				.done(function () { onSuccess(response); });
 			},
 			complete: onComplete,
 			error: onError
@@ -56,13 +55,13 @@
 
 				if (removeFromDom) {
 					$('div[data-productid=' + id + ']').parents('.product-item').effect('drop', function () { $(this).detach(); });
+					onSuccess(response);
 				}
 				else {
 					//animate
-					AjaxCart.animateRemoving($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')));
+					AjaxCart.animateRemoving($element.parents('div[data-productid]'), $($(AjaxCart.topwishlistselector).prev().parents('a')))
+					.done(function () { onSuccess(response); });
 				}
-
-				onSuccess(response);
 			},
 			complete: onComplete,
 			error: onError

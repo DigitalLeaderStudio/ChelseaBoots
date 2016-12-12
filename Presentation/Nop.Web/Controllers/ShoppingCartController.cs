@@ -1655,7 +1655,7 @@ namespace Nop.Web.Controllers
 										.Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
 										.LimitPerStore(_storeContext.CurrentStore.Id)
 										.ToList();
-			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, ShoppingCartType.ShoppingCart, product);
+			var shoppingCartItem = cart.FirstOrDefault(sci => sci.ProductId == product.Id);
 			//if we already have the same product in the cart, then break
 			if (shoppingCartItem == null)
 			{
