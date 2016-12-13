@@ -626,6 +626,9 @@ namespace Nop.Web.Controllers
 				//let's load them
 				productAttributeMapping = _productAttributeService.GetProductAttributeMappingsByProductId(product.Id);
 			}
+
+			var productCombinations = _productAttributeService.GetAllProductAttributeCombinations(product.Id);
+
 			if (productAttributeMapping == null)
 			{
 				productAttributeMapping = new List<ProductAttributeMapping>();
@@ -656,14 +659,22 @@ namespace Nop.Web.Controllers
 				{
 					//values
 					var attributeValues = _productAttributeService.GetProductAttributeValues(attribute.Id);
+
 					foreach (var attributeValue in attributeValues)
 					{
+						List<ProductAttributeValue> productCombinationsAttrs = new List<ProductAttributeValue>();
+						foreach (var pc in productCombinations)
+						{
+							productCombinationsAttrs.AddRange(_productAttributeParser.ParseProductAttributeValues(pc.AttributesXml));
+						}
+
 						var valueModel = new ProductDetailsModel.ProductAttributeValueModel
 						{
 							Id = attributeValue.Id,
 							Name = attributeValue.GetLocalized(x => x.Name),
 							ColorSquaresRgb = attributeValue.ColorSquaresRgb, //used with "Color squares" attribute type
-							IsPreSelected = attributeValue.IsPreSelected
+							IsPreSelected = attributeValue.IsPreSelected,
+							IsAvailable = productCombinationsAttrs.Contains(attributeValue)
 						};
 						attributeModel.Values.Add(valueModel);
 

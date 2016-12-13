@@ -298,6 +298,8 @@ namespace Nop.Web.Models.Catalog
 
 			public bool IsPreSelected { get; set; }
 
+			public bool IsAvailable { get; set; }
+
 			//product picture ID (associated to this value)
 			public int PictureId { get; set; }
 		}

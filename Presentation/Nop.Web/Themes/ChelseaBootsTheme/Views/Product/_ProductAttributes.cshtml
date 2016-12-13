@@ -33,14 +33,23 @@
 											attributeValue.Name :
 											T("Products.ProductAttributes.PriceAdjustment", attributeValue.Name, attributeValue.PriceAdjustment).Text;
 										<li>
-											<a name="@(controlId)"
-											   id="@(controlId)_@(attributeValue.Id)"
-											   value="@attributeValue.Id"
-											   class="@(attributeValue.IsPreSelected ? "active" : "")"
-											   href="javascript:void(0);">
-												<i class="fa fa-check"></i>
-												@attributeName
-											</a>
+											@if (attributeValue.IsAvailable)
+											{
+												<a name="@(controlId)"
+												   id="@(controlId)_@(attributeValue.Id)"
+												   value="@attributeValue.Id"
+												   href="javascript:void(0);">
+													<i class="fa fa-check"></i>
+													@attributeName
+												</a>
+											}
+											else
+											{
+												<a href="javascript:void(0);" class="disabled">
+													@attributeName
+												</a>
+											}
+
 										</li>
 									}
 								</ul>

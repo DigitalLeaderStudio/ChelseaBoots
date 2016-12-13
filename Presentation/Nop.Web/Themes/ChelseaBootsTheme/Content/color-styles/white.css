@@ -293,6 +293,12 @@ select.form-control.date-select {
 	border-top: none !important;
 }
 
+	.dropdown-menu > li > a.disabled {
+		box-shadow: none;
+		cursor: not-allowed;
+		opacity: 0.65;
+	}
+
 	.masthead .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
 		background-color: #f0f0f0;
 		color: #c68c53 !important;
@@ -908,36 +914,44 @@ blockquote {
 	padding: 0 10px !important;
 }
 
-.pager li a, .pager li span {
-	background-color: #555 !important;
-	border: 0 none !important;
-	border-left: solid 1px #1a1a1a !important;
-	color: #fff !important;
-	font-size: 12px !important;
-	padding: 6px 12px !important;
-	outline: none;
+.pager ul {
+	padding-left: 0;
 }
 
-	.pager li a:hover, .pager li span:hover {
-		background-color: #1a1a1a !important;
+.pager {
+	margin: 0 !important;
+}
+
+	.pager li {
+		float: left;
 	}
 
-.pager li.previous-page a {
-	border-radius: 4px;
-	border-bottom-right-radius: 0;
-	border-top-right-radius: 0;
-}
+		.pager li a,
+		.pager li span {
+			background-color: #555 !important;
+			border: none !important;
+			border-left: solid 1px #1a1a1a !important;
+			color: #fff !important;
+			outline: none;
+		}
 
-.pager li.next-page a {
-	border-radius: 4px;
-	border-bottom-left-radius: 0;
-	border-top-left-radius: 0;
-}
+			.pager li a:hover,
+			.pager li span:hover,
+			.pager li.current-page span {
+				background-color: #1a1a1a !important;
+			}
 
-.pager li.current-page span {
-	background-color: #1a1a1a;
-}
+		.pager li.previous-page a {
+			border-radius: 4px;
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
 
+		.pager li.next-page a {
+			border-radius: 4px;
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+		}
 
 .panel-default.form-panel .catalog-home {
 	display: none;
