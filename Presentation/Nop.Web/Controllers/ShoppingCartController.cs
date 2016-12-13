@@ -1515,8 +1515,11 @@ namespace Nop.Web.Controllers
 		//add product to cart using AJAX
 		//currently we use this method on catalog pages (category/manufacturer/etc)
 		[HttpPost]
-		public ActionResult AddProductToCart_Catalog(int productId, int shoppingCartTypeId,
-			int quantity, bool forceredirection = false)
+		public ActionResult AddProductToCart_Catalog(
+			int productId,
+			int shoppingCartTypeId,
+			int quantity,
+			bool forceredirection = false)
 		{
 			var cartType = (ShoppingCartType)shoppingCartTypeId;
 
@@ -1537,10 +1540,21 @@ namespace Nop.Web.Controllers
 			var shoppingCartItem = _shoppingCartService.FindShoppingCartItemInTheCart(cart, cartType, product);
 			//if we already have the same product in the cart, then use the total quantity to validate
 			var quantityToValidate = shoppingCartItem != null ? shoppingCartItem.Quantity + quantity : quantity;
-			var addToCartWarnings = _shoppingCartService
-				.GetShoppingCartItemWarnings(_workContext.CurrentCustomer, cartType,
-				product, _storeContext.CurrentStore.Id, string.Empty,
-				decimal.Zero, null, null, quantityToValidate, false, true, false, false, false);
+			var addToCartWarnings = _shoppingCartService.GetShoppingCartItemWarnings(
+				_workContext.CurrentCustomer,
+				cartType,
+				product,
+				_storeContext.CurrentStore.Id,
+				string.Empty,
+				decimal.Zero,
+				null,
+				null,
+				quantityToValidate,
+				false,
+				true,
+				false,
+				false,
+				false);
 			if (addToCartWarnings.Any())
 			{
 				//cannot be added to the cart
