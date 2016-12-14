@@ -8,7 +8,9 @@
 	@if (Model.IsAuthenticated)
 	{
 		<ul class="dropdown-menu">
-			<li>
+            @Html.Action("AdminHeaderLinks", "Common")
+
+            <li>
 				<a href="@Url.RouteUrl("CustomerInfo")">
 					<i class="fa fa-cog" aria-hidden="true"></i>
 					@Model.CustomerEmailUsername

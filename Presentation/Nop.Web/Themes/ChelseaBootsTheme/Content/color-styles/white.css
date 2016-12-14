@@ -97,23 +97,23 @@
 	text-decoration: none !important;
 }
 
-.navbar-fixed-top.top-menu .top-menu-item-wrapper {
+.header-home .user-tools .top-menu-item-wrapper {
 	line-height: 20px;
 	padding: 15px;
 	width: 110%;
 }
 
-.navbar-fixed-top.top-menu li {
+.header-home .user-tools li {
 	display: block;
 }
 
-	.navbar-fixed-top.top-menu li > a:hover {
-		background-color: #fff;
-		color: #4d4d4d;
+	.header-home .user-tools li > a:hover {
+		background: none !important;
+        color: #4d4d4d;
 	}
 
 ul.nav.navbar-nav.navbar-right li > a:hover {
-	background-color: #fff;
+	/background-color: #fff;
 	color: #c68c53 !important;
 }
 
@@ -218,14 +218,15 @@ select.form-control.date-select {
 	color: #FFF;
 }
 
-	.top-menu ul.dropdown-menu > li > a:hover {
-		color: #fff;
-		background-color: #000000;
-	}
+.top-menu ul.dropdown-menu > li > a:hover {
+	color: #fff;
+	background-color: #000000;
+}
 
 .top-menu.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
 	background-color: #fff;
 	color: #fff;
+
 }
 
 .masthead .navbar-inverse .navbar-nav > li > a:hover {
@@ -434,96 +435,89 @@ h2.title {
 }
 
 /*Flyout cart*/
-
-.top-menu li#topcartlink ul.dropdown-menu {
-	min-width: 380px !important;
-	left: -380px !important;
-	top: 50px !important;
-}
-
 #flyout-cart {
 	color: #000;
 	max-height: 330px !important;
 }
 
-	#flyout-cart a:hover {
-		color: #c68c53 !important;
-	}
+#flyout-cart a:hover {
+	color: #c68c53 !important;
+}
 
-	#flyout-cart .mini-shopping-cart a.remove-from-cart {
-		position: absolute;
-		font-size: 15px;
-		top: 0;
-		right: 15px;
-		color: #ff1c01;
-	}
+#flyout-cart .mini-shopping-cart a.remove-from-cart {
+	position: absolute;
+	font-size: 15px;
+	top: 0;
+	right: 15px;
+	color: #ff1c01;
+}
 
-	#flyout-cart .mini-shopping-cart .item {
-		border-bottom: dotted 1px #d9d9d9;
-		min-height: 114px;
-	}
+#flyout-cart .mini-shopping-cart .item {
+	border-bottom: dotted 1px #d9d9d9;
+	min-height: 114px;
+}
 
-		#flyout-cart .mini-shopping-cart .item .picture {
-			margin-top: 7px;
-		}
+#flyout-cart .mini-shopping-cart .item .picture {
+	margin-top: 7px;
+}
 
-		#flyout-cart .mini-shopping-cart .item .product {
-		}
+#flyout-cart .mini-shopping-cart .item .product {
+}
 
-			#flyout-cart .mini-shopping-cart .item .product > div {
-				padding-bottom: 5px;
-			}
+#flyout-cart .mini-shopping-cart .item .product > div {
+	padding-bottom: 5px;
+}
 
-			#flyout-cart .mini-shopping-cart .item .product .name {
-				min-height: 42px;
-				font-size: 14px;
-				padding-top: 2px;
-				width: 90%;
-			}
+#flyout-cart .mini-shopping-cart .item .product .name {
+	min-height: 42px;
+	font-size: 14px;
+	padding-top: 2px;
+	width: 90%;
+}
 
-			#flyout-cart .mini-shopping-cart .item .product .size {
-				text-align: right;
-				font-size: 12px;
-			}
+#flyout-cart .mini-shopping-cart .item .product .size {
+	text-align: right;
+	font-size: 12px;
+}
 
-			#flyout-cart .mini-shopping-cart .item .product .quantity {
-				text-align: right;
-				font-size: 12px;
-			}
+#flyout-cart .mini-shopping-cart .item .product .quantity {
+	text-align: right;
+	font-size: 12px;
+}
 
-			#flyout-cart .mini-shopping-cart .item .product .price {
-				position: absolute;
-				top: 85px;
-				right: 15px;
-				font-size: 12px;
-			}
+#flyout-cart .mini-shopping-cart .item .product .price {
+	position: absolute;
+	top: 85px;
+	right: 15px;
+	font-size: 12px;
+}
 
-				#flyout-cart .mini-shopping-cart .item .product .price a {
-					text-align: left;
-				}
+#flyout-cart .mini-shopping-cart .item .product .price a {
+	text-align: left;
+}
 
-				#flyout-cart .mini-shopping-cart .item .product .price span,
-				#flyout-cart .mini-shopping-cart .item .product .quantity span,
-				#flyout-cart .mini-shopping-cart .item .product .size span {
-					font-weight: bold;
-				}
+#flyout-cart .mini-shopping-cart .item .product .price span,
+#flyout-cart .mini-shopping-cart .item .product .quantity span,
+#flyout-cart .mini-shopping-cart .item .product .size span {
+	font-weight: bold;
+}
 
-	#flyout-cart .mini-shopping-cart .totals {
-		text-align: right;
-		padding-top: 10px;
-	}
+#flyout-cart .mini-shopping-cart .totals {
+	text-align: right;
+	padding-top: 10px;
+}
 
-	#flyout-cart .flyout-cart-footer {
-		border-top: 1px dotted #d9d9d9;
-		text-align: center;
-		margin: 10px -15px;
-		padding-top: 10px;
-	}
+#flyout-cart .flyout-cart-footer {
+	border-top: 1px dotted #d9d9d9;
+	text-align: center;
+	margin: 10px -15px;
+	padding-top: 10px;
+}
 
-		#flyout-cart .flyout-cart-footer a i {
-			font-size: larger;
-			padding-right: 10px;
-		}
+#flyout-cart .flyout-cart-footer a i {
+	font-size: larger;
+	padding-right: 10px;
+}
 
 .order-summary-content .buttons {
 	float: right;
@@ -1200,3 +1194,86 @@ blockquote {
 		.brands div img {
 			width: 100%;
 		}
+
+.newsletter {
+    overflow: auto;
+}
+
+#newsletter-email {
+    padding: 5px;
+    /border-radius: 5px;
+    outline: none;
+    border: 0;
+    width: 100%;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+#newsletter-email:focus {
+    color: #1a1a1a;
+}
+#newsletter-subscribe-button {
+    color: #fff;
+    background-color: #c68c53;
+    border: 0;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 1.2em;
+    float: right;
+}
+
+.header-home {
+    padding: 20px 0 0 0;
+}
+
+.header-home .header-logo {
+	margin-bottom: 10px;
+}
+.header-home .header-logo a {
+	text-decoration: none;
+}
+.header-home .header-logo .logo-title {
+	color: #333333;
+	font-family: "Pattaya",sans-serif;
+	font-size: 4em;
+	text-align: left;
+    padding-top: 10px;
+}
+.header-home a.logo {
+	background: url("images/logo.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	display: block;
+	height: 60px;
+	text-decoration: none;
+	width: 310px;
+}
+
+.homepage {
+    padding:0;
+}
+
+.header-home .user-tools {
+    /background:#ff1c01;
+    padding: 20px 0;
+        font-size: 18px;
+}
+
+.collapse.navbar-collapse.category-navbar-collapse {
+    font-size: 18px;
+}
+
+.header-home .user-tools .dropdown-menu {
+	min-width: 380px !important;
+	left: -380px !important;
+	top: 50px !important;
+}
+.header-home .user-tools .dropdown.login .dropdown-menu {
+	min-width: 200px !important;
+	left: -200px !important;
+	top: 50px !important;
+}
+
+.header-home .user-tools .dropdown-menu.language-select {
+	min-width: 50px !important;
+	left: 0 !important;
+	top: 50px !important;
+}
+
