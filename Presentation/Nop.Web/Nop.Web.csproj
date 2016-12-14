@@ -1277,6 +1277,8 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\Wishlist - Original.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Simple.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Home\_ProductManufacturersSlider.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderSummary - Original.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderTotals - Original.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

@@ -246,6 +246,9 @@ namespace Nop.Web.Controllers
 				throw new ArgumentNullException("model");
 
 			model.OnePageCheckoutEnabled = _orderSettings.OnePageCheckoutEnabled;
+			model.ContinueShoppingUrl = _workContext.CurrentCustomer.GetAttribute<string>(
+				SystemCustomerAttributeNames.LastContinueShoppingPage,
+				_storeContext.CurrentStore.Id);
 
 			if (!cart.Any())
 				return;
@@ -460,6 +463,8 @@ namespace Nop.Web.Controllers
 
 			foreach (var sci in cart)
 			{
+				var manufacturer = sci.Product.ProductManufacturers.FirstOrDefault().Manufacturer;
+
 				var cartItemModel = new ShoppingCartModel.ShoppingCartItemModel
 				{
 					Id = sci.Id,
@@ -469,6 +474,12 @@ namespace Nop.Web.Controllers
 					ProductSeName = sci.Product.GetSeName(),
 					Quantity = sci.Quantity,
 					AttributeInfo = _productAttributeFormatter.FormatAttributes(sci.Product, sci.AttributesXml),
+					Manufacturer = new ManufacturerBriefInfoModel
+					{
+						Id = manufacturer.Id,
+						Name = manufacturer.GetLocalized(x => x.Name),
+						SeName = manufacturer.GetSeName()
+					}
 				};
 
 				//allow editing?
@@ -2622,7 +2633,6 @@ namespace Nop.Web.Controllers
 			return PartialView("_EstimateShippingResult", model);
 		}
 
-		[ChildActionOnly]
 		public ActionResult OrderTotals(bool isEditable)
 		{
 			var cart = _workContext.CurrentCustomer.ShoppingCartItems

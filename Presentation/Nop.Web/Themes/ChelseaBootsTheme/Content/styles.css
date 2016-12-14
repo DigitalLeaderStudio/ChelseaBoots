@@ -46,6 +46,27 @@ button, a, .icon {
 	display: none;
 }
 
+
+.ajax-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1030;
+	background-color: #000000;
+}
+
+	.ajax-backdrop.fade {
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+
+	.ajax-backdrop.in {
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+
 .loading-image {
 	position: fixed;
 	top: 50%;

@@ -525,6 +525,38 @@ h2.title {
 			padding-right: 10px;
 		}
 
+.order-summary-content .buttons {
+	float: right;
+}
+
+	.order-summary-content .buttons button,
+	.order-summary-content .buttons a {
+		margin-left: 20px;
+	}
+
+.order-summary-content .table {
+}
+
+	.order-summary-content .table .media .thumbnail {
+		margin-bottom: 0 !important;
+	}
+
+	.order-summary-content .table .media-body p {
+		margin-top: 10px;
+	}
+
+	.order-summary-content .table .media-body span {
+		font-size: 13px;
+	}
+
+	.order-summary-content .table .media-body strong {
+		font-size: 15px;
+	}
+
+	.order-summary-content .table td.valign-center {
+		vertical-align: middle;
+	}
+
 .navbar-right .dropdown li a {
 	color: #000;
 }
