@@ -6,22 +6,21 @@
 
 <ul class="nav navbar-nav navbar-right">
 	@Html.Widget("header_links_before")
-	@Html.Action("AdminHeaderLinks", "Common")
-
+	
 	@Html.Partial("PartialViews/LoginPartial", Model)
 
-	@Html.Partial("PartialViews/MessagesPartial", Model)
+	@*@Html.Partial("PartialViews/MessagesPartial", Model)*@
 
 	@Html.Partial("PartialViews/WishListPartial", Model)
 
 	@Html.Partial("PartialViews/ShoppingCartPartial", Model)
 
-	<li>
+	@*<li>
 		@Html.Action("TaxTypeSelector", "Common")
 	</li>
 	<li>
 		@Html.Action("CurrencySelector", "Common")
-	</li>
+	</li>*@
 	<li>
 		@Html.Action("LanguageSelector", "Common")
 	</li>
