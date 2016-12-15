@@ -82,7 +82,9 @@ namespace Nop.Web.Models.ShoppingCart
 			public string Discount { get; set; }
 
 			public int Quantity { get; set; }
+
 			public List<SelectListItem> AllowedQuantities { get; set; }
+			public IList<ProductDetailsModel.ProductAttributeModel> ProductAttributes { get; set; }
 
 			public string AttributeInfo { get; set; }
 

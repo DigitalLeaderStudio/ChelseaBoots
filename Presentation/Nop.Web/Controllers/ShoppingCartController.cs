@@ -479,8 +479,156 @@ namespace Nop.Web.Controllers
 						Id = manufacturer.Id,
 						Name = manufacturer.GetLocalized(x => x.Name),
 						SeName = manufacturer.GetSeName()
-					}
+					},
+					ProductAttributes = new List<ProductDetailsModel.ProductAttributeModel>()
 				};
+
+
+				#region Product attributes
+
+				//performance optimization
+				//We cache a value indicating whether a product has attributes
+				IList<ProductAttributeMapping> productAttributeMapping = null;
+				string cacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_HAS_PRODUCT_ATTRIBUTES_KEY, sci.Product.Id);
+				var hasProductAttributesCache = _cacheManager.Get<bool?>(cacheKey);
+				if (!hasProductAttributesCache.HasValue)
+				{
+					//no value in the cache yet
+					//let's load attributes and cache the result (true/false)
+					productAttributeMapping = _productAttributeService.GetProductAttributeMappingsByProductId(sci.Product.Id);
+					hasProductAttributesCache = productAttributeMapping.Any();
+					_cacheManager.Set(cacheKey, hasProductAttributesCache, 60);
+				}
+				if (hasProductAttributesCache.Value && productAttributeMapping == null)
+				{
+					//cache indicates that the product has attributes
+					//let's load them
+					productAttributeMapping = _productAttributeService.GetProductAttributeMappingsByProductId(sci.Product.Id);
+				}
+
+				var productCombinations = _productAttributeService.GetAllProductAttributeCombinations(sci.Product.Id);
+
+				if (productAttributeMapping == null)
+				{
+					productAttributeMapping = new List<ProductAttributeMapping>();
+				}
+				foreach (var attribute in productAttributeMapping)
+				{
+					var attributeModel = new ProductDetailsModel.ProductAttributeModel
+					{
+						Id = attribute.Id,
+						ProductId = sci.Product.Id,
+						ProductAttributeId = attribute.ProductAttributeId,
+						Name = attribute.ProductAttribute.GetLocalized(x => x.Name),
+						Description = attribute.ProductAttribute.GetLocalized(x => x.Description),
+						TextPrompt = attribute.TextPrompt,
+						IsRequired = attribute.IsRequired,
+						AttributeControlType = attribute.AttributeControlType,
+						DefaultValue = sci != null ? null : attribute.DefaultValue,
+						HasCondition = !String.IsNullOrEmpty(attribute.ConditionAttributeXml)
+					};
+					if (!String.IsNullOrEmpty(attribute.ValidationFileAllowedExtensions))
+					{
+						attributeModel.AllowedFileExtensions = attribute.ValidationFileAllowedExtensions
+							.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+							.ToList();
+					}
+
+					if (attribute.ShouldHaveValues())
+					{
+						//values
+						var attributeValues = _productAttributeService.GetProductAttributeValues(attribute.Id);
+
+						foreach (var attributeValue in attributeValues)
+						{
+							List<ProductAttributeValue> productCombinationsAttrs = new List<ProductAttributeValue>();
+							foreach (var pc in productCombinations)
+							{
+								productCombinationsAttrs.AddRange(_productAttributeParser.ParseProductAttributeValues(pc.AttributesXml));
+							}
+
+							var valueModel = new ProductDetailsModel.ProductAttributeValueModel
+							{
+								Id = attributeValue.Id,
+								Name = attributeValue.GetLocalized(x => x.Name),
+								ColorSquaresRgb = attributeValue.ColorSquaresRgb, //used with "Color squares" attribute type
+								IsPreSelected = attributeValue.IsPreSelected,
+								IsAvailable = productCombinationsAttrs.Contains(attributeValue)
+							};
+							attributeModel.Values.Add(valueModel);
+
+							//display price if allowed
+							if (_permissionService.Authorize(StandardPermissionProvider.DisplayPrices))
+							{
+								decimal taxRate;
+								decimal attributeValuePriceAdjustment = _priceCalculationService.GetProductAttributeValuePriceAdjustment(attributeValue);
+								decimal priceAdjustmentBase = _taxService.GetProductPrice(sci.Product, attributeValuePriceAdjustment, out taxRate);
+								decimal priceAdjustment = _currencyService.ConvertFromPrimaryStoreCurrency(priceAdjustmentBase, _workContext.WorkingCurrency);
+								if (priceAdjustmentBase > decimal.Zero)
+									valueModel.PriceAdjustment = "+" + _priceFormatter.FormatPrice(priceAdjustment, false, false);
+								else if (priceAdjustmentBase < decimal.Zero)
+									valueModel.PriceAdjustment = "-" + _priceFormatter.FormatPrice(-priceAdjustment, false, false);
+
+								valueModel.PriceAdjustmentValue = priceAdjustment;
+							}
+
+							//"image square" picture (with with "image squares" attribute type only)
+							if (attributeValue.ImageSquaresPictureId > 0)
+							{
+								var productAttributeImageSquarePictureCacheKey = string.Format(ModelCacheEventConsumer.PRODUCTATTRIBUTE_IMAGESQUARE_PICTURE_MODEL_KEY,
+									   attributeValue.ImageSquaresPictureId,
+									   _webHelper.IsCurrentConnectionSecured(),
+									   _storeContext.CurrentStore.Id);
+								valueModel.ImageSquaresPictureModel = _cacheManager.Get(productAttributeImageSquarePictureCacheKey, () =>
+								{
+									var imageSquaresPicture = _pictureService.GetPictureById(attributeValue.ImageSquaresPictureId);
+									if (imageSquaresPicture != null)
+									{
+										return new PictureModel
+										{
+											FullSizeImageUrl = _pictureService.GetPictureUrl(imageSquaresPicture),
+											ImageUrl = _pictureService.GetPictureUrl(imageSquaresPicture, _mediaSettings.ImageSquarePictureSize)
+										};
+									}
+									return new PictureModel();
+								});
+							}
+
+							//picture of a product attribute value
+							valueModel.PictureId = attributeValue.PictureId;
+						}
+					}
+
+					//set already selected attributes (if we're going to update the existing shopping cart item)
+					switch (attribute.AttributeControlType)
+					{
+						case AttributeControlType.DropdownList:
+						case AttributeControlType.RadioList:
+						case AttributeControlType.Checkboxes:
+						case AttributeControlType.ColorSquares:
+						case AttributeControlType.ImageSquares:
+							{
+								if (!String.IsNullOrEmpty(sci.AttributesXml))
+								{
+									//clear default selection
+									foreach (var item in attributeModel.Values)
+										item.IsPreSelected = false;
+
+									//select new values
+									var selectedValues = _productAttributeParser.ParseProductAttributeValues(sci.AttributesXml);
+									foreach (var attributeValue in selectedValues)
+										foreach (var item in attributeModel.Values)
+											if (attributeValue.Id == item.Id)
+												item.IsPreSelected = true;
+								}
+							}
+							break;
+					}
+
+					cartItemModel.ProductAttributes.Add(attributeModel);
+				}
+
+				#endregion
 
 				//allow editing?
 				//1. setting enabled?
@@ -1953,12 +2101,54 @@ namespace Nop.Web.Controllers
 			#endregion
 		}
 
+		[HttpPost]
+		[ValidateInput(false)]
+		public ActionResult AttributeChange(int productId, FormCollection form)
+		{
+			var product = _productService.GetProductById(productId);
+			if (product == null)
+				return new NullJsonResult();
+
+			#region Update existing shopping cart item
+
+			ShoppingCartItem updatecartitem = null;
+
+			var cart = _workContext.CurrentCustomer.ShoppingCartItems
+				.Where(x => x.ShoppingCartType == ShoppingCartType.ShoppingCart)
+				.LimitPerStore(_storeContext.CurrentStore.Id)
+				.ToList();
+
+			updatecartitem = cart.FirstOrDefault(cartItem => cartItem.ProductId == productId);
+
+			#endregion
+
+			string attributeXml = ParseProductAttributes(product, form);
+
+			//update existing item
+			_shoppingCartService.UpdateShoppingCartItem(_workContext.CurrentCustomer,
+				updatecartitem.Id,
+				attributeXml,
+				decimal.Zero,
+				resetCheckoutData: false);
+
+			var attributeInfo = _productAttributeFormatter.FormatAttributes(product, attributeXml);
+
+			return Json(new
+			{
+				Success = true,
+				AttributeInfo = attributeInfo
+			});
+		}
+
 		//handle product attribute selection event. this way we return new price, overridden gtin/sku/mpn
 		//currently we use this method on the product details pages
 		[HttpPost]
 		[ValidateInput(false)]
-		public ActionResult ProductDetails_AttributeChange(int productId, bool validateAttributeConditions,
-			bool loadPicture, FormCollection form)
+		public ActionResult ProductDetails_AttributeChange(
+			int productId,
+			bool validateAttributeConditions,
+			bool loadPicture,
+			FormCollection form)
 		{
 			var product = _productService.GetProductById(productId);
 			if (product == null)

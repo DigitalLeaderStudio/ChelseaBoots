@@ -24,7 +24,7 @@
 		using (Html.BeginRouteForm("ShoppingCart", FormMethod.Post, new { enctype = "multipart/form-data" }))
 		{
 			@Html.AntiForgeryToken()
-			<div class="table-wrapper">
+			<div class="table-wrapper" style="z-index: 1;">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -65,6 +65,32 @@
 												<span>@T("Manufacturers"):</span>&nbsp;
 												<strong><a href="@manufacturerUrl">@item.Manufacturer.Name</a></strong>
 											</p>
+											<div id="attributes-container">
+												@if (item.Warnings.Count > 0)
+												{
+													<div class="alert alert-danger square-box">
+														@for (int i = 0; i < item.Warnings.Count; i++)
+														{
+															<div>@item.Warnings[i]</div>
+														}
+														<div class="attribute-item">
+															@{
+														var dataDictAttributes = new ViewDataDictionary();
+														dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", item.ProductId);
+														@Html.Partial("../Product/_ProductAttributes", item.ProductAttributes, dataDictAttributes)
+															}
+														</div>
+													</div>
+												}
+												else
+												{
+													var attrs = item.AttributeInfo.Split(new char[] { ':' });
+													<p>
+														<span>@attrs[0]</span>
+														<strong>@attrs[1]</strong>
+													</p>
+												}
+											</div>
 										</div>
 									</div>
 								</td>
@@ -79,8 +105,8 @@
 								</td>
 								<td class="col-sm-1 col-md-1 valign-center">
 									@{
-							var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, });
-							var refreshLink = Url.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable });
+											var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, });
+											var refreshLink = Url.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable });
 									}
 									<button type="button"
 											class="btn btn-danger"
