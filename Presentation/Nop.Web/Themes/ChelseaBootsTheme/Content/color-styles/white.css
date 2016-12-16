@@ -325,7 +325,7 @@ select.form-control.date-select {
 	color: #c68c53 !important;
 }
 
-.ul.nav.navbar-nav.navbar-right li:hover {
+ul.nav.navbar-nav.navbar-right li:hover {
 	background-color: #fff;
 }
 
@@ -1169,7 +1169,7 @@ blockquote {
 
 #newsletter-email {
     padding: 5px;
-    /border-radius: 5px;
+    border-radius: 3px;
     outline: none;
     border: 0;
     width: 100%;
@@ -1186,7 +1186,8 @@ blockquote {
     border-radius: 3px;
     padding: 5px 10px;
     font-size: 1.2em;
-    float: right;
+    float: left;
+    width: 100%;
 }
 
 .header-home {
@@ -1231,17 +1232,98 @@ blockquote {
 .header-home .user-tools .dropdown-menu {
 	min-width: 380px !important;
 	left: -380px !important;
-	top: 50px !important;
+	top: 48px !important;
+    border-color: #f1dfcd;
+
 }
 .header-home .user-tools .dropdown.login .dropdown-menu {
 	min-width: 200px !important;
 	left: -200px !important;
-	top: 50px !important;
+	top: 48px !important;
 }
 
 .header-home .user-tools .dropdown-menu.language-select {
 	min-width: 50px !important;
 	left: 0 !important;
-	top: 50px !important;
+	top: 48px !important;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+.panel-body p {
+    font-size: 16px;
+}
+#ph-topic .form-contactus p {
+    font-size: 16px;
+}
+#ph-topic .form-contactus {
+    margin:0;
+}
+#ph-topic .form-contactus {
+    padding: 15px;
+}
+#ph-topic .panel-body {
+    padding: 20px 30px 20px 30px;
+}
+.panel-heading {
+    padding: 10px 0;
+    background-color: #444444 !important;
+    color: #fff !important;
+
+}
+.panel-heading h3 {
+    margin: 10px 0;
+}
+
+.masthead .navbar {
+    margin: 0 0 10px 0;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    background: #c68c53;
+    /padding: 5px;
+    border: 0px dotted #ccc;
+    border-radius: 5px;
+    z-index: 2147483647;
+}
+
+ul.nav.navbar-nav.navbar-right > li {
+    color: #fff; 
+}
+ul.nav.navbar-nav.navbar-right > li:hover {
+    background-color: #fff; 
+    color: #c68c53;
+}
+ul.nav.navbar-nav.navbar-right > li > a, 
+ul.nav.navbar-nav.navbar-right > li > div > a {
+    color: inherit;
+}
+ul.nav.navbar-nav.navbar-right > li > a:active, 
+ul.nav.navbar-nav.navbar-right > li > a:hover,
+ul.nav.navbar-nav.navbar-right > li > div > a:active, 
+ul.nav.navbar-nav.navbar-right > li > div > a:hover {
+    color: #1a1a1a; 
+    color: inherit;
+}
+ul.nav.navbar-nav.navbar-right li.dropdown.languages {
+    text-transform: uppercase;
+}
+
+ul.nav.navbar-nav.navbar-right .dropdown-menu {
+    padding:0;
+}
+
+.new-products-homepage {
+    padding: 15px 7px;
+}
+
+.view-all-btn-wrapper {
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+.view-all-btn-wrapper .btn-default {
+    font-size: 22px;
+}   

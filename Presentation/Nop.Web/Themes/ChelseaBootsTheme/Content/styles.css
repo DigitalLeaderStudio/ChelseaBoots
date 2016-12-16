@@ -6,6 +6,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-weight: 600;
 }
 
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
 body {
 	padding-top: 81px;
 	font-family: Arial, sans-serif;
@@ -330,10 +334,6 @@ a.logo {
 .panel.panel-default.side-nav, .panel.panel-default.form-panel { /*border-top: 4px solid #000;*/
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.15);
 }
-
-	.panel.panel-default.form-panel > .panel-heading > h3 {
-		margin: 0;
-	}
 
 	/*.panel.panel-default.side-nav.side-nav-category{
 border:none;

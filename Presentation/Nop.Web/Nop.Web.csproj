@@ -407,6 +407,7 @@
     <Compile Include="Models\Vendors\VendorInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes\ChelseaBootsTheme\Controllers\CatalogController.cs" />
+    <Compile Include="Themes\ChelseaBootsTheme\Controllers\ProductController.cs" />
     <Compile Include="Themes\ChelseaBootsTheme\Models\ProductWishListModel.cs" />
     <Compile Include="Validators\Blogs\BlogPostValidator.cs" />
     <Compile Include="Validators\Boards\EditForumPostValidator.cs" />
@@ -1277,6 +1278,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\Wishlist - Original.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Simple.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Home\_ProductManufacturersSlider.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Product\HomepageNewProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

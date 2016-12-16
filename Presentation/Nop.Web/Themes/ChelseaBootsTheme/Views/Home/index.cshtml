@@ -6,6 +6,7 @@
 	<div class="widget">@Html.Widget("home_page_top")</div>
 </div>
 
+@Html.Action("HomepageNewProducts", "Product")
 @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
 @Html.Action("HomepageCategories", "Catalog")
 @Html.Action("HomepageProducts", "Product")
