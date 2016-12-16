@@ -15,7 +15,7 @@
 				@for (int i = 0; i < Model.Items.Count; i++)
 				{
 					var item = Model.Items[i];
-					<div class="item @(i == 0 ? "first" : null) row">
+					<div product-id="@item.ProductId" class="item @(i == 0 ? "first" : null) row">
 						@if (Model.ShowProductImages)
 						{
 							<div class="col-md-5">
@@ -34,8 +34,8 @@
 								</div>
 								@{ var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, }); }
 								<a class="remove-from-cart"
-								   href="javascript:void();"
-								   onclick="AjaxCart.removeFromCart(this, '@removeLink');return false;">
+								   href="javascript:void(0);"
+								   onclick="AjaxCart.removeFromCart(this, '@removeLink'); return false;">
 									<i class="fa fa-trash-o"></i>
 								</a>
 

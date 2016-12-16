@@ -51,15 +51,20 @@
 
 		var that = this;
 
+		var defferRemoveFromCart = $.Deferred();
+
 		$.ajax({
 			cache: false,
 			url: removeUrl,
 			type: 'post',
 			success: function (response) {
 				that.success(response, function (defer) {
-					$(element).parents('div.item').effect('drop', function () { $(this).detach(); });
+					$(element).parents('[product-id]').effect('drop', function () { $(this).detach(); });
 
-					setTimeout(function () { defer.resolve(); }, 400);
+					setTimeout(function () {
+						defer.resolve();
+						defferRemoveFromCart.resolve();
+					}, 400);
 
 					return defer.promise();
 				});
@@ -67,6 +72,8 @@
 			complete: that.resetLoadWaiting,
 			error: that.ajaxFailure
 		});
+
+		return defferRemoveFromCart.promise();
 	},
 
 	//add a product to the cart/wishlist from the product details page
@@ -208,7 +215,6 @@
 
 	success: function (response, animation) {
 		var result = true;
-
 		if (response.message) {
 			if (response.success == true) {
 				if (AjaxCart.usepopupnotifications == true)
