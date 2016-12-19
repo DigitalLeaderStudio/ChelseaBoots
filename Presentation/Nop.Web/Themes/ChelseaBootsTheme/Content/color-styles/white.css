@@ -266,7 +266,7 @@ select.form-control.date-select {
 
 .dropdown-menu > li > a i,
 .page .nav > li > a i {
-	display: none;
+	display: inline;
 }
 
 .page .dropdown-menu > li.selected-value > a i,
@@ -277,7 +277,7 @@ select.form-control.date-select {
 
 .dropdown-menu > li > a {
 	background-color: #fff;
-	color: #4d4d4d !important;
+	color: #4d4d4d;
 	text-decoration: none;
 	border: 1px dotted #ccc !important;
 	border-top: none !important;
@@ -1243,10 +1243,15 @@ blockquote {
 		display: block;
 	}
 
-		.header-home .user-tools li > a:hover {
-			background: none !important;
-			color: #4d4d4d;
-		}
+    .header-home .user-tools li > a  {
+		color: #1a1a1a;
+	}
+
+	.header-home .user-tools li > a:hover, 
+    .header-home .user-tools li > a:active  {
+		background: none !important;
+		color: #fff;
+	}
 
 	.header-home .user-tools .dropdown-menu {
 		min-width: 380px !important;
@@ -1272,7 +1277,7 @@ blockquote {
 }
 
 #ph-topic .panel-body {
-	padding: 20px 30px 20px 30px;
+	padding: 20px;
 }
 
 	#ph-topic .panel-body i {
@@ -1308,6 +1313,7 @@ ul.nav.navbar-nav.navbar-right {
 
 	ul.nav.navbar-nav.navbar-right > li {
 		color: #fff;
+        border-radius: 5px;
 	}
 
 	ul.nav.navbar-nav.navbar-right li:hover {
@@ -1328,6 +1334,7 @@ ul.nav.navbar-nav.navbar-right {
 		color: inherit;
         text-align: center;
         display: inherit;
+        border-radius: 5px;
 	}
     	ul.nav.navbar-nav.navbar-right > li > a {
             padding: 15px;
@@ -1358,7 +1365,15 @@ ul.nav.navbar-nav.navbar-right {
     .user-tools .dropdown-menu > li > a {
 		border: 0 !important;
         padding: 3px 10px;
+        color: inherit;
 	}
+    .user-tools .nav.navbar-nav.navbar-right .dropdown-menu li:hover {
+		background:#c68c53;
+        color: #fff !important;
+	}
+    #topcartlink .dropdown-menu li:hover {
+        background:none !important;
+    }
 
 
 .new-products-homepage {
@@ -1408,6 +1423,10 @@ ul.nav.navbar-nav.navbar-right {
 }
 #filters {
     display: block;
+}
+
+.margin-top-10 {
+	margin-top: 10px;
 }
 
 
@@ -1512,9 +1531,6 @@ ul.nav.navbar-nav.navbar-right {
     #filters {
         display: none;
     }
-}
-.margin-top-10 {
-	margin-top: 10px;
 }
 
 
