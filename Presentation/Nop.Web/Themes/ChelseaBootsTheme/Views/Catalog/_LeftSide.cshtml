@@ -10,7 +10,8 @@
 	var breadcrumbDelimiter = Nop.Core.Infrastructure.EngineContext.Current.Resolve<Nop.Core.Domain.Common.CommonSettings>().BreadcrumbDelimiter;
 }
 
-<div class="product-filters-wrapper">
+<button id="filterSwitch">Filters</button>
+<div id="filters" class="product-filters-wrapper">
 	@*filtering*@
 	@if (Model.PriceRangeFilter.Enabled)
 	{
@@ -21,7 +22,7 @@
 	{
 		@Html.Partial("_FilterSpecsBox", Model.SpecificationFilter, new ViewDataDictionary())
 	}
+    @Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })
 </div>
-@Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })
 @Html.Widget("left_side_column_after")
 @Html.Action("VendorNavigation", "Catalog")

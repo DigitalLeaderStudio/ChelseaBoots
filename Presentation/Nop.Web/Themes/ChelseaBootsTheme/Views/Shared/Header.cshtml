@@ -4,10 +4,11 @@
             <div class="col-sm-8">
                 @Html.Action("Logo", "Common")
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-xs-12 user-tools">
+                @Html.Action("HeaderLinks", "Common")
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="navbar-collapse collapse user-tools">
+                <div class="navbar-collapse collapse">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".test">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -15,7 +16,6 @@
                         <span class="icon-bar"></span>
                     </button>
                     @Html.Widget("header")
-                    @Html.Action("HeaderLinks", "Common")
                     @*@Html.Action("FlyoutShoppingCart", "ShoppingCart")*@
                 </div>
                 @Html.Widget("bsmegamenu")

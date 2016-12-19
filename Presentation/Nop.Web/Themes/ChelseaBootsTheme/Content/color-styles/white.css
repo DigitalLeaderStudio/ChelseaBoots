@@ -1201,6 +1201,7 @@ blockquote {
 }
 
 	.header-home .header-logo {
+        margin-top: 20px;
 		margin-bottom: 10px;
 	}
 
@@ -1228,7 +1229,7 @@ blockquote {
 }
 
 .header-home .user-tools {
-	padding: 0;
+	padding: 10px;
 	font-size: 18px;
 }
 
@@ -1302,7 +1303,7 @@ ul.nav.navbar-nav.navbar-right {
 	background: #c68c53;
 	border: 0px dotted #ccc;
 	border-radius: 5px;
-	/*z-index: 10001;*/
+    padding: 1px;
 }
 
 	ul.nav.navbar-nav.navbar-right > li {
@@ -1317,27 +1318,48 @@ ul.nav.navbar-nav.navbar-right {
 		background-color: #fff;
 		color: #c68c53;
 	}
-
+    ul.nav.navbar-nav.navbar-right > li,
+	ul.nav.navbar-nav.navbar-right > li > div {
+		border-radius: 5px;
+        border: 0;
+	}
 	ul.nav.navbar-nav.navbar-right > li > a,
 	ul.nav.navbar-nav.navbar-right > li > div > a {
 		color: inherit;
+        text-align: center;
+        display: inherit;
 	}
+    	ul.nav.navbar-nav.navbar-right > li > a {
+            padding: 15px;
+    	}
 
 		ul.nav.navbar-nav.navbar-right > li > a:active,
 		ul.nav.navbar-nav.navbar-right > li > a:hover,
 		ul.nav.navbar-nav.navbar-right > li > div > a:active,
 		ul.nav.navbar-nav.navbar-right > li > div > a:hover {
-			color: #1a1a1a;
 			color: inherit;
 		}
 
 	ul.nav.navbar-nav.navbar-right li.dropdown.languages {
 		text-transform: uppercase;
 	}
+    ul.nav.navbar-nav.navbar-right li.dropdown.languages a {
+        text-align: center !important;
+	}
 
 	ul.nav.navbar-nav.navbar-right .dropdown-menu {
-		padding: 0;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
 	}
+    ul.nav.navbar-nav.navbar-right .dropdown-menu li {
+        padding: 0px;
+    }
+    .user-tools .dropdown-menu > li > a {
+		border: 0 !important;
+        padding: 3px 10px;
+	}
+
 
 .new-products-homepage {
 	padding: 15px 7px;
@@ -1352,7 +1374,6 @@ ul.nav.navbar-nav.navbar-right {
     font-size: 22px;
 }   
 
-
 .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     width: 100%;
 }
@@ -1366,6 +1387,23 @@ ul.nav.navbar-nav.navbar-right {
 .show-by {
     float:right; 
     margin-right: 10px
+}
+
+#filterSwitch {
+    display: none;
+    width: 100%;
+    background: #c68c53;
+    padding: 10px;
+    border:0;
+    outline: none;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+}
+#filters {
+    display: block;
 }
 
 
@@ -1385,6 +1423,41 @@ ul.nav.navbar-nav.navbar-right {
         float:left; 
         margin-top: 10px;
         margin-left: 0;
+    }
+    .header-home .user-tools {
+        position: fixed;
+        top: 0;
+        z-index: 40000;
+        padding: 0;
+        font-size: 12px;
+    }
+   .header-home .user-tools > ul {
+        width: 100%;
+        border-radius: 0 !important;
+        display: block;
+        margin: 0;
+    }
+    .header-home .user-tools > ul > li {
+        width: 25%;
+        display: inline-block;
+        float: left;
+    }
+    .header-home .user-tools .dropdown-menu {
+        font-size: 12px;
+        padding: 0;
+    }
+    .header-home .user-tools .dropdown.login .dropdown-menu {
+        min-width: 400px !important;
+    }
+    ul.nav.navbar-nav.navbar-right > li > a,
+    ul.nav.navbar-nav.navbar-right > li > div {
+        padding: 5px;
+    }
+    #filterSwitch {
+        display: block;
+    }
+    #filters {
+        display: none;
     }
 }
 /*sm*/
@@ -1411,6 +1484,29 @@ ul.nav.navbar-nav.navbar-right {
         float:right;
         margin: 0;
         margin-right: 0;
+    }
+    .header-home .user-tools .dropdown-menu {
+		min-width: 380px !important;
+		left: -380px !important;
+		top: 40px !important;
+	}
+
+	.header-home .user-tools .dropdown.login .dropdown-menu {
+		min-width: 200px !important;
+		left: -200px !important;
+		top: 40px !important;
+	}
+
+	.header-home .user-tools .dropdown-menu.language-select {
+		min-width: 50px !important;
+		left: 0 !important;
+		top: 40px !important;
+	}
+    #filterSwitch {
+        display: block;
+    }
+    #filters {
+        display: none;
     }
 }
 /*md*/

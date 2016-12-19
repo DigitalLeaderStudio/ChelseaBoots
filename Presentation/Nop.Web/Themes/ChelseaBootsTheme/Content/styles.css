@@ -2180,16 +2180,14 @@ div#color-options h4 {
 }
 
 .category-menu .navbar-toggle {
-	background-color: #444444;
+	background-color: #fff;
+    border: 1px solid #c68c53;
 }
-
-
 .category-menu .navbar-toggle:hover, .category-menu .navbar-toggle:focus {
 	background-color: #c68c53;
 }
-
 .category-menu .navbar-toggle .icon-bar {
-	background-color: #fff;
+	background-color: #1a1a1a;
 }
 
 .category-menu .navbar-nav .open .dropdown-menu > li > a, .category-menu .navbar-nav .open .dropdown-menu > li > a:hover {

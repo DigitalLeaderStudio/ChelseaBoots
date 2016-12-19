@@ -6,21 +6,22 @@
 
 @model CategoryModel
 @{
-	Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 
-	Html.AppendScriptParts("~/Scripts/native.history.js");
-	Html.AppendScriptParts("~/Themes/ChelseaBootsTheme/Scripts/Catalog/catalog.js");
+    Html.AppendScriptParts("~/Scripts/custom.switcher.js");
+    Html.AppendScriptParts("~/Scripts/native.history.js");
+    Html.AppendScriptParts("~/Themes/ChelseaBootsTheme/Scripts/Catalog/catalog.js");
 
-	Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
-	Html.AddMetaDescriptionParts(Model.MetaDescription);
-	Html.AddMetaKeywordParts(Model.MetaKeywords);
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
 
-	var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
-	if (canonicalUrlsEnabled)
-	{
-		var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, this.Request.Url.Scheme);
-		Html.AddCanonicalUrlParts(categoryUrl);
-	}
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(categoryUrl);
+    }
 }
 
 <div class="row">
