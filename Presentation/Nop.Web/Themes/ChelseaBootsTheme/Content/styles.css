@@ -1174,7 +1174,7 @@ Page: Product Details START
 }
 
 .product-essential .gallery .picture img {
-	height: 380px;
+	height: auto;
 	width: 100%;
 }
 
@@ -1184,15 +1184,15 @@ Page: Product Details START
 }
 
 	.product-details-page .gallery .picture {
-		height: 380px;
-	}
-
-	.product-details-page .gallery .picture {
-		height: 380px;
+		height: auto;
 	}
 
 	.product-details-page .gallery .picture-thumbs {
 		margin-top: 10px;
+        margin-bottom: 10px;
+	}
+    .product-details-page .gallery .picture-thumbs a img  {
+	    width: 20%;
 	}
 
 		.product-details-page .gallery .picture-thumbs a {
@@ -1923,8 +1923,8 @@ FLY OUT Shopping Cart END
 
 @media (min-width:768px) {
 	.nav > li > a {
-		padding-right: 5px;
-		padding-left: 5px;
+		padding-right: 15px;
+		padding-left: 15px;
 	}
 }
 
@@ -2179,8 +2179,13 @@ div#color-options h4 {
 	border-color: #101010;
 }
 
+.category-menu .navbar-toggle {
+	background-color: #444444;
+}
+
+
 .category-menu .navbar-toggle:hover, .category-menu .navbar-toggle:focus {
-	background-color: #333333;
+	background-color: #c68c53;
 }
 
 .category-menu .navbar-toggle .icon-bar {
@@ -2209,6 +2214,6 @@ div#color-options h4 {
 
 @media (min-width: 1001px) {
 	.theme-custom {
-		margin: -10px auto 15px auto !important;
+		margin: 0 auto 15px auto !important;
 	}
 }

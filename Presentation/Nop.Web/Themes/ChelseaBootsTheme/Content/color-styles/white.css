@@ -829,7 +829,7 @@ blockquote {
 
 #map {
 	height: 255px;
-	width: 500px;
+	width: 100%;
 }
 
 #filter-spec .list-group {
@@ -1003,7 +1003,7 @@ blockquote {
 	.custom-home-page .widget {
 		width: 100%;
 		background: #ccc;
-		height: 400px;
+		height: auto;
 	}
 
 		.custom-home-page .widget .theme-custom .nivo-controlNav a.active {
@@ -1076,7 +1076,7 @@ blockquote {
 	}
 
 	.product-essential .overview .product-specs-box ul.product-spec-list {
-		padding-left: 15px;
+		padding-left: 25px;
 	}
 
 .product-essential .overview .product-item-row {
@@ -1252,7 +1252,6 @@ blockquote {
 			color: #333333;
 			font-family: "Pattaya",sans-serif;
 			font-size: 4em;
-			text-align: left;
 			padding-top: 10px;
 		}
 
@@ -1269,8 +1268,7 @@ blockquote {
 }
 
 .header-home .user-tools {
-	/background:#ff1c01;
-	padding: 20px 0;
+	padding: 0;
 	font-size: 18px;
 }
 
@@ -1377,3 +1375,98 @@ ul.nav.navbar-nav.navbar-right .dropdown-menu {
 .view-all-btn-wrapper .btn-default {
     font-size: 22px;
 }   
+
+
+.img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+
+.sort-by {
+    float:left;
+}
+.products-view-switch {
+    float:right;
+}
+.show-by {
+    float:right; 
+    margin-right: 10px
+}
+
+
+/* responsive */
+/*xs*/
+@media (max-width: 768px) { 
+    .header-home .header-logo .logo-title {
+    text-align: center;
+    font-size: 3em;
+    }
+    .products-view-switch {
+        float:left;
+        margin-top: 0;
+        display: none !important;
+    }
+    .show-by {
+        float:left; 
+        margin-top: 10px;
+        margin-left: 0;
+    }
+}
+/*sm*/
+@media (min-width: 768px) and (max-width: 992px) { 
+    .header-home .header-logo .logo-title {
+    font-size: 3em;
+    text-align: left !important;
+    }
+    .header-home .user-tools .nav.navbar-nav.navbar-right {
+        font-size: 12px;
+    }
+    .header-home .user-tools .nav.navbar-nav.navbar-right .top-menu-item-wrapper {
+        padding: 10px;
+    }
+    .header-home .user-tools .nav.navbar-nav.navbar-right li > a {
+        padding: 10px;
+    }
+    .products-view-switch {
+        float:right;
+        margin-top: 0;
+        display: none !important;
+    }
+    .show-by {
+        float:right;
+        margin: 0;
+        margin-right: 0;
+    }
+}
+/*md*/
+@media (min-width: 992px) and (max-width: 1200px) { 
+    .header-home .header-logo .logo-title {
+    font-size: 5em;
+    text-align: left;
+    }
+    .header-home .user-tools .nav.navbar-nav.navbar-right {
+        font-size: 16px;
+    }
+    .header-home .user-tools .nav.navbar-nav.navbar-right .top-menu-item-wrapper {
+        padding: 15px;
+    }
+    .header-home .user-tools .nav.navbar-nav.navbar-right li > a {
+        padding: 15px;
+    }
+    .products-view-switch {
+        float:right;
+        margin-top: 0;
+    }
+    .show-by {
+        float:right;
+        margin: 0;
+        margin-right: 10px;
+    }
+}
+/*lg*/
+@media (min-width: 1200px) { 
+    .header-home .header-logo .logo-title {
+        font-size: 5em;
+        text-align: left;
+    }
+}
+

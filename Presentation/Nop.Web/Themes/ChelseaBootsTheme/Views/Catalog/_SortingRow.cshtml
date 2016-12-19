@@ -2,12 +2,12 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="product-selectors clearfix">
-			<div class="col">
+		<div class="row product-selectors clearfix">
+			<div class="col-sm-6 col-xs-12">
 				@*sorting*@
 				@if (Model.AllowProductSorting)
 				{
-					<div class="btn-group pull-left">
+					<div class="btn-group sort-by">
 						<button type="button" class="btn btn-default" data-toggle="dropdown">@T("Catalog.OrderBy")</button>
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
@@ -27,11 +27,11 @@
 					</div>
 				}
 			</div>
-			<div class="col">
+			<div class="col-sm-6 col-xs-12">
 				@*view mode*@
 				@if (Model.AllowProductViewModeChanging)
 				{
-					<div class="btn-group pull-right margin-left-5">
+					<div class="btn-group products-view-switch">
 
 						@foreach (var viewMode in Model.AvailableViewModes)
 						{
@@ -45,7 +45,7 @@
 				@*page size*@
 				@if (Model.AllowCustomersToSelectPageSize)
 				{
-					<div class="btn-group pull-right">
+					<div class="btn-group show-by">
 						<button type="button" class="btn btn-default" data-toggle="dropdown">@T("Catalog.PageSize")</button>
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
