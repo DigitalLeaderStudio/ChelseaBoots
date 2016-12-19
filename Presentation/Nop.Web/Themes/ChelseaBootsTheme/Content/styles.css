@@ -337,7 +337,9 @@ a.logo {
 }
 
 .panel-body > ul > li {
-	list-style: none;
+	list-style: disc;
+    padding: 5px;
+    font-size: 16px;
 }
 
 .panel.panel-default.side-nav > .panel-body {
