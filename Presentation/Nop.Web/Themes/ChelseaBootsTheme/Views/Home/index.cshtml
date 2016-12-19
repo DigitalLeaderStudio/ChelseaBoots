@@ -6,11 +6,11 @@
 	<div class="widget">@Html.Widget("home_page_top")</div>
 </div>
 
-@Html.Action("HomepageNewProducts", "Product")
 @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
 @Html.Action("HomepageCategories", "Catalog")
 @Html.Action("HomepageProducts", "Product")
 @Html.Action("HomepageBestSellers", "Product")
+@Html.Action("HomepageNewProducts", "Product")
 @Html.Action("HomePageNews", "News")
 @Html.Action("HomePagePolls", "Poll")
 @Html.Action("_ProductManufacturersSlider", "Home")

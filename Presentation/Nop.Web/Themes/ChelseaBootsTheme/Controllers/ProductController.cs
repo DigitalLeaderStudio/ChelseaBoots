@@ -44,25 +44,27 @@ namespace Nop.Web.Controllers
 {
 	public partial class ProductController : BasePublicController
 	{
-        #region New products for home page
-        [NopHttpsRequirement(SslRequirement.No)]
-        public ActionResult HomepageNewProducts()
-        {
-            if (!_catalogSettings.NewProductsEnabled)
-                return Content("");
+		#region New products for home page
 
-            var products = _productService.SearchProducts(
-                storeId: _storeContext.CurrentStore.Id,
-                visibleIndividuallyOnly: false,
-                markedAsNewOnly: true,
-                orderBy: ProductSortingEnum.CreatedOn,
-                pageSize: _catalogSettings.NewProductsNumber);
+		[NopHttpsRequirement(SslRequirement.No)]
+		public ActionResult HomepageNewProducts()
+		{
+			if (!_catalogSettings.NewProductsEnabled)
+				return Content("");
 
-            var model = new List<ProductOverviewModel>();
-            model.AddRange(PrepareProductOverviewModels(products));
+			var products = _productService.SearchProducts(
+				storeId: _storeContext.CurrentStore.Id,
+				visibleIndividuallyOnly: false,
+				markedAsNewOnly: true,
+				orderBy: ProductSortingEnum.CreatedOn,
+				pageSize: _catalogSettings.NewProductsNumber);
 
-            return View(model);
-        }
-        #endregion
+			var model = new List<ProductOverviewModel>();
+			model.AddRange(PrepareProductOverviewModels(products, prepareSpecificationAttributes: true));
+
+			return View(model);
+		}
+
+		#endregion
 	}
 }

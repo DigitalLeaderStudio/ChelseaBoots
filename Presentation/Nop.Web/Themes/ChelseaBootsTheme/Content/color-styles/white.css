@@ -1020,11 +1020,6 @@ blockquote {
 	font-size: 2.2em;
 }
 
-.manufacturer-page .panel-default.form-panel > .panel-heading {
-	font-size: 2em;
-	background-color: #FFF !important;
-}
-
 .product-essential .overview .manufacturers {
 	padding-top: 10px;
 }
@@ -1159,6 +1154,10 @@ blockquote {
 			width: 100%;
 		}
 
+.header-rss {
+	padding-top: 10px;
+}
+
 .newsletter {
 	overflow: auto;
 }
@@ -1249,9 +1248,9 @@ blockquote {
 
 	.header-home .user-tools li > a:hover, 
     .header-home .user-tools li > a:active  {
-		background: none !important;
+			background: none !important;
 		color: #fff;
-	}
+		}
 
 	.header-home .user-tools .dropdown-menu {
 		min-width: 380px !important;
@@ -1304,6 +1303,14 @@ blockquote {
 		margin: 10px 0;
 	}
 
+		.panel-heading h3 a {
+			color: #FFF;
+		}
+
+			.panel-heading h3 a:hover {
+				color: #c68c53;
+			}
+
 ul.nav.navbar-nav.navbar-right {
 	background: #c68c53;
 	border: 0px dotted #ccc;
@@ -1324,11 +1331,13 @@ ul.nav.navbar-nav.navbar-right {
 		background-color: #fff;
 		color: #c68c53;
 	}
+
     ul.nav.navbar-nav.navbar-right > li,
 	ul.nav.navbar-nav.navbar-right > li > div {
 		border-radius: 5px;
         border: 0;
 	}
+
 	ul.nav.navbar-nav.navbar-right > li > a,
 	ul.nav.navbar-nav.navbar-right > li > div > a {
 		color: inherit;
@@ -1336,6 +1345,7 @@ ul.nav.navbar-nav.navbar-right {
         display: inherit;
         border-radius: 5px;
 	}
+
     	ul.nav.navbar-nav.navbar-right > li > a {
             padding: 15px;
     	}
@@ -1350,6 +1360,7 @@ ul.nav.navbar-nav.navbar-right {
 	ul.nav.navbar-nav.navbar-right li.dropdown.languages {
 		text-transform: uppercase;
 	}
+
     ul.nav.navbar-nav.navbar-right li.dropdown.languages a {
         text-align: center !important;
 	}
@@ -1359,9 +1370,11 @@ ul.nav.navbar-nav.navbar-right {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
 	}
+
     ul.nav.navbar-nav.navbar-right .dropdown-menu li {
         padding: 0px;
     }
+
     .user-tools .dropdown-menu > li > a {
 		border: 0 !important;
         padding: 3px 10px;
@@ -1373,7 +1386,7 @@ ul.nav.navbar-nav.navbar-right {
 	}
     #topcartlink .dropdown-menu li:hover {
         background:none !important;
-    }
+	}
 
 
 .new-products-homepage {
@@ -1413,7 +1426,7 @@ ul.nav.navbar-nav.navbar-right {
     width: 100%;
     background: #c68c53;
     padding: 10px;
-    border:0;
+	border: 0;
     outline: none;
     margin-bottom: 10px;
     font-weight: bold;
@@ -1421,6 +1434,7 @@ ul.nav.navbar-nav.navbar-right {
     color: #fff;
     border-radius: 5px;
 }
+
 #filters {
     display: block;
 }
@@ -1441,16 +1455,19 @@ ul.nav.navbar-nav.navbar-right {
     text-align: center;
     font-size: 3em;
     }
+
     .products-view-switch {
-        float:left;
+		float: left;
         margin-top: 0;
         display: none !important;
     }
+
     .show-by {
-        float:left; 
+		float: left;
         margin-top: 10px;
         margin-left: 0;
     }
+
     .header-home .user-tools {
         position: fixed;
         top: 0;
@@ -1458,31 +1475,38 @@ ul.nav.navbar-nav.navbar-right {
         padding: 0;
         font-size: 12px;
     }
+
    .header-home .user-tools > ul {
         width: 100%;
         border-radius: 0 !important;
         display: block;
         margin: 0;
     }
+
     .header-home .user-tools > ul > li {
         width: 25%;
         display: inline-block;
         float: left;
     }
+
     .header-home .user-tools .dropdown-menu {
         font-size: 12px;
         padding: 0;
     }
+
     .header-home .user-tools .dropdown.login .dropdown-menu {
         min-width: 400px !important;
     }
+
     ul.nav.navbar-nav.navbar-right > li > a,
     ul.nav.navbar-nav.navbar-right > li > div {
         padding: 5px;
     }
+
     #filterSwitch {
         display: block;
     }
+
     #filters {
         display: none;
     }
@@ -1493,25 +1517,31 @@ ul.nav.navbar-nav.navbar-right {
     font-size: 3em;
     text-align: left !important;
     }
+
     .header-home .user-tools .nav.navbar-nav.navbar-right {
         font-size: 12px;
     }
+
     .header-home .user-tools .nav.navbar-nav.navbar-right .top-menu-item-wrapper {
         padding: 10px;
     }
+
     .header-home .user-tools .nav.navbar-nav.navbar-right li > a {
         padding: 10px;
     }
+
     .products-view-switch {
-        float:right;
+		float: right;
         margin-top: 0;
         display: none !important;
     }
+
     .show-by {
-        float:right;
+		float: right;
         margin: 0;
         margin-right: 0;
     }
+
     .header-home .user-tools .dropdown-menu {
 		min-width: 380px !important;
 		left: -380px !important;
@@ -1529,12 +1559,18 @@ ul.nav.navbar-nav.navbar-right {
 		left: 0 !important;
 		top: 40px !important;
 	}
+
     #filterSwitch {
         display: block;
     }
+
     #filters {
         display: none;
     }
+}
+
+.margin-top-10 {
+	margin-top: 10px;
 }
 
 

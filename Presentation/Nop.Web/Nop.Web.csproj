@@ -302,6 +302,7 @@
     <Compile Include="Models\Boards\SearchModel.cs" />
     <Compile Include="Models\Boards\TopicMoveModel.cs" />
     <Compile Include="Models\Catalog\BackInStockSubscribeModel.cs" />
+    <Compile Include="Models\Catalog\NewProductsModel.cs" />
     <Compile Include="Models\Catalog\CategorySimpleModel.cs" />
     <Compile Include="Models\Catalog\CompareProductsModel.cs" />
     <Compile Include="Models\Catalog\CustomerProductReviewModel.cs" />
@@ -1272,7 +1273,6 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_BreadCrumb.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_LeftSide.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_ManufacturerTemplateInnerBody.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_FilterSpecsBox.Old.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ButtonAddToWishlist.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\Wishlist - Original.cshtml" />
