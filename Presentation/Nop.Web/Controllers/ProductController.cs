@@ -179,19 +179,37 @@ namespace Nop.Web.Controllers
 		#region Utilities
 
 		[NonAction]
-		protected virtual IEnumerable<ProductOverviewModel> PrepareProductOverviewModels(IEnumerable<Product> products,
-			bool preparePriceModel = true, bool preparePictureModel = true,
-			int? productThumbPictureSize = null, bool prepareSpecificationAttributes = false,
+		protected virtual IEnumerable<ProductOverviewModel> PrepareProductOverviewModels(
+			IEnumerable<Product> products,
+			bool preparePriceModel = true, 
+			bool preparePictureModel = true,
+			int? productThumbPictureSize = null, 
+			bool prepareSpecificationAttributes = false,
 			bool forceRedirectionAfterAddingToCart = false)
 		{
-			return this.PrepareProductOverviewModels(_workContext,
-				_storeContext, _categoryService, _productService, _specificationAttributeService,
-				_priceCalculationService, _priceFormatter, _permissionService,
-				_localizationService, _taxService, _currencyService,
-				_pictureService, _measureService, _webHelper, _cacheManager,
-				_catalogSettings, _mediaSettings, products,
-				preparePriceModel, preparePictureModel,
-				productThumbPictureSize, prepareSpecificationAttributes,
+			return this.PrepareProductOverviewModels(
+				_workContext,
+				_storeContext, 
+				_categoryService, 
+				_productService, 
+				_specificationAttributeService,
+				_priceCalculationService, 
+				_priceFormatter, 
+				_permissionService,
+				_localizationService, 
+				_taxService, 
+				_currencyService,
+				_pictureService, 
+				_measureService, 
+				_webHelper, 
+				_cacheManager,
+				_catalogSettings, 
+				_mediaSettings, 
+				products,
+				preparePriceModel, 
+				preparePictureModel,
+				productThumbPictureSize, 
+				prepareSpecificationAttributes,
 				forceRedirectionAfterAddingToCart);
 		}
 
@@ -1182,8 +1200,16 @@ namespace Nop.Web.Controllers
 				orderBy: ProductSortingEnum.CreatedOn,
 				pageSize: _catalogSettings.NewProductsNumber);
 
-			var model = new List<ProductOverviewModel>();
-			model.AddRange(PrepareProductOverviewModels(products));
+			var model = new NewProductsModel
+			{
+				PagingFilteringContext = new CatalogPagingFilteringModel(),
+				Products = new List<ProductOverviewModel>()
+			};
+
+			model.Products.AddRange(PrepareProductOverviewModels(products, prepareSpecificationAttributes: true));
+
+			//var model = new List<ProductOverviewModel>();
+			//model.AddRange(PrepareProductOverviewModels(products));
 
 			return View(model);
 		}

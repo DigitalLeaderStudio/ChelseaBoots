@@ -1,34 +1,16 @@
 ﻿@model IList<ProductOverviewModel>
 @using Nop.Web.Models.Catalog;
 
-<div class="row new-products-homepage">
-    <div class="col-md-12">
-        <div class="product-grid home-page-product-grid">
-        @{
-            var pg_i = 0;
-        }
-        @foreach (var product in Model)
-        {
-            if (pg_i % 3 == 0)
-            {
-                @:<div class="row box-products">
-		    }
-            <div class="col-md-4 product-item">
-                @Html.Partial("_ProductBox", product)
-            </div>
-            if (pg_i % 3 == 2)
-            {
-                @:</div>
-		    }
-            pg_i++;
-        }
-        @if (pg_i % 3 != 0)
-        {
-            @:</div>
-	    }
-    </div>
-</div>
+<div class="panel panel-default form-panel">
+	<div class="panel-heading">
+		<h3>
+			<a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a>
+		</h3>
+	</div>
 
-<div class="view-all-btn-wrapper">
-    @Html.ActionLink("View all Chelsea boots", "ProductTagsAll", "Catalog", new { @class = "btn btn-default btn-lg" })
+	<div class="panel-body">
+		<div class="page-body">
+			@Html.Partial("../Catalog/_ProductsGrid", Model)
+		</div>
+	</div>
 </div>
