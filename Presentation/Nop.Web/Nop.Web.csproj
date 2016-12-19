@@ -1246,7 +1246,6 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\EmailWishlist.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\EstimateShipping.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\FlyoutShoppingCart.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderSummary.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderTotals.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\Wishlist.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\_ButtonPaymentMethod.cshtml" />
@@ -1279,6 +1278,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\ProductTemplate.Simple.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Home\_ProductManufacturersSlider.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\HomepageNewProducts.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

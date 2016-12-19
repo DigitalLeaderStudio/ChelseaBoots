@@ -24,40 +24,25 @@
 		using (Html.BeginRouteForm("ShoppingCart", FormMethod.Post, new { enctype = "multipart/form-data" }))
 		{
 			@Html.AntiForgeryToken()
-			<div class="table-wrapper" style="z-index: 1;">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th class="product">
-								@T("ShoppingCart.Product(s)")
-							</th>
-							<th class="quantity">
-								@T("ShoppingCart.Quantity")
-							</th>
-							<th class="text-center">@T("ShoppingCart.UnitPrice")</th>
-							<th class="text-center">@T("ShoppingCart.ItemTotal")</th>
-							@if (Model.IsEditable)
-							{
-								<th class="remove-from-cart">
-								</th>
-							}
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var item in Model.Items)
-						{
-							var productUrl = Url.RouteUrl("Product", new { SeName = item.ProductSeName });
-							var manufacturerUrl = Url.RouteUrl("Manufacturer", new { SeName = item.Manufacturer.SeName });
-							<tr product-id="@item.ProductId">
-								<td class="col-sm-8 col-md-6">
-									<div class="media">
-										<a class="thumbnail pull-left" href="@productUrl">
-											<img class="media-object"
-												 alt="@item.Picture.AlternateText"
-												 src="@item.Picture.ImageUrl"
-												 title="@item.Picture.Title" />
-										</a>
-										<div class="media-body">
+			<div>
+				@foreach (var item in Model.Items)
+				{
+					var productUrl = Url.RouteUrl("Product", new { SeName = item.ProductSeName });
+					var manufacturerUrl = Url.RouteUrl("Manufacturer", new { SeName = item.Manufacturer.SeName });
+					<div product-id="@item.ProductId" class="row">
+						<div class="container-fluid">
+							<div class="row cart-item">
+								<div class="col-xs-12 col-sm-12 col-md-8">
+									<div class="row">
+										<div class="col-md-4 col-sm-4">
+											<a class="thumbnail" href="@productUrl">
+												<img class="media-object"
+													 alt="@item.Picture.AlternateText"
+													 src="@item.Picture.ImageUrl"
+													 title="@item.Picture.Title" />
+											</a>
+										</div>
+										<div class="col-md-8 col-sm-8">
 											<h4 class="media-heading">
 												<a href="@productUrl" class="product-name">@item.ProductName</a>
 											</h4>
@@ -68,56 +53,60 @@
 											<div id="attributes-container">
 												@if (item.Warnings.Count > 0)
 												{
-													<div class="alert alert-danger square-box">
-														@for (int i = 0; i < item.Warnings.Count; i++)
+												<div class="alert alert-danger square-box">
+													@for (int i = 0; i < item.Warnings.Count; i++)
 														{
-															<div>@item.Warnings[i]</div>
+													<div>@item.Warnings[i]</div>
 														}
-														<div class="attribute-item">
-															@{
+													<div class="attribute-item">
+														@{
 														var dataDictAttributes = new ViewDataDictionary();
 														dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", item.ProductId);
 														@Html.Partial("../Product/_ProductAttributes", item.ProductAttributes, dataDictAttributes)
-															}
-														</div>
+														}
 													</div>
+												</div>
 												}
 												else
 												{
 													var attrs = item.AttributeInfo.Split(new char[] { ':' });
-													<p>
-														<span>@attrs[0]</span>
-														<strong>@attrs[1]</strong>
-													</p>
+												<p>
+													<span>@attrs[0]</span>
+													<strong>@attrs[1]</strong>
+												</p>
 												}
 											</div>
 										</div>
 									</div>
-								</td>
-								<td class="col-sm-1 col-md-1 valign-center">
-									@Html.TextBoxFor(model => item.Quantity, new { @type = "number", @class = "form-control" })
-								</td>
-								<td class="col-sm-1 col-md-1 text-center valign-center">
+								</div>
+								<div class="col-xs-4 col-sm-4 col-md-1 text-center margin-top-10">
+									@T("ShoppingCart.Quantity")<br />
+									@Html.TextBoxFor(model => item.Quantity, new { @type = "number", @class = "form-control", @disabled = "" })
+								</div>
+								<div class="col-xs-4 col-sm-4 col-md-1 text-center margin-top-10">
+									@T("ShoppingCart.UnitPrice")<br />
 									<strong>@item.UnitPrice</strong>
-								</td>
-								<td class="col-sm-1 col-md-1 text-center valign-center">
+								</div>
+								<div class="col-xs-4 col-sm-4 col-md-1 text-center margin-top-10">
+									@T("ShoppingCart.ItemTotal")<br />
 									<strong>@item.SubTotal </strong>
-								</td>
-								<td class="col-sm-1 col-md-1 valign-center">
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-1 text-center margin-top-10">
 									@{
-											var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, });
-											var refreshLink = Url.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable });
+												var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, });
+												var refreshLink = Url.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable });
 									}
 									<button type="button"
-											class="btn btn-danger"
+											class="btn btn-danger btn-block"
 											onclick="orderSummary.deleteItem(this, '@removeLink', '@refreshLink');return false;">
-										<i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;&nbsp;@T("Common.Remove")
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
-								</td>
-							</tr>
-						}
-					</tbody>
-				</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+
 				<div id="orderTotals">
 					@Html.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable })
 				</div>
@@ -127,12 +116,13 @@
 						var continueShoppingUrl = string.IsNullOrEmpty(Model.ContinueShoppingUrl) ? Url.RouteUrl("HomePage") : Model.ContinueShoppingUrl;
 
 						<div class="common-buttons">
-							<a type="button" href="@continueShoppingUrl" class="btn btn-primary">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;@T("ShoppingCart.ContinueShopping")
-							</a>
-							<button class="btn btn-success" type="submit" id="checkout" name="checkout" value="checkout">
+							<button class="btn btn-success pull-right" type="submit" id="checkout" name="checkout" value="checkout">
 								@T("Checkout.Button")&nbsp;&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i>
 							</button>
+							<a type="button" href="@continueShoppingUrl" class="btn btn-primary pull-right">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;@T("ShoppingCart.ContinueShopping")
+							</a>
+							<div class="clearfix"></div>
 						</div>
 						@*@Html.Partial("_CheckoutAttributes", Model.CheckoutAttributes, new ViewDataDictionary())*@
 					}
