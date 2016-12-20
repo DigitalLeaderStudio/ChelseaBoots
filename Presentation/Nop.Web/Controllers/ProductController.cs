@@ -181,34 +181,34 @@ namespace Nop.Web.Controllers
 		[NonAction]
 		protected virtual IEnumerable<ProductOverviewModel> PrepareProductOverviewModels(
 			IEnumerable<Product> products,
-			bool preparePriceModel = true, 
+			bool preparePriceModel = true,
 			bool preparePictureModel = true,
-			int? productThumbPictureSize = null, 
+			int? productThumbPictureSize = null,
 			bool prepareSpecificationAttributes = false,
 			bool forceRedirectionAfterAddingToCart = false)
 		{
 			return this.PrepareProductOverviewModels(
 				_workContext,
-				_storeContext, 
-				_categoryService, 
-				_productService, 
+				_storeContext,
+				_categoryService,
+				_productService,
 				_specificationAttributeService,
-				_priceCalculationService, 
-				_priceFormatter, 
+				_priceCalculationService,
+				_priceFormatter,
 				_permissionService,
-				_localizationService, 
-				_taxService, 
+				_localizationService,
+				_taxService,
 				_currencyService,
-				_pictureService, 
-				_measureService, 
-				_webHelper, 
+				_pictureService,
+				_measureService,
+				_webHelper,
 				_cacheManager,
-				_catalogSettings, 
-				_mediaSettings, 
+				_catalogSettings,
+				_mediaSettings,
 				products,
-				preparePriceModel, 
+				preparePriceModel,
 				preparePictureModel,
-				productThumbPictureSize, 
+				productThumbPictureSize,
 				prepareSpecificationAttributes,
 				forceRedirectionAfterAddingToCart);
 		}
@@ -1188,28 +1188,45 @@ namespace Nop.Web.Controllers
 		#region New (recently added) products page
 
 		[NopHttpsRequirement(SslRequirement.No)]
-		public ActionResult NewProducts()
+		public ActionResult NewProducts(CatalogPagingFilteringModel command = null)
 		{
 			if (!_catalogSettings.NewProductsEnabled)
 				return Content("");
-
-			var products = _productService.SearchProducts(
-				storeId: _storeContext.CurrentStore.Id,
-				visibleIndividuallyOnly: true,
-				markedAsNewOnly: true,
-				orderBy: ProductSortingEnum.CreatedOn,
-				pageSize: _catalogSettings.NewProductsNumber);
-
+			
 			var model = new NewProductsModel
 			{
 				PagingFilteringContext = new CatalogPagingFilteringModel(),
 				Products = new List<ProductOverviewModel>()
 			};
 
-			model.Products.AddRange(PrepareProductOverviewModels(products, prepareSpecificationAttributes: true));
+			//sorting
+			this.PrepareSortingOptions(model.PagingFilteringContext, command, _webHelper, _workContext, _localizationService, _catalogSettings);
+			//view mode
+			this.PrepareViewModes(model.PagingFilteringContext, command, _webHelper, _localizationService, _catalogSettings);
+			//page size
+			this.PreparePageSizeOptions(
+				model.PagingFilteringContext,
+				command,
+				_webHelper,
+				_catalogSettings.SearchPageAllowCustomersToSelectPageSize,
+				_catalogSettings.SearchPagePageSizeOptions,
+				_catalogSettings.SearchPageProductsPerPage);
 
-			//var model = new List<ProductOverviewModel>();
-			//model.AddRange(PrepareProductOverviewModels(products));
+			var products = _productService.SearchProducts(
+				storeId: _storeContext.CurrentStore.Id,
+				visibleIndividuallyOnly: true,
+				markedAsNewOnly: true,
+				orderBy: (ProductSortingEnum)command.OrderBy,
+				pageIndex: command.PageNumber - 1,
+				pageSize: command.PageSize);
+
+			model.Products.AddRange(PrepareProductOverviewModels(products, prepareSpecificationAttributes: true));
+			model.PagingFilteringContext.LoadPagedList(products);
+
+			if (Request.IsAjaxRequest())
+			{
+				return PartialView("_NewProductsPartial", model);
+			}
 
 			return View(model);
 		}

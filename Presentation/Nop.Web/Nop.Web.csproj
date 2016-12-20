@@ -1280,6 +1280,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Home\_ProductManufacturersSlider.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\HomepageNewProducts.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderSummary.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Product\_NewProductsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />

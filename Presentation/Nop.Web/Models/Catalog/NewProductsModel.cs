@@ -1,4 +1,5 @@
 ﻿using Nop.Web.Framework.Mvc;
+using Nop.Web.Themes.ChelseaBootsTheme.Models;
 using System.Collections.Generic;
 
 namespace Nop.Web.Models.Catalog

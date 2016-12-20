@@ -443,7 +443,9 @@ namespace Nop.Web.Extensions
 			return productReview;
 		}
 
-		private static IList<int> GetWishListIds(IWorkContext workContext, IStoreContext storeContext)
+		private static IList<int> GetWishListIds(
+			IWorkContext workContext,
+			IStoreContext storeContext)
 		{
 			Customer customer = workContext.CurrentCustomer;
 			if (customer != null)
@@ -456,6 +458,189 @@ namespace Nop.Web.Extensions
 			}
 
 			return null;
+		}
+
+		[NonAction]
+		public static void PrepareSortingOptions(this Controller controller,
+			CatalogPagingFilteringModel pagingFilteringModel,
+			CatalogPagingFilteringModel command,
+			IWebHelper webHelper,
+			IWorkContext workContext,
+			ILocalizationService localizationService,
+			CatalogSettings catalogSettings)
+		{
+			CheckForNull(pagingFilteringModel, command);
+
+			var allDisabled = catalogSettings.ProductSortingEnumDisabled.Count == Enum.GetValues(typeof(ProductSortingEnum)).Length;
+			pagingFilteringModel.AllowProductSorting = catalogSettings.AllowProductSorting && !allDisabled;
+
+			var activeOptions = Enum.GetValues(typeof(ProductSortingEnum)).Cast<int>()
+				.Except(catalogSettings.ProductSortingEnumDisabled)
+				.Select((idOption) =>
+				{
+					int order;
+					return new KeyValuePair<int, int>(idOption,
+						catalogSettings.ProductSortingEnumDisplayOrder.TryGetValue(idOption, out order) ? order : idOption);
+				})
+				.OrderBy(x => x.Value);
+
+			if (command.OrderBy == null)
+			{
+				command.OrderBy = allDisabled ? 0 : activeOptions.First().Key;
+			}
+
+			if (pagingFilteringModel.AllowProductSorting)
+			{
+				foreach (var option in activeOptions)
+				{
+					var sortText = ((ProductSortingEnum)option.Key).GetLocalizedEnum(localizationService, workContext);
+					var currentPageUrl = webHelper.GetThisPageUrl(true);
+
+					var listItem = new SelectListItem
+					{
+						Text = sortText,
+						Value = webHelper.ModifyQueryString(currentPageUrl, "orderby=" + (option.Key).ToString(), null),
+						Selected = option.Key == command.OrderBy
+					};
+
+					pagingFilteringModel.AvailableSortOptions.Add(listItem);
+				}
+			}
+		}
+
+		[NonAction]
+		public static void PrepareViewModes(this Controller controller,
+			CatalogPagingFilteringModel pagingFilteringModel,
+			CatalogPagingFilteringModel command,
+			IWebHelper webHelper,
+			ILocalizationService localizationService,
+			CatalogSettings catalogSettings)
+		{
+			CheckForNull(pagingFilteringModel, command);
+
+			pagingFilteringModel.AllowProductViewModeChanging = catalogSettings.AllowProductViewModeChanging;
+
+			var viewMode = !string.IsNullOrEmpty(command.ViewMode)
+				? command.ViewMode
+				: catalogSettings.DefaultViewMode;
+			pagingFilteringModel.ViewMode = viewMode;
+
+			if (pagingFilteringModel.AllowProductViewModeChanging)
+			{
+				var currentPageUrl = webHelper.GetThisPageUrl(true);
+
+				var gridSelectListItem = new SelectListItem
+				{
+					Text = localizationService.GetResource("Catalog.ViewMode.Grid"),
+					Selected = viewMode == "grid",
+					Value = webHelper.ModifyQueryString(currentPageUrl, "viewmode=grid", null)
+				};
+				var listSelectListItem = new SelectListItem
+				{
+					Text = localizationService.GetResource("Catalog.ViewMode.List"),
+					Selected = viewMode == "list",
+					Value = webHelper.ModifyQueryString(currentPageUrl, "viewmode=list", null)
+				};
+
+				pagingFilteringModel.AvailableViewModes.Add(gridSelectListItem);
+				pagingFilteringModel.AvailableViewModes.Add(listSelectListItem);
+			}
+
+		}
+
+		[NonAction]
+		public static void PreparePageSizeOptions(this Controller controller,
+			CatalogPagingFilteringModel pagingFilteringModel,
+			CatalogPagingFilteringModel command,
+			IWebHelper webHelper,
+			bool allowCustomersToSelectPageSize,
+			string pageSizeOptions,
+			int fixedPageSize)
+		{
+			CheckForNull(pagingFilteringModel, command);
+
+			if (command.PageNumber <= 0)
+			{
+				command.PageNumber = 1;
+			}
+			pagingFilteringModel.AllowCustomersToSelectPageSize = false;
+			if (allowCustomersToSelectPageSize && pageSizeOptions != null)
+			{
+				var pageSizes = pageSizeOptions.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+				if (pageSizes.Any())
+				{
+					// get the first page size entry to use as the default (category page load) or if customer enters invalid value via query string
+					if (command.PageSize <= 0 || !pageSizes.Contains(command.PageSize.ToString()))
+					{
+						int temp;
+						if (int.TryParse(pageSizes.FirstOrDefault(), out temp))
+						{
+							if (temp > 0)
+							{
+								command.PageSize = temp;
+							}
+						}
+					}
+
+					var currentPageUrl = webHelper.GetThisPageUrl(true);
+					var sortUrl = webHelper.ModifyQueryString(currentPageUrl, "pagesize={0}", null);
+					sortUrl = webHelper.RemoveQueryString(sortUrl, "pagenumber");
+
+					foreach (var pageSize in pageSizes)
+					{
+						int temp;
+						if (!int.TryParse(pageSize, out temp))
+						{
+							continue;
+						}
+						if (temp <= 0)
+						{
+							continue;
+						}
+
+						var listItem = new SelectListItem
+						{
+							Text = pageSize,
+							Value = String.Format(sortUrl, pageSize),
+							Selected = pageSize.Equals(command.PageSize.ToString(), StringComparison.InvariantCultureIgnoreCase)
+						};
+
+						pagingFilteringModel.PageSizeOptions.Add(listItem);
+					}
+
+					if (pagingFilteringModel.PageSizeOptions.Any())
+					{
+						pagingFilteringModel.PageSizeOptions = pagingFilteringModel.PageSizeOptions.OrderBy(x => int.Parse(x.Text)).ToList();
+						pagingFilteringModel.AllowCustomersToSelectPageSize = true;
+
+						if (command.PageSize <= 0)
+						{
+							command.PageSize = int.Parse(pagingFilteringModel.PageSizeOptions.FirstOrDefault().Text);
+						}
+					}
+				}
+			}
+			else
+			{
+				//customer is not allowed to select a page size
+				command.PageSize = fixedPageSize;
+			}
+
+			//ensure pge size is specified
+			if (command.PageSize <= 0)
+			{
+				command.PageSize = fixedPageSize;
+			}
+		}
+
+		private static void CheckForNull(CatalogPagingFilteringModel pagingFilteringModel, CatalogPagingFilteringModel command)
+		{
+			if (pagingFilteringModel == null)
+				throw new ArgumentNullException("pagingFilteringModel");
+
+			if (command == null)
+				throw new ArgumentNullException("command");
 		}
 	}
 }

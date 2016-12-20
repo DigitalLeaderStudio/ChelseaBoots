@@ -1,0 +1,26 @@
+﻿@model NewProductsModel
+
+@using Nop.Web.Models.Catalog;
+
+@Html.Partial("../Catalog/_SortingRow", Model.PagingFilteringContext)
+
+@if (Model.Products.Count > 0)
+{
+	<div id="products-container">
+		@if (Model.Products.Count > 0)
+		{
+			if (Model.PagingFilteringContext.ViewMode == "list")
+			{
+				@Html.Partial("../Catalog/_ProductsList", Model.Products);
+			}
+			else
+			{
+				@Html.Partial("../Catalog/_ProductsGrid", Model.Products);
+			}
+		}
+	</div>
+}
+
+<div class="pager">
+	@Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber")
+</div>

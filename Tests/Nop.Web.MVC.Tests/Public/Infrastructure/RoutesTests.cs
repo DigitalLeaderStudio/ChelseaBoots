@@ -60,7 +60,7 @@ namespace Nop.Web.MVC.Tests.Public.Infrastructure
         {
             //"~/p/some-se-name/".ShouldMapTo<CatalogController>(c => c.Product("some-se-name"));
             "~/recentlyviewedproducts/".ShouldMapTo<ProductController>(c => c.RecentlyViewedProducts());
-            "~/newproducts/".ShouldMapTo<ProductController>(c => c.NewProducts());
+            "~/newproducts/".ShouldMapTo<ProductController>(c => c.NewProducts(null));
             "~/newproducts/rss/".ShouldMapTo<ProductController>(c => c.NewProductsRss());
             "~/compareproducts/add/2".ShouldMapTo<ProductController>(c => c.AddProductToCompareList(2));
             "~/compareproducts/".ShouldMapTo<ProductController>(c => c.CompareProducts());

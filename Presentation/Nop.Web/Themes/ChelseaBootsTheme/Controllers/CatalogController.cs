@@ -152,172 +152,6 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 		#region Utilities
 
 		[NonAction]
-		protected virtual void PrepareSortingOptions(
-			CatalogPagingFilteringModel pagingFilteringModel,
-			CatalogPagingFilteringModel command)
-		{
-			CheckForNull(pagingFilteringModel, command);
-
-			var allDisabled = _catalogSettings.ProductSortingEnumDisabled.Count == Enum.GetValues(typeof(ProductSortingEnum)).Length;
-			pagingFilteringModel.AllowProductSorting = _catalogSettings.AllowProductSorting && !allDisabled;
-
-			var activeOptions = Enum.GetValues(typeof(ProductSortingEnum)).Cast<int>()
-				.Except(_catalogSettings.ProductSortingEnumDisabled)
-				.Select((idOption) =>
-				{
-					int order;
-					return new KeyValuePair<int, int>(idOption,
-						_catalogSettings.ProductSortingEnumDisplayOrder.TryGetValue(idOption, out order) ? order : idOption);
-				})
-				.OrderBy(x => x.Value);
-
-			if (command.OrderBy == null)
-			{
-				command.OrderBy = allDisabled ? 0 : activeOptions.First().Key;
-			}
-
-			if (pagingFilteringModel.AllowProductSorting)
-			{
-				foreach (var option in activeOptions)
-				{
-					var sortText = ((ProductSortingEnum)option.Key).GetLocalizedEnum(_localizationService, _workContext);
-					var currentPageUrl = _webHelper.GetThisPageUrl(true);
-
-					var listItem = new SelectListItem
-					{
-						Text = sortText,
-						Value = _webHelper.ModifyQueryString(currentPageUrl, "orderby=" + (option.Key).ToString(), null),
-						Selected = option.Key == command.OrderBy
-					};
-
-					pagingFilteringModel.AvailableSortOptions.Add(listItem);
-				}
-			}
-		}
-
-		[NonAction]
-		protected virtual void PrepareViewModes(
-			CatalogPagingFilteringModel pagingFilteringModel,
-			CatalogPagingFilteringModel command)
-		{
-			CheckForNull(pagingFilteringModel, command);
-
-			pagingFilteringModel.AllowProductViewModeChanging = _catalogSettings.AllowProductViewModeChanging;
-
-			var viewMode = !string.IsNullOrEmpty(command.ViewMode)
-				? command.ViewMode
-				: _catalogSettings.DefaultViewMode;
-			pagingFilteringModel.ViewMode = viewMode;
-
-			if (pagingFilteringModel.AllowProductViewModeChanging)
-			{
-				var currentPageUrl = _webHelper.GetThisPageUrl(true);
-
-				var gridSelectListItem = new SelectListItem
-				{
-					Text = _localizationService.GetResource("Catalog.ViewMode.Grid"),
-					Selected = viewMode == "grid",
-					Value = _webHelper.ModifyQueryString(currentPageUrl, "viewmode=grid", null)
-				};
-				var listSelectListItem = new SelectListItem
-				{
-					Text = _localizationService.GetResource("Catalog.ViewMode.List"),
-					Selected = viewMode == "list",
-					Value = _webHelper.ModifyQueryString(currentPageUrl, "viewmode=list", null)
-				};
-
-				pagingFilteringModel.AvailableViewModes.Add(gridSelectListItem);
-				pagingFilteringModel.AvailableViewModes.Add(listSelectListItem);
-			}
-
-		}
-
-		[NonAction]
-		protected virtual void PreparePageSizeOptions(
-			CatalogPagingFilteringModel pagingFilteringModel,
-			CatalogPagingFilteringModel command,
-			bool allowCustomersToSelectPageSize,
-			string pageSizeOptions,
-			int fixedPageSize)
-		{
-			CheckForNull(pagingFilteringModel, command);
-
-			if (command.PageNumber <= 0)
-			{
-				command.PageNumber = 1;
-			}
-			pagingFilteringModel.AllowCustomersToSelectPageSize = false;
-			if (allowCustomersToSelectPageSize && pageSizeOptions != null)
-			{
-				var pageSizes = pageSizeOptions.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-				if (pageSizes.Any())
-				{
-					// get the first page size entry to use as the default (category page load) or if customer enters invalid value via query string
-					if (command.PageSize <= 0 || !pageSizes.Contains(command.PageSize.ToString()))
-					{
-						int temp;
-						if (int.TryParse(pageSizes.FirstOrDefault(), out temp))
-						{
-							if (temp > 0)
-							{
-								command.PageSize = temp;
-							}
-						}
-					}
-
-					var currentPageUrl = _webHelper.GetThisPageUrl(true);
-					var sortUrl = _webHelper.ModifyQueryString(currentPageUrl, "pagesize={0}", null);
-					sortUrl = _webHelper.RemoveQueryString(sortUrl, "pagenumber");
-
-					foreach (var pageSize in pageSizes)
-					{
-						int temp;
-						if (!int.TryParse(pageSize, out temp))
-						{
-							continue;
-						}
-						if (temp <= 0)
-						{
-							continue;
-						}
-
-						var listItem = new SelectListItem
-						{
-							Text = pageSize,
-							Value = String.Format(sortUrl, pageSize),
-							Selected = pageSize.Equals(command.PageSize.ToString(), StringComparison.InvariantCultureIgnoreCase)
-						};
-
-						pagingFilteringModel.PageSizeOptions.Add(listItem);
-					}
-
-					if (pagingFilteringModel.PageSizeOptions.Any())
-					{
-						pagingFilteringModel.PageSizeOptions = pagingFilteringModel.PageSizeOptions.OrderBy(x => int.Parse(x.Text)).ToList();
-						pagingFilteringModel.AllowCustomersToSelectPageSize = true;
-
-						if (command.PageSize <= 0)
-						{
-							command.PageSize = int.Parse(pagingFilteringModel.PageSizeOptions.FirstOrDefault().Text);
-						}
-					}
-				}
-			}
-			else
-			{
-				//customer is not allowed to select a page size
-				command.PageSize = fixedPageSize;
-			}
-
-			//ensure pge size is specified
-			if (command.PageSize <= 0)
-			{
-				command.PageSize = fixedPageSize;
-			}
-		}
-
-		[NonAction]
 		protected virtual List<int> GetChildCategoryIds(int parentCategoryId)
 		{
 			string cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_CHILD_IDENTIFIERS_MODEL_KEY,
@@ -586,15 +420,6 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			return result;
 		}
 
-		private void CheckForNull(CatalogPagingFilteringModel pagingFilteringModel, CatalogPagingFilteringModel command)
-		{
-			if (pagingFilteringModel == null)
-				throw new ArgumentNullException("pagingFilteringModel");
-
-			if (command == null)
-				throw new ArgumentNullException("command");
-		}
-
 		private PriceRange PreparePriceRangeFilter(CatalogPagingFilteringModel pagingFilter, string priceRanges)
 		{
 			var result = new PriceRange();
@@ -635,13 +460,14 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			var model = category.ToModel();
 
 			//sorting
-			PrepareSortingOptions(model.PagingFilteringContext, command);
+			this.PrepareSortingOptions(model.PagingFilteringContext, command, _webHelper, _workContext, _localizationService, _catalogSettings);
 			//view mode
-			PrepareViewModes(model.PagingFilteringContext, command);
+			this.PrepareViewModes(model.PagingFilteringContext, command, _webHelper, _localizationService, _catalogSettings);
 			//page size
-			PreparePageSizeOptions(
+			this.PreparePageSizeOptions(
 				model.PagingFilteringContext,
 				command,
+				_webHelper,
 				category.AllowCustomersToSelectPageSize,
 				category.PageSizeOptions,
 				category.PageSize);
@@ -855,16 +681,18 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			var model = manufacturer.ToModel();
 
 			//sorting
-			PrepareSortingOptions(model.PagingFilteringContext, command);
+			this.PrepareSortingOptions(model.PagingFilteringContext, command, _webHelper, _workContext, _localizationService, _catalogSettings);
 			//view mode
-			PrepareViewModes(model.PagingFilteringContext, command);
+			this.PrepareViewModes(model.PagingFilteringContext, command, _webHelper, _localizationService, _catalogSettings);
 			//page size
-			PreparePageSizeOptions(
+			this.PreparePageSizeOptions(
 				model.PagingFilteringContext,
 				command,
+				_webHelper,
 				manufacturer.AllowCustomersToSelectPageSize,
 				manufacturer.PageSizeOptions,
 				manufacturer.PageSize);
+
 			//price ranges
 			var convertedPriceRange = PreparePriceRangeFilter(model.PagingFilteringContext, manufacturer.PriceRanges);
 
@@ -1034,12 +862,14 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 			};
 
 			//sorting
-			PrepareSortingOptions(model.PagingFilteringContext, command);
+			this.PrepareSortingOptions(model.PagingFilteringContext, command, _webHelper, _workContext, _localizationService, _catalogSettings);
 			//view mode
-			PrepareViewModes(model.PagingFilteringContext, command);
+			this.PrepareViewModes(model.PagingFilteringContext, command, _webHelper, _localizationService, _catalogSettings);
 			//page size
-			PreparePageSizeOptions(model.PagingFilteringContext, command,
-				vendor.AllowCustomersToSelectPageSize,
+			this.PreparePageSizeOptions(
+				model.PagingFilteringContext,
+				command,
+				_webHelper, vendor.AllowCustomersToSelectPageSize,
 				vendor.PageSizeOptions,
 				vendor.PageSize);
 
@@ -1199,17 +1029,18 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 				TagSeName = productTag.GetSeName()
 			};
 
-
 			//sorting
-			PrepareSortingOptions(model.PagingFilteringContext, command);
+			this.PrepareSortingOptions(model.PagingFilteringContext, command, _webHelper, _workContext, _localizationService, _catalogSettings);
 			//view mode
-			PrepareViewModes(model.PagingFilteringContext, command);
+			this.PrepareViewModes(model.PagingFilteringContext, command, _webHelper, _localizationService, _catalogSettings);
 			//page size
-			PreparePageSizeOptions(model.PagingFilteringContext, command,
+			this.PreparePageSizeOptions(
+				model.PagingFilteringContext,
+				command,
+				_webHelper,
 				_catalogSettings.ProductsByTagAllowCustomersToSelectPageSize,
 				_catalogSettings.ProductsByTagPageSizeOptions,
 				_catalogSettings.ProductsByTagPageSize);
-
 
 			//products
 			var products = _productService.SearchProducts(
@@ -1272,19 +1103,19 @@ namespace Nop.Web.Themes.ChelseaBootsTheme.Controllers
 				searchTerms = "";
 			searchTerms = searchTerms.Trim();
 
-
-
 			//sorting
-			PrepareSortingOptions(model.PagingFilteringContext, command);
+			this.PrepareSortingOptions(model.PagingFilteringContext, command, _webHelper, _workContext, _localizationService, _catalogSettings);
 			//view mode
-			PrepareViewModes(model.PagingFilteringContext, command);
+			this.PrepareViewModes(model.PagingFilteringContext, command, _webHelper, _localizationService, _catalogSettings);
 			//page size
-			PreparePageSizeOptions(model.PagingFilteringContext, command,
+			this.PreparePageSizeOptions(
+				model.PagingFilteringContext,
+				command,
+				_webHelper,
 				_catalogSettings.SearchPageAllowCustomersToSelectPageSize,
 				_catalogSettings.SearchPagePageSizeOptions,
 				_catalogSettings.SearchPageProductsPerPage);
-
-
+			
 			string cacheKey = string.Format(ModelCacheEventConsumer.SEARCH_CATEGORIES_MODEL_KEY,
 				_workContext.WorkingLanguage.Id,
 				string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
