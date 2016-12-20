@@ -805,19 +805,6 @@ ul {
 	}
 /*badge number css start*/
 
-.op-number {
-	font-size: 12px;
-	border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	color: #ffffff;
-	display: inline-block;
-	line-height: 14px;
-	text-align: center;
-	padding: 2px;
-	float: right;
-}
-
 .dropdown-filter {
 	height: 25px;
 	padding-top: 0px;

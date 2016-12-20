@@ -38,16 +38,14 @@
 	}
 
 	<div class="row">
-		@if (Model.RequiresShipping && !String.IsNullOrEmpty(Model.SelectedShippingMethod))
-		{
-			<div class="col-md-8 col-xs-12 text-right">
-				<h5>
-					@T("ShoppingCart.Totals.Shipping.Method", Model.SelectedShippingMethod):
-				</h5>
-			</div>
-		}
-		<div class="col-md-2 col-xs-5 text-right">
-			<h5>@T("ShoppingCart.Totals.Shipping"):</h5>
+		<div class="col-md-10 col-xs-5 text-right">
+			<h5>
+				@T("ShoppingCart.Totals.Shipping")
+				@if (Model.RequiresShipping && !String.IsNullOrEmpty(Model.SelectedShippingMethod))
+				{
+					@T("ShoppingCart.Totals.Shipping.Method", Model.SelectedShippingMethod)
+				}:
+			</h5>
 		</div>
 		<div class="col-md-2 col-xs-7 text-right">
 			<h5><strong>@Model.Shipping</strong></h5>
