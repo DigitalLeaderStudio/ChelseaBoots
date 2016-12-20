@@ -1445,6 +1445,10 @@ ul.nav.navbar-nav.navbar-right {
 	margin-top: 10px;
 }
 
+.panel-body > ul, .panel-body > ul > li {
+    list-style: disc;
+}
+
 
 /* responsive */
 /*xs*/
