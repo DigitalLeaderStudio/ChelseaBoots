@@ -688,6 +688,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Scripts\html5shiv.min.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\respond.min.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\Shared\product.js" />
+    <Content Include="Themes\ChelseaBootsTheme\Scripts\ShoppingCart\product-attribute.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\ShoppingCart\wishlist.js" />
     <Content Include="Themes\ChelseaBootsTheme\Scripts\styleSheetToogle.js" />
     <Content Include="Themes\DefaultClean\Content\css\ie8.css" />

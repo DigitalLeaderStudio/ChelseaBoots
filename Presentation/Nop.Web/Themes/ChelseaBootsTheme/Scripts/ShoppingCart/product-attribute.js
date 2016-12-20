@@ -25,8 +25,6 @@
 			$dropdown.append(hinput);
 		}
 
-
-
 		if (doPostBack) {
 			var $container = $element.parents('#attributes-container');
 			_doPostBack(
@@ -40,7 +38,7 @@
 	function _doPostBack(url, name, value, $container) {
 		var data = {};
 		data[name] = value;
-
+		console.log(url, value, name);
 		$.ajax({
 			cache: false,
 			url: url,
@@ -54,7 +52,6 @@
 	}
 
 	function _bindEvents() {
-
 		$(document).on('click', '.attributes ul.dropdown-menu a[attr-value]', _dropDownChange);
 	}
 

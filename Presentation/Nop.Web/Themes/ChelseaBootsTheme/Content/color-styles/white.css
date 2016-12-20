@@ -723,12 +723,7 @@ blockquote {
 /*------------------------------------*\
    Theme Color Picker style End
 \*------------------------------------*/
-/*badge number css start*/
-.op-number {
-	background-color: #01619d;
-	border: 1px #01619d;
-}
-/*badge number css end*/
+
 .rec-banner.active_position {
 	background-color: #2B2B2B;
 	color: #FFF;
@@ -1448,9 +1443,41 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 .panel-body > ul, .panel-body > ul > li {
-    list-style: disc;
+	list-style: disc;
 }
 
+#checkout-steps {
+}
+
+	#checkout-steps .buttons {
+		margin: 0;
+	}
+
+	#checkout-steps p.back-link {
+		padding-top: 15px;
+	}
+
+		#checkout-steps p.back-link a {
+			text-decoration: none;
+		}
+
+	#checkout-steps .op-number {
+		font-size: 16px;
+		font-weight: bold;
+		float: left;
+		line-height: 1.1em;
+		min-height: 40px;
+		margin-left: -5px;
+		width: 15px;
+	}
+
+	#checkout-steps .step-title.panel-heading {
+		background-color: #c68c53 !important;
+	}
+
+	#checkout-steps .tab-section.allow:not(.active) .step-title.panel-heading h2.panel-title {
+		cursor: pointer;
+	}
 .carousel-inner.container-fluid {
     padding-right: 10px !important;
     padding-left: 10px !important;
@@ -1459,8 +1486,6 @@ ul.nav.navbar-nav.navbar-right {
 .product-grid .title-carousel-control:hover {
     color: #1a1a1a !important;
 }
-
-
 /* responsive */
 /*xs*/
 @media (max-width: 768px) {
@@ -1585,7 +1610,6 @@ ul.nav.navbar-nav.navbar-right {
 .margin-top-10 {
 	margin-top: 10px;
 }
-
 
 /*md*/
 @media (min-width: 992px) and (max-width: 1200px) {

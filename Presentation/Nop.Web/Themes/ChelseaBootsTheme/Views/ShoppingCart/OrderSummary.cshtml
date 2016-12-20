@@ -53,27 +53,27 @@
 											<div id="attributes-container">
 												@if (item.Warnings.Count > 0)
 												{
-												<div class="alert alert-danger square-box">
-													@for (int i = 0; i < item.Warnings.Count; i++)
+													<div class="alert alert-danger square-box">
+														@for (int i = 0; i < item.Warnings.Count; i++)
 														{
-													<div>@item.Warnings[i]</div>
+															<div>@item.Warnings[i]</div>
 														}
-													<div class="attribute-item">
-														@{
+														<div class="attribute-item">
+															@{
 														var dataDictAttributes = new ViewDataDictionary();
 														dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", item.ProductId);
 														@Html.Partial("../Product/_ProductAttributes", item.ProductAttributes, dataDictAttributes)
-														}
+															}
+														</div>
 													</div>
-												</div>
 												}
 												else
 												{
 													var attrs = item.AttributeInfo.Split(new char[] { ':' });
-												<p>
-													<span>@attrs[0]</span>
-													<strong>@attrs[1]</strong>
-												</p>
+													<p>
+														<span>@attrs[0]</span>
+														<strong>@attrs[1]</strong>
+													</p>
 												}
 											</div>
 										</div>
@@ -92,15 +92,17 @@
 									<strong>@item.SubTotal </strong>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-1 text-center margin-top-10">
-									@{
-												var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, });
-												var refreshLink = Url.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable });
+									@if (Model.IsEditable)
+									{
+										var removeLink = Url.RouteUrl("RemoveProductFromCart", new { productId = item.ProductId, quantity = item.Quantity, });
+										var refreshLink = Url.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable });
+
+										<button type="button"
+												class="btn btn-danger btn-block"
+												onclick="orderSummary.deleteItem(this, '@removeLink', '@refreshLink');return false;">
+											<i class="fa fa-trash-o" aria-hidden="true"></i>
+										</button>
 									}
-									<button type="button"
-											class="btn btn-danger btn-block"
-											onclick="orderSummary.deleteItem(this, '@removeLink', '@refreshLink');return false;">
-										<i class="fa fa-trash-o" aria-hidden="true"></i>
-									</button>
 								</div>
 							</div>
 						</div>
