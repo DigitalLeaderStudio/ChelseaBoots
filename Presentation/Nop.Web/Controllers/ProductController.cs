@@ -1316,8 +1316,14 @@ namespace Nop.Web.Controllers
 			if (!products.Any())
 				return Content("");
 
-			var model = PrepareProductOverviewModels(products, true, true, productThumbPictureSize).ToList();
-			return PartialView(model);
+			var model = PrepareProductOverviewModels(
+                products,
+                true, 
+                true,
+                productThumbPictureSize, 
+                prepareSpecificationAttributes: true).ToList();
+
+            return PartialView(model);
 		}
 
 		#endregion
