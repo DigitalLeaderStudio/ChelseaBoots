@@ -16,9 +16,9 @@ namespace Nop.Web.Models.Catalog
 			SpecificationAttributeModels = new List<ProductSpecificationModel>();
 			ReviewOverviewModel = new ProductReviewOverviewModel();
 			WishListModel = new ProductWishListModel();
-		}
+        }
 
-		public string Name { get; set; }
+        public string Name { get; set; }
 		public string ShortDescription { get; set; }
 		public string FullDescription { get; set; }
 		public string SeName { get; set; }

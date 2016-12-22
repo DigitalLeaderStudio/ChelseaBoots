@@ -1,0 +1,38 @@
+﻿@model IList<Nop.Web.Models.Catalog.ProductOverviewModel>
+
+<div class="carousel-inner container-fluid product-grid home-page-product-grid">
+    @{
+        var ci = 0;
+    }
+    @foreach (var item in Model)
+    {
+        if (ci == 0)
+        {
+            @:<div class="item active">
+                @:<div class="row box-products">
+                    }
+        else if (ci % 4 == 0)
+        {
+            @:<div class="item">
+                @:<div class="row box-products">
+                    }
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-md-12 product-item">
+            @Html.Partial("_ProductBox", item)
+        </div>
+
+        if (ci % 4 == 3)
+        {
+                @:</div>
+            @:</div>
+        }
+        ci++;
+    }
+    @if (ci % 4 == 3)
+    {
+            @:</div>
+        @:</div>
+    }
+
+</div>
+</div>

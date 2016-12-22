@@ -1282,7 +1282,7 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\HomepageNewProducts.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\ShoppingCart\OrderSummary.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Product\_NewProductsPartial.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Checkout\OnePageCheckout - Original.cshtml" />
+    <Content Include="Themes\ChelseaBootsTheme\Views\Catalog\_HomeProductsGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />
