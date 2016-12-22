@@ -327,6 +327,16 @@ h3 {
 	margin-bottom: 5px;
 }
 
+	.offer-default.order-completed {
+		background: none;
+		border: none;
+		box-shadow: none;
+	}
+
+	.offer-default.order-completed .btn {
+		margin-bottom: 5px;
+	}
+
 .footer {
 	background-color: #323840;
 }
@@ -1476,6 +1486,18 @@ ul.nav.navbar-nav.navbar-right {
 	#checkout-steps .tab-section.allow:not(.active) .step-title.panel-heading h2.panel-title {
 		cursor: pointer;
 	}
+
+	#checkout-steps .shipping-addresses {
+	}
+
+		#checkout-steps .shipping-addresses .select-shipping-address {
+			margin-bottom: 10px;
+		}
+
+		#checkout-steps .shipping-addresses .new-shipping-address {
+			margin: 0 auto;
+			/*width: 85%;*/
+		}
 
 /* responsive */
 /*xs*/

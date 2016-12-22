@@ -22,3 +22,5 @@ Tax.FixedRate
 Tax.CountryStateZip
 Widgets.GoogleAnalytics
 Widgets.NivoSlider
+Payments.CashOnDelivery
+Payments.PayInStore
