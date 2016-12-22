@@ -2125,18 +2125,25 @@ namespace Nop.Web.Controllers
 			string attributeXml = ParseProductAttributes(product, form);
 
 			//update existing item
-			_shoppingCartService.UpdateShoppingCartItem(_workContext.CurrentCustomer,
+			var warnings = _shoppingCartService.UpdateShoppingCartItem(_workContext.CurrentCustomer,
 				updatecartitem.Id,
 				attributeXml,
 				decimal.Zero,
 				resetCheckoutData: false);
 
-			var attributeInfo = _productAttributeFormatter.FormatAttributes(product, attributeXml);
+			if (warnings.Count > 0)
+			{
+				return Json(new
+				{
+					Success = false,
+					Message = warnings
+				});
+			}
 
 			return Json(new
 			{
 				Success = true,
-				AttributeInfo = attributeInfo
+				AttributeInfo = _productAttributeFormatter.FormatAttributes(product, attributeXml)
 			});
 		}
 

@@ -45,8 +45,12 @@
 			data: data,
 			type: 'post',
 			success: function (response) {
-				var attrs = response.AttributeInfo.split(':');
-				$container.html('<p><span>' + attrs[0] + '</span><strong>' + attrs[1] + '</strong></p>');
+				if (response.Success === true) {
+					var attrs = response.AttributeInfo.split(':');
+					$container.html('<p><span>' + attrs[0] + '</span><strong>' + attrs[1] + '</strong></p>');
+				}
+
+				displayBarNotification(response.Message, 'error', 0);
 			}
 		});
 	}
