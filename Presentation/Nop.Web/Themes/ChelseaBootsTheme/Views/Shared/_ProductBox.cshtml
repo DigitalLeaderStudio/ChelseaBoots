@@ -82,7 +82,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 col-xs-7">
 					@if (!Model.ProductPrice.DisableWishlistButton && Model.WishListModel.ShowWishListButton)
 					{
 						@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
@@ -90,7 +90,7 @@
 					<span class="price">@Model.ProductPrice.Price</span>
 				</div>
 
-				<div class="col-md-6 text-right">
+				<div class="col-md-6 col-xs-5 text-right">
 					@if (Model.ShowBuyButton)
 					{
 						var buyButtonText = (Model.ProductPrice.AvailableForPreOrder ? T("ShoppingCart.PreOrder") : T("ShoppingCart.AddToCart"));

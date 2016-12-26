@@ -38,6 +38,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PublishDatabases>false</PublishDatabases>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -433,6 +435,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\browscap.xml" />
+    <Content Include="App_Data\InstalledPlugins.txt" />
     <Content Include="App_Data\Install\Fast\create_required_data.sql" />
     <Content Include="App_Data\Install\Fast\create_sample_data.sql" />
     <Content Include="App_Data\Install\Fast\readme.txt" />
@@ -477,6 +480,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\Install\SqlServer.Indexes.sql" />
+    <Content Include="App_Data\Settings.txt" />
     <Content Include="Content\BBEditor\ed.js" />
     <Content Include="Content\BBEditor\images\bold.gif" />
     <Content Include="Content\BBEditor\images\code.gif" />
@@ -601,6 +605,9 @@
     <Content Include="Content\samples\product_NightVision_1.zip" />
     <Content Include="Content\samples\product_ScienceAndFaith_1.zip" />
     <Content Include="Scripts\custom.switcher.js" />
+    <None Include="Properties\PublishProfiles\ChelseaBoots-FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\chelseaboots.in.ua - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\local-folder.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fineuploader\iframe.xss.response-4.2.2.js" />
     <Content Include="Scripts\fineuploader\jquery.fineuploader-4.2.2.js" />
@@ -1241,7 +1248,6 @@
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_CreateOrUpdateAddress.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Notifications.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Print.cshtml" />
-    <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_ProductBox-Original.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Root.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_Root.Head.cshtml" />
     <Content Include="Themes\ChelseaBootsTheme\Views\Shared\_RootPopup.cshtml" />

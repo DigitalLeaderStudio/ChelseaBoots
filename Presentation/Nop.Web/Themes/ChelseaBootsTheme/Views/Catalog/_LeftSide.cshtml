@@ -8,19 +8,18 @@
 	}
 }
 
-<button id="filterSwitch">Filters</button>
+<button id="filterSwitch">@T("FilterSwitch.Caption")</button>
 <div id="filters" class="product-filters-wrapper">
 	@*filtering*@
 	@if (Model.PriceRangeFilter.Enabled)
 	{
 		@Html.Partial("_FilterPriceBox", Model.PriceRangeFilter, new ViewDataDictionary())
 	}
-	@*filtering*@
-	@if (Model.SpecificationFilter.Enabled)
+	@*filtering*@@if (Model.SpecificationFilter.Enabled)
 	{
 		@Html.Partial("_FilterSpecsBox", Model.SpecificationFilter, new ViewDataDictionary())
 	}
-    @Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })
+	@Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })
 </div>
 @Html.Widget("left_side_column_after")
 @Html.Action("VendorNavigation", "Catalog")
