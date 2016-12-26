@@ -872,7 +872,7 @@ blockquote {
 
 .product-grid ul.product-spec-list {
 	padding: 15px 0;
-	min-height: 65px;
+	height: 85px;
 }
 
 .product-grid .product-item table {
@@ -1074,6 +1074,7 @@ blockquote {
 .product-essential .overview .product-item-row {
 	border-top: 1px dotted #d9d9d9;
 	margin: 0 !important;
+	margin-bottom: 15px !important;
 }
 
 	.product-essential .overview .product-item-row .add-to-wishlist-button {
