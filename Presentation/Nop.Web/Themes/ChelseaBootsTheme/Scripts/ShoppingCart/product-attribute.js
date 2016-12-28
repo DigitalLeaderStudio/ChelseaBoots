@@ -49,8 +49,9 @@
 					var attrs = response.AttributeInfo.split(':');
 					$container.html('<p><span>' + attrs[0] + '</span><strong>' + attrs[1] + '</strong></p>');
 				}
-
-				displayBarNotification(response.Message, 'error', 0);
+				else {
+					displayBarNotification(response.Message, 'error', 0);
+				}
 			}
 		});
 	}
