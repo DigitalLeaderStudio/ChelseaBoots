@@ -1443,6 +1443,7 @@ ul.nav.navbar-nav.navbar-right {
 
 #filters {
 	display: block;
+	margin-right: -15px !important;
 }
 
 .margin-top-10 {
