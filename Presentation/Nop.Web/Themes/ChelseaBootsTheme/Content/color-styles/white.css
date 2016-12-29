@@ -333,9 +333,9 @@ h3 {
 		box-shadow: none;
 	}
 
-	.offer-default.order-completed .btn {
-		margin-bottom: 5px;
-	}
+		.offer-default.order-completed .btn {
+			margin-bottom: 5px;
+		}
 
 .footer {
 	background-color: #323840;
@@ -871,8 +871,8 @@ blockquote {
 	}
 
 .product-grid ul.product-spec-list {
-	margin: 15px 0;
-	padding: 0;
+	padding: 15px 0;
+	height: 85px;
 }
 
 .product-grid .product-item table {
@@ -1074,6 +1074,7 @@ blockquote {
 .product-essential .overview .product-item-row {
 	border-top: 1px dotted #d9d9d9;
 	margin: 0 !important;
+	margin-bottom: 15px !important;
 }
 
 	.product-essential .overview .product-item-row .add-to-wishlist-button {
@@ -1147,8 +1148,8 @@ blockquote {
 .brands {
 	width: 100%;
 	margin: 0px 0 30px 0;
-    display: block;
-    overflow: auto;
+	display: block;
+	overflow: auto;
 }
 
 	.brands div {
@@ -1196,10 +1197,6 @@ blockquote {
 
 .homepage {
 	padding: 0;
-}
-
-.collapse.navbar-collapse.category-navbar-collapse {
-	font-size: 18px;
 }
 
 .header-home {
@@ -1488,29 +1485,45 @@ ul.nav.navbar-nav.navbar-right {
 	#checkout-steps .tab-section.allow:not(.active) .step-title.panel-heading h2.panel-title {
 		cursor: pointer;
 	}
+
 .carousel-inner.container-fluid {
-    padding-right: 10px !important;
-    padding-left: 10px !important;
+	padding-right: 10px !important;
+	padding-left: 10px !important;
 }
 
 .product-grid .title-carousel-control:hover {
-    color: #1a1a1a !important;
+	color: #1a1a1a !important;
 }
-	#checkout-steps .shipping-addresses {
+
+#checkout-steps .shipping-addresses {
+}
+
+	#checkout-steps .shipping-addresses .select-shipping-address {
+		margin-bottom: 10px;
 	}
 
-		#checkout-steps .shipping-addresses .select-shipping-address {
-			margin-bottom: 10px;
-		}
+	#checkout-steps .shipping-addresses .new-shipping-address {
+		margin: 0 auto;
+		/*width: 85%;*/
+	}
 
-		#checkout-steps .shipping-addresses .new-shipping-address {
-			margin: 0 auto;
-			/*width: 85%;*/
-		}
-
+.theme-custom {
+	margin: 0 auto 15px auto !important;
+}
 /* responsive */
 /*xs*/
 @media (max-width: 768px) {
+
+	.theme-custom .nivo-controlNav {
+		padding-bottom: 5px !important;
+	}
+
+		.theme-custom .nivo-controlNav a.nivo-control {
+			height: 10px !important;
+			width: 20px !important;
+			margin: 0 20px;
+		}
+
 	.header-home .header-logo .logo-title {
 		text-align: center;
 		font-size: 3em;
@@ -1569,6 +1582,10 @@ ul.nav.navbar-nav.navbar-right {
 
 	#filters {
 		display: none;
+	}
+
+	.col-xs-5 .btn-sm.btn-primary {
+		margin-left: -25px;
 	}
 }
 /*sm*/
