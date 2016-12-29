@@ -75,19 +75,19 @@
 								<h2 class="product-name">@Model.Name</h2>
 								<div class="row product-item-row">
 									<div class="col-md-6">
-										@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
 										@{
-											var dataDictPrice = new ViewDataDictionary();
-											dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
-											@Html.Partial("_ProductPrice", Model.ProductPrice, dataDictPrice)
+			var dataDictPrice = new ViewDataDictionary();
+			dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
+			@Html.Partial("_ProductPrice", Model.ProductPrice, dataDictPrice)
 
-											var dataDictAttributes = new ViewDataDictionary();
-											dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
-											@Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
+			var dataDictAttributes = new ViewDataDictionary();
+			dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
+			@Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
 
-											var dataDictAddToCart = new ViewDataDictionary();
-											dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
-											@Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
+											@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
+			var dataDictAddToCart = new ViewDataDictionary();
+			dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
+			@Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
 										}
 									</div>
 
@@ -152,10 +152,10 @@
 								<!--attributes-->
 								<!--gift card-->
 								@*@{
-										var dataDictGiftCard = new ViewDataDictionary();
-										dataDictGiftCard.TemplateInfo.HtmlFieldPrefix = string.Format("giftcard_{0}", Model.Id);
-										@Html.Partial("_GiftCardInfo", Model.GiftCard, dataDictGiftCard)
-								}*@
+											var dataDictGiftCard = new ViewDataDictionary();
+											dataDictGiftCard.TemplateInfo.HtmlFieldPrefix = string.Format("giftcard_{0}", Model.Id);
+											@Html.Partial("_GiftCardInfo", Model.GiftCard, dataDictGiftCard)
+									}*@
 
 								@*<div class= "form-group row">
 										@Html.Partial("_ProductEmailAFriendButton", Model)

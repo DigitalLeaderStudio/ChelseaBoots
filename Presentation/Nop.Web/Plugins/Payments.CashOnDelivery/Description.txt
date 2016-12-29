@@ -1,5 +1,5 @@
-Group: Payment methods
-FriendlyName: Оплата наличными
+﻿Group: Payment methods
+FriendlyName: Cash On Delivery (COD)
 SystemName: Payments.CashOnDelivery
 Version: 1.20
 SupportedVersions: 3.80

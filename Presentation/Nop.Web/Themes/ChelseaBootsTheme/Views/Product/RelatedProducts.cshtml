@@ -11,61 +11,65 @@
             {
                 <span class="pull-right">
                     <a class="title-carousel-control" href="#carousel-example-generic-homepage-product" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
+						<i class="fa fa-arrow-circle-left"></i>
                     </a>
                     <a class="title-carousel-control" href="#carousel-example-generic-homepage-product" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
+						<i class="fa fa-arrow-circle-right"></i>
                     </a>
 
                 </span>
             }
         </div>
-        
-                
-        
 
-        <div id="carousel-example-generic-homepage-product" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-    
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                @{
-                    var ci = 0;
-                } 
-                @foreach (var item in Model)
-                {
-                    if(ci==0)
-                    {
-                        @:<div class="item active">
-                        @:<div class="row box-products" >
-                    }else if(ci%3==0){
-                        @:<div class="item">
-                        @:<div class="row box-products" >
+		<div id="carousel-example-generic-homepage-product" class="carousel slide" data-ride="carousel" data-interval="false">
+			<!-- Indicators -->
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				@{
+	var ci = 0;
+				}
+				@foreach (var item in Model)
+				{
+					if (ci == 0)
+					{
+						@:<div class="item active">
+							@:<div class="row box-products">
                     }
-                    
-                    <div class="col-md-4">
-                        <div class="offer-default silde-show-offer pull-text-center">
-                            @Html.Partial("_ProductBox", item)
-                        </div>
-                    </div>
-                    
-
-                    if(ci%3==2){
-                        @:</div>
-                        @:</div>
+					else if (ci % 3 == 0)
+					{
+						@:<div class="item">
+							@:<div class="row box-products">
                     }
-                    ci++;
-                }
-                @if(ci%3!=0){
-                    @:</div>
-                    @:</div>
-                }
-        
-            </div>
+
+					<div class="col-md-4">
+						<div class="offer-default silde-show-offer pull-text-center">
+							@Html.Partial("_ProductBox", item)
+						</div>
+					</div>
 
 
-        </div>
+					if (ci % 3 == 2)
+					{
+						@:
+					</div>
+					@:
+				</div>
+                    }
+					ci++;
+				}
+				@if (ci % 3 != 0)
+				{
+					@:
+				</div>
+					@:
+				</div>
+                }
+
+			</div>
+
+
+		</div>
+
     </div>
 
 
