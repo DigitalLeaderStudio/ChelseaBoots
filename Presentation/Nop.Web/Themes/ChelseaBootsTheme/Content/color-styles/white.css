@@ -1532,11 +1532,11 @@ ul.nav.navbar-nav.navbar-right {
 		padding-bottom: 5px !important;
 	}
 
-		.theme-custom .nivo-controlNav a.nivo-control {
+		/*.theme-custom .nivo-controlNav a.nivo-control {
 			height: 10px !important;
-			width: 20px !important;
-			margin: 0 20px;
-		}
+			width: 10px !important;
+			margin: 0 10px;
+		}*/
 
 	.header-home .header-logo .logo-title {
 		text-align: center;
@@ -1582,7 +1582,7 @@ ul.nav.navbar-nav.navbar-right {
 		}
 
 		.header-home .user-tools .dropdown.login .dropdown-menu {
-			min-width: 400px !important;
+			min-width: 800px !important;
 		}
 
 	ul.nav.navbar-nav.navbar-right > li > a,
@@ -1601,6 +1601,10 @@ ul.nav.navbar-nav.navbar-right {
 	.col-xs-5 .btn-sm.btn-primary {
 		margin-left: -25px;
 	}
+
+    #filters {
+        margin-right: 0 !important;
+    }
 }
 /*sm*/
 @media (min-width: 768px) and (max-width: 992px) {
@@ -1657,6 +1661,7 @@ ul.nav.navbar-nav.navbar-right {
 
 	#filters {
 		display: none;
+        margin-right: 0 !important;
 	}
 
 }
