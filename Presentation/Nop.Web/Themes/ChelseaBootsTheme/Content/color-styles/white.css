@@ -78,16 +78,8 @@
 		}
 
 	.login-page .mid-content-footer {
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 	}
-
-		.login-page .mid-content-footer .login-button {
-			float: right;
-		}
-
-		.login-page .mid-content-footer .register-button {
-			float: left;
-		}
 
 .notifications {
 	top: 0px !important;
@@ -116,6 +108,26 @@
 	border-color: #FFDEC1 !important;
 }
 
+.section.products .actions {
+	margin-top: 10px;
+}
+
+.btn-group.btn-group-attr {
+	width: 100%;
+}
+
+	.btn-group.btn-group-attr .btn.btn-attr:first-child {
+		width: 145px;
+	}
+
+	.btn-group.btn-group-attr .btn.btn-attr.dropdown-toggle {
+		/*width: 20%;*/
+	}
+
+.btn > i {
+	padding-left: 5px;
+}
+
 .btn.btn-default {
 	color: #fff;
 	background-color: #555;
@@ -131,21 +143,6 @@
 		background-color: #1a1a1a;
 		border-color: #FFDEC1;
 	}
-
-.btn-group.btn-group-attr {
-	width: 100%;
-}
-
-	.btn-group.btn-group-attr .btn.btn-attr:first-child {
-		width: 97px;
-	}
-
-	.btn-group.btn-group-attr .btn.btn-attr.dropdown-toggle {
-		/*width: 20%;*/
-	}
-
-.btn.btn-attr {
-}
 
 .btn.btn-primary {
 	color: #fff;
@@ -1042,7 +1039,7 @@ blockquote {
 .product-essential .overview .prices {
 	margin: 0 !important;
 	margin-left: 15px;
-	padding: 10px;
+	padding: 10px 10px 10px 0;
 }
 
 	.product-essential .overview .prices .product-price span {
@@ -1079,7 +1076,8 @@ blockquote {
 
 	.product-essential .overview .product-item-row .add-to-wishlist-button {
 		font-size: 1.4em;
-		padding-top: 12px;
+		/*padding-top: 12px;*/
+		padding: 0 15px;
 	}
 
 	.product-essential .overview .product-item-row .full-description {
