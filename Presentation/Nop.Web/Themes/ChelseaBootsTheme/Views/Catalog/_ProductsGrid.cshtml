@@ -1,6 +1,18 @@
 ﻿@model IList<Nop.Web.Models.Catalog.ProductOverviewModel>
 
 <div class="product-grid home-page-product-grid">
+    <div class="row box-products">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-6 product-item">
+                @Html.Partial("_ProductBox", product)
+            </div>
+        }
+    </div>
+</div>
+
+
+@*<div class="product-grid home-page-product-grid">
     @{
         var pg_i = 0;
     }
@@ -10,17 +22,19 @@
         {
             @:<div class="row box-products">
 		}
-        <div class="col-md-4 product-item">
+        <div class="col-md-4 col-sm-6 product-item">
             @Html.Partial("_ProductBox", product)
         </div>
         if (pg_i % 3 == 2)
         {
-            @:</div>
+            @:
+        </div>
 		}
         pg_i++;
     }
     @if (pg_i % 3 != 0)
     {
-        @:</div>
-	}
+        @:
     </div>
+	}
+    </div>*@
