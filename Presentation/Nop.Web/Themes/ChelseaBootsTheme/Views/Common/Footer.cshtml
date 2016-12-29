@@ -114,13 +114,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="text-center">
-					Powered by <a href="http://www.nopcommerce.com/">nopCommerce</a> <a href="http://www.noBugsException.com/">
-						noBugsException
-					</a>
+					@T("Content.CopyrightNotice", DateTime.Now.Year.ToString(), Model.StoreName)
+                    Developed by <a href="http://www.noBugsException.com/">noBugsException</a>. 
+                    Powered by<a href="http://www.nopcommerce.com/">nopCommerce</a> .
 					@*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
 						Find more info here http://www.nopcommerce.com/copyrightremoval.aspx*@
-
-					@T("Content.CopyrightNotice", DateTime.Now.Year.ToString(), Model.StoreName)
 				</div>
 				@if (Model.DisplayTaxShippingInfoFooter)
 				{
