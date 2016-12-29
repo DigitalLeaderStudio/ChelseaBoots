@@ -8,17 +8,17 @@
             <strong><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></strong>
             <span class="pull-right">
                 <a class="title-carousel-control" href="#carousel-1" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
+					<i class="fa fa-arrow-circle-left"></i>
                 </a>
                 <a class="title-carousel-control" href="#carousel-1" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
+					<i class="fa fa-arrow-circle-right"></i>
                 </a>
             </span>
         </div>
 
-        <div id="carousel-1" class="carousel slide" data-ride="carousel">
-            @Html.Partial("../Catalog/_HomeProductsGrid", Model)
-        </div>
+		<div id="carousel-1" class="carousel slide" data-ride="carousel" data-interval="false">
+			@Html.Partial("../Catalog/_HomeProductsGrid", Model)
+		</div>
     </div>
     @:<br />
 }

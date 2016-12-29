@@ -366,13 +366,26 @@ h3 {
 	border: none;
 }
 
-.title-carousel-control:hover {
-	background-color: #fff;
-	padding: 10px;
-	color: #FFF;
-	border-radius: 0px;
+.title-carousel-control {
+	outline: none;
 	text-decoration: none;
 }
+
+	.title-carousel-control i {
+		font-size: 1.2em;
+	}
+
+	.title-carousel-control:hover {
+		background-color: #fff;
+		padding: 10px;
+		color: #FFF;
+		border-radius: 0px;
+		text-decoration: none;
+	}
+
+	.title-carousel-control:focus {
+		text-decoration: none;
+	}
 
 .tags a {
 	color: #fff;

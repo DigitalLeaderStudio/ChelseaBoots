@@ -3,24 +3,6 @@
 @using Nop.Web.Models.Catalog;
 @if (Model.Count > 0)
 {
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="product-grid home-page-product-grid">
                 <div class="title mid-content-title">
 									<strong>@T("Products.AlsoPurchased")</strong>
@@ -28,7 +10,7 @@
 {
 	<span class="pull-right">
 		<a class="title-carousel-control" href="#carousel-example-generic-purchased-product" data-slide="prev">
-			<i class="fa fa-angle-left"></i>
+			<i class="fa fa-arrow-circle-left"></i>
 		</a>
 		<a class="title-carousel-control" href="#carousel-example-generic-purchased-product" data-slide="next">
 			<i class="fa fa-angle-right"></i>
@@ -37,54 +19,52 @@
 	</span>
 }
                 </div>
-        
-                
-        
 
-                <div id="carousel-example-generic-purchased-product" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-    
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        @{
-                            var pg_i = 0;
-                        } 
-                        @foreach (var item in Model)
-                        {
-                            if(pg_i==0)
-                            {
-                                @:<div class="item active">
-                                @:<div class="row box-products" >
-                            }else if(pg_i%3==0){
-                                @:<div class="item">
-                                @:<div class="row box-products" >
+				<div id="carousel-example-generic-purchased-product" class="carousel slide" data-ride="carousel" data-interval="false">
+					<!-- Indicators -->
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner">
+						@{
+	var pg_i = 0;
+						}
+						@foreach (var item in Model)
+						{
+							if (pg_i == 0)
+							{
+								@:<div class="item active">
+									@:<div class="row box-products">
                             }
-                    
-                            <div class="col-md-4">
-                                <div class="offer-default silde-show-offer pull-text-center">
-                                    @Html.Partial("_ProductBox", item)
-                                </div>
-                            </div>
-                    
-
-                            if(pg_i%3==2){
-                                @:</div>
-                                @:</div>
+							else if (pg_i % 3 == 0)
+							{
+								@:<div class="item">
+									@:<div class="row box-products">
                             }
-                            pg_i++;
-                        }
-                        @if(pg_i%3!=0){
-                            @:</div>
-                            @:</div>
-                        }
-        
-                    </div>
+
+							<div class="col-md-4">
+								<div class="offer-default silde-show-offer pull-text-center">
+									@Html.Partial("_ProductBox", item)
+								</div>
+							</div>
 
 
-                </div>
+							if (pg_i % 3 == 2)
+							{
+								@:
+							</div>
+							@:
+						</div>
+                            }
+							pg_i++;
+						}
+						@if (pg_i % 3 != 0)
+						{
+							@:
+						</div>
+							@:
+						</div>
+                        }
+
+					</div>
+				</div>
             </div>
-
-
-
 }
