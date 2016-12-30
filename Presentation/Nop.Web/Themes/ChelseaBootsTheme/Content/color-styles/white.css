@@ -575,6 +575,19 @@ h2.title {
 			border: 0;
 		}
 
+.method-list {
+}
+
+	.method-list .method-name {
+		margin-bottom: 10px;
+	}
+
+	.method-list .payment-logo img {
+		height: 45px;
+		width: 45px;
+	}
+
+
 .navbar-right .dropdown li a {
 	color: #000;
 }
@@ -1532,7 +1545,7 @@ ul.nav.navbar-nav.navbar-right {
 		padding-bottom: 5px !important;
 	}
 
-		/*.theme-custom .nivo-controlNav a.nivo-control {
+	/*.theme-custom .nivo-controlNav a.nivo-control {
 			height: 10px !important;
 			width: 10px !important;
 			margin: 0 10px;
@@ -1602,9 +1615,9 @@ ul.nav.navbar-nav.navbar-right {
 		margin-left: -25px;
 	}
 
-    #filters {
-        margin-right: 0 !important;
-    }
+	#filters {
+		margin-right: 0 !important;
+	}
 }
 /*sm*/
 @media (min-width: 768px) and (max-width: 992px) {
@@ -1661,9 +1674,8 @@ ul.nav.navbar-nav.navbar-right {
 
 	#filters {
 		display: none;
-        margin-right: 0 !important;
+		margin-right: 0 !important;
 	}
-
 }
 
 .margin-top-10 {
@@ -1700,19 +1712,21 @@ ul.nav.navbar-nav.navbar-right {
 		margin-right: 10px;
 	}
 
-    #catalog-container .col-md-2 {
-        width: 21% !important;
-    }
-    #catalog-container .col-md-10 {
-        width: 79% !important;
-    }
+	#catalog-container .col-md-2 {
+		width: 21% !important;
+	}
 
-    .product-item h5 a {
-        margin-bottom:10px;
-    }
-    .product-list .product-item .thumbnail .col-md-6.col-xs-5.text-right a {
-        float: right !important;
-    }
+	#catalog-container .col-md-10 {
+		width: 79% !important;
+	}
+
+	.product-item h5 a {
+		margin-bottom: 10px;
+	}
+
+	.product-list .product-item .thumbnail .col-md-6.col-xs-5.text-right a {
+		float: right !important;
+	}
 }
 /*lg*/
 @media (min-width: 1200px) {
@@ -1720,10 +1734,12 @@ ul.nav.navbar-nav.navbar-right {
 		font-size: 5em;
 		text-align: left;
 	}
-    #catalog-container .col-md-2 {
-        width: 18% !important;
-    }
-    #catalog-container .col-md-10 {
-        width: 82% !important;
-    }
+
+	#catalog-container .col-md-2 {
+		width: 18% !important;
+	}
+
+	#catalog-container .col-md-10 {
+		width: 82% !important;
+	}
 }
