@@ -109,7 +109,7 @@ namespace Nop.Web.Extensions
 				{
 					Id = product.Id,
 					Name = product.GetLocalized(x => x.Name),
-					ManufacturerName = product.GetLocalized(x => x.ProductManufacturers.First().Manufacturer.Name),
+					ManufacturerName = product.ProductManufacturers.First().Manufacturer.Name,
 					ShortDescription = product.GetLocalized(x => x.ShortDescription),
 					FullDescription = product.GetLocalized(x => x.FullDescription),
 					SeName = product.GetSeName(),
@@ -125,6 +125,7 @@ namespace Nop.Web.Extensions
 						(!product.MarkAsNewStartDateTimeUtc.HasValue || product.MarkAsNewStartDateTimeUtc.Value < DateTime.UtcNow) &&
 						(!product.MarkAsNewEndDateTimeUtc.HasValue || product.MarkAsNewEndDateTimeUtc.Value > DateTime.UtcNow)
 				};
+
 				//price
 				if (preparePriceModel)
 				{

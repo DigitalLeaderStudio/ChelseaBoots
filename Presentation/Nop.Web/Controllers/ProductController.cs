@@ -1104,7 +1104,7 @@ namespace Nop.Web.Controllers
 				return Content("");
 
 			//prepare model
-			var model = PrepareProductOverviewModels(products, true, true, productThumbPictureSize).ToList();
+			var model = PrepareProductOverviewModels(products, true, true, productThumbPictureSize, true).ToList();
 
 			return PartialView(model);
 		}
@@ -1192,7 +1192,7 @@ namespace Nop.Web.Controllers
 		{
 			if (!_catalogSettings.NewProductsEnabled)
 				return Content("");
-			
+
 			var model = new NewProductsModel
 			{
 				PagingFilteringContext = new CatalogPagingFilteringModel(),
@@ -1317,13 +1317,13 @@ namespace Nop.Web.Controllers
 				return Content("");
 
 			var model = PrepareProductOverviewModels(
-                products,
-                true, 
-                true,
-                productThumbPictureSize, 
-                prepareSpecificationAttributes: true).ToList();
+				products,
+				true,
+				true,
+				productThumbPictureSize,
+				prepareSpecificationAttributes: true).ToList();
 
-            return PartialView(model);
+			return PartialView(model);
 		}
 
 		#endregion
