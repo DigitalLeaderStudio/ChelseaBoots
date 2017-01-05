@@ -1536,6 +1536,9 @@ ul.nav.navbar-nav.navbar-right {
 	margin: 0 auto 15px auto !important;
 }
 
+.margin-top-10 {
+	margin-top: 10px;
+}
 
 /* responsive */
 /*xs*/
@@ -1618,6 +1621,18 @@ ul.nav.navbar-nav.navbar-right {
 	#filters {
 		margin-right: 0 !important;
 	}
+    .theme-custom {
+        margin: 0 0 15px 0 !important;
+        height: auto; 
+        max-width: 100% !important;
+    }
+    .theme-custom .nivoSlider {
+        height: auto; 
+    }
+    .theme-custom .nivo-controlNav a {
+        width: 8px !important;
+        height: 8px !important;
+    }
 }
 /*sm*/
 @media (min-width: 768px) and (max-width: 992px) {
@@ -1676,10 +1691,14 @@ ul.nav.navbar-nav.navbar-right {
 		display: none;
 		margin-right: 0 !important;
 	}
-}
-
-.margin-top-10 {
-	margin-top: 10px;
+    .theme-custom {
+        margin: 0 0 15px 0 !important;
+        height: auto; 
+        max-width: 100% !important;
+    }
+    .theme-custom .nivoSlider {
+        height: auto; 
+    }
 }
 
 /*md*/
@@ -1727,6 +1746,14 @@ ul.nav.navbar-nav.navbar-right {
 	.product-list .product-item .thumbnail .col-md-6.col-xs-5.text-right a {
 		float: right !important;
 	}
+    .theme-custom {
+        margin: 0 0 15px 0 !important;
+        height: auto; 
+        max-width: 100% !important;
+    }
+    .theme-custom .nivoSlider {
+        height: auto; 
+    }
 }
 /*lg*/
 @media (min-width: 1200px) {
