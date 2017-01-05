@@ -76,20 +76,24 @@
 								<div class="row product-item-row">
 									<div class="col-md-6">
 										@{
-			var dataDictPrice = new ViewDataDictionary();
-			dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
-			@Html.Partial("_ProductPrice", Model.ProductPrice, dataDictPrice)
+			                                var dataDictPrice = new ViewDataDictionary();
+			                                dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
+			                                @Html.Partial("_ProductPrice", Model.ProductPrice, dataDictPrice)
 
-			var dataDictAttributes = new ViewDataDictionary();
-			dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
-			@Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
+                                            @:<div class="row product-attributes">
+                                                var dataDictAttributes = new ViewDataDictionary();
+                                                dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
+                                                @Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
+                                            @:</div>
+                                            @:<div class="row">
+                                                @Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
 
-											@Html.Partial("_ButtonAddToWishlist", Model.WishListModel)
-			var dataDictAddToCart = new ViewDataDictionary();
-			dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
-			@Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
-										}
-									</div>
+                                                var dataDictAddToCart = new ViewDataDictionary();
+                                                dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
+                                                @Html.Partial("_AddToCart", Model.AddToCart, dataDictAddToCart)
+                                            @:</div>   
+                                            }
+                                            </div>
 
 									<div class="col-md-6">
 										@Html.Partial("_ProductManufacturers", Model.ProductManufacturers)
