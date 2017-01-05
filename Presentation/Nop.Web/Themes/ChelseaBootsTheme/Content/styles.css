@@ -544,9 +544,20 @@ div.newsletter-subscribe-block > div.newsletter-email {
 			background-color: #33bce9;
 		}
 
+
 		.footer .social-icons .facebook:hover a {
 			background-color: #37528d;
 		}
+        .footer .social-icons .vk:hover a {
+			background-color: #45668e;
+		}
+        .footer .social-icons .instagram:hover a {
+			background-color: #bc2a8d;
+		}
+        .footer .social-icons .pinterest:hover a {
+			background-color: #cb2027;
+		}
+
 
 		.footer .social-icons .rss:hover a {
 			background-color: #FF6600;
