@@ -82,29 +82,20 @@
 					<div class="title">
 						<strong>@T("Footer.FollowUs")</strong>
 					</div>
-					@Html.Action("Social", "Common")
-					@*<ul>
-							@if (!string.IsNullOrEmpty(Model.GooglePlusLink))
-							{
-								<li class="icon google-plus"><a href="@Model.GooglePlusLink" target="_blank"><i class="fa fa-google-plus fa-fw"></i></a></li>
-							}
-							@if (!string.IsNullOrEmpty(Model.YoutubeLink))
-							{
-								<li class="icon youtube"><a href="@Model.YoutubeLink" target="_blank"><i class="fa fa-youtube fa-fw"></i></a></li>
-							}
-							@if (!string.IsNullOrEmpty(Model.TwitterLink))
-							{
-								<li class="icon twitter"><a href="@Model.TwitterLink" target="_blank"><i class="fa fa-twitter fa-fw"></i></a></li>
-							}
-							@if (!string.IsNullOrEmpty(Model.FacebookLink))
-							{
-								<li class="icon facebook"><a href="@Model.FacebookLink" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
-							}
-							@if (Model.NewsEnabled)
-							{
-								<li class="icon rss"><a href="@Url.RouteUrl("NewsRSS", new {languageId = Model.WorkingLanguageId})"><i class="fa fa-rss fa-fw"></i></a></li>
-							}
-						</ul>*@
+                    <ul>
+                        <li class="icon facebook"><a href="https://www.facebook.com/Ботинки-Челси-1813285052291595" target="_blank">
+                            <i class="fa fa-facebook fa-fw"></i></a>
+                        </li>
+                        <li class="icon vk">
+                            <a href="https://vk.com/chelsea_boots" target="_blank"><i class="fa fa-vk fa-fw"></i></a>
+                        </li>
+                        <li class="icon instagram">
+                            <a href="https://www.instagram.com/bootschelsea_/" target="_blank"><i class="fa fa-instagram fa-fw"></i></a>
+                        </li>
+                        <li class="icon pinterest">
+                            <a href="https://www.pinterest.com/chelseabootsinu/" target="_blank"><i class="fa fa-pinterest-p fa-fw"></i></a>
+                        </li>
+                    </ul>
 				</div>
 			</div>
 		</div>
@@ -114,8 +105,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="text-center">
-					@T("Conten t.CopyrightNotice", DateTime.Now.Year.ToString(), Model.StoreName)
-                    Developed by <a href="http://www.noBugsException.com/">noBugsException</a>. 
+					@T("Content.CopyrightNotice", DateTime.Now.Year.ToString(), Model.StoreName)
+                    Developed by <a href="http://www.noBugsException.com/">noBugsException Software Solutions Studio</a>. 
                     Powered by <a href="http://www.nopcommerce.com/">nopCommerce</a>
 					@*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
 						Find more info here http://www.nopcommerce.com/copyrightremoval.aspx*@
