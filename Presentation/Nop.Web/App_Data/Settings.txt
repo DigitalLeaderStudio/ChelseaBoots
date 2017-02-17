@@ -1,2 +1,2 @@
 DataProvider: sqlserver
-DataConnectionString: Server=BUG\SQLEXPRESS;Database=ChelseaBoots;User Id=sa;Password=sa;
+DataConnectionString: Server=TOHA-PC\SQLEXPRESS2014;Database=chelseaboots;User Id=sa;Password=sa;
